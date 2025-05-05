@@ -41,6 +41,7 @@ const Navigation = () => {
       console.error(error);
     }
   };
+  // console.log('userinfo',userInfo,'uname',userInfo.username)
   return (
     <div
       style={{ zIndex: 999 }}
@@ -89,14 +90,16 @@ const Navigation = () => {
       </div>
       <div className="relative flex items-center text-gray-800 focus:outline-none ">
         <button onClick={toggleDropdown}>
-          {userInfo ? (
+          {userInfo ?  (
             <span className="text-white ">{userInfo.username}</span>
           ) : (
             <></>
           )}
         </button>
       </div>
-      <ul>
+      <ul
+        className="flex flex-col items-start justify-start"
+      >
         <li>
           <Link
             to="/login"

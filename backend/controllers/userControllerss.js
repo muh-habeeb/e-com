@@ -56,23 +56,34 @@ const loginUser = asyncHandler(async (req, res) => {
       const { _id, username, password, email, isAdmin } = existsUser; //destructuring  for future use existing user
       //show response
       res.status(200).json({
-        id: _id,
-        username: username,
-        email: email,
-        password: password,
-        isAdmin: isAdmin,
+        request: "success",
+        message: "OK",
+        MESSAGE: "OK",
+        data: {
+          id: _id,
+          username: username,
+          email: email,
+          password: password,
+          isAdmin: isAdmin,
+        },
       });
       return; //exit the function after sending response
     } else {
       // show if the password is wrong
-      res
-        .status(400)
-        .json({ request: "success", message: "password is wrong" });
+      res.status(404).json({
+        request: "success",
+        message: "password is wrong",
+        MESSAGE: "WRONG_PASSWORD",
+        code: 404,
+      });
     }
   } else {
-    res
-      .status(404)
-      .json({ request: "success", message: "user dose not  exist" });
+    res.status(404).json({
+      request: "success",
+      message: "user dose not exist",
+      MESSAGE: "NO_USER",
+      code: 404,
+    });
   }
 });
 
@@ -98,9 +109,12 @@ const getAllUser = asyncHandler(async (req, res) => {
   //fetch all the users from DB
   const users = await User.find({});
   //print it to the console
-  res
-    .status(200)
-    .json({ request: "success", message: "ALL USER DATA",length:users.length, data: users });
+  res.status(200).json({
+    request: "success",
+    message: "ALL USER DATA",
+    length: users.length,
+    data: users,
+  });
 });
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -210,9 +224,11 @@ const deleteUserById = asyncHandler(async (req, res) => {
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
-    res
-      .status(200)
-      .json({ request: "success", message: "user data from admin", data: { user } });
+    res.status(200).json({
+      request: "success",
+      message: "user data from admin",
+      data: { user },
+    });
   } else {
     res.status(404).json({
       request: "success",
@@ -231,18 +247,16 @@ const updateUserById = asyncHandler(async (req, res) => {
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     // user.isAdmin = Boolean(req.body.isAdmin) || user.isAdmin;
-    user.isAdmin = Boolean(req.body.isAdmin) ;
-    // waiting to updated the user 
+    user.isAdmin = Boolean(req.body.isAdmin);
+    // waiting to updated the user
 
-    const updatedUser=await user.save();
+    const updatedUser = await user.save();
 
-    res
-      .status(200)
-      .json({
-        request: "success",
-        message: "updated user data from admin side",
-        data:updatedUser,
-      });
+    res.status(200).json({
+      request: "success",
+      message: "updated user data from admin side",
+      data: updatedUser,
+    });
   } else {
     res.status(404).json({
       request: "success",

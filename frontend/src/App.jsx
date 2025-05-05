@@ -7,8 +7,8 @@ const App = () => {
     <>
       <ToastContainer />
       <Navigation />
-      <main className="py-3">
-        <Outlet />
+      <main className="bg-slate-400 " style={{transitionDuration:3000,transitionProperty:"all"}}>
+      <Outlet />
       </main>
     </>
   );

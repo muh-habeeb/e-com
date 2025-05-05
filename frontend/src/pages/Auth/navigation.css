@@ -1,5 +1,5 @@
 #navigation-container{
-    width: 4%;
+    min-width: 50px;
     transition: all 0.3s ease-in-out;
     overflow: hidden;
 }
@@ -16,4 +16,11 @@
     visibility: visible;
     opacity: 1;
 
+}
+
+
+/* login css */
+
+.login{
+    transition: all .3s ;
 }
