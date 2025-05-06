@@ -6,7 +6,7 @@ import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 const Login = () => {
-  //state to mange the input in modern way 
+  //state to mange the input in modern way
   let [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,11 +23,11 @@ const Login = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
-  const redirect = sp.get("redirect") || "/";
+  const redirect = sp.get("/redirect") || "/";
 
   useEffect(() => {
     if (userInfo) {
-      //user info can be logged
+      //user info can be  c.log
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
@@ -137,7 +137,7 @@ const Login = () => {
             <p className="text-white">
               {"New Customer ?"}
               <Link
-                to={redirect ? `/register/redirect=${redirect}` : "/register"}
+                to={redirect ? `/register?${redirect}` : "/register"}
                 className="text-pink-500 hover:underline"
               >
                 Register

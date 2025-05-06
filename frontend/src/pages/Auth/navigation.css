@@ -44,7 +44,7 @@
 }
 
 .mask {
-  animation: open .4s linear forwards;
+  animation: open 0.2s linear forwards;
   /* transition: all 0.4s; */
 }
 

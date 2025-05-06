@@ -8,9 +8,14 @@ import mongoose from "mongoose";
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body; //destructure the data we want from body
   if (!username || !email || !password) {
-    //no data is present show error
-    throw new Error("All fields  are required!!");
-  }
+    //no data is present SEND RES AND EXIT
+    res.status(400).json({
+      request: "success",
+      message: "All fields  are required!!",
+      MESSAGE: "INVALID_DATA",
+    });
+    return; 
+  };
   const userExist = await User.findOne({ email }); //check for thw user is exist in the mail
   if (userExist) {
     //if user exist - show error
@@ -18,6 +23,7 @@ const createUser = asyncHandler(async (req, res) => {
       request: "success",
       message: "User already exists",
       MESSAGE: "USER_EXIST_WITH_THE_EMAIL",
+      code: 400,
     });
     return;
   }
@@ -39,7 +45,7 @@ const createUser = asyncHandler(async (req, res) => {
       username: username,
       email: email,
       password: password,
-      isAdmin: isAdmin, 
+      isAdmin: isAdmin,
     });
   } catch (error) {
     //errors

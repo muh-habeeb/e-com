@@ -6,15 +6,7 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { FaHeart } from "react-icons/fa";
-import {
-  IoIosArrowDown,
-  IoIosArrowDropdown,
-  IoIosArrowDropdownCircle,
-  IoIosArrowDropupCircle,
-  IoIosArrowForward,
-  IoIosArrowUp,
-  IoMdArrowDown,
-} from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +41,7 @@ const Navigation = () => {
     } catch (error) {
       console.error("logout error ", error);
     }
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
@@ -113,20 +106,18 @@ const Navigation = () => {
       <div className="relative flex  text-white focus:outline-none ">
         <button
           onClick={toggleDropdown}
-          className="flex items-center text-white capitalize"
+          className="flex items-center gap-1 text-white capitalize"
         >
           {userInfo ? (
-            <span className="text-white">
-              {userInfo?.username || ""}
-            </span>
+            <span className="text-white">{userInfo?.username || ""}</span>
           ) : (
             <></>
           )}
 
-          {userInfo ? dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />:''}
+          {userInfo ? dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown /> : ""}
         </button>
 
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center -ml-3 ">
           {dropdownOpen && userInfo && (
             <ul
               className={`dashboard-ul absolute ${

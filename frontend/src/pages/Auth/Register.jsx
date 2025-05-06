@@ -9,16 +9,22 @@ import { toast } from "react-toastify";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  //   const [username, setUsername] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [email, setEmail] = useState("");
+  //   const [confirmPassword, setConfirmPassword] = useState("");
 
-  //   let [formData, setFormData] = useState({
-  //     username='',
-  //     password='',
-  //     email=''
-  //   });
+  let [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    confirmPassword: "",
+  });
+
+  let { username, email, password,confirmPassword } = formData;
+  let handleFormData = (e) => {
+    setFormData((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +41,11 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    //  show error if email or password is not provided
+    //  show error if email or password username is not provided
+    if (!username) {
+      toast.warn("Provide username");
+      return;
+    }
     if (!email) {
       toast.warn("Provide email");
       return;
@@ -44,38 +54,35 @@ const Register = () => {
       toast.warn("Provide password");
       return;
     }
+    if (confirmPassword !== password) {
+      toast.error("Password do not match!");
+    }
 
     try {
-      //   const result = await register({ email, password, username });
+      const result = await register({ username, email, password });
       //check for errors
       if (result.error) {
-        const { status, data } = result.error; //destructure the result
+        //destructure the result
+        const { status, data } = result.error;
 
-        if (data?.MESSAGE === "NO_USER") {
-          toast.error(`No user found for Email: ${email}`);
+        if (data?.MESSAGE === "USER_EXIST_WITH_THE_EMAIL") {
+          toast.error(`User exist with Email: ${email}`);
           return;
         }
-
-        if (data?.MESSAGE === "WRONG_PASSWORD") {
-          toast.error("Password or Email is wrong");
+        if (data?.MESSAGE === "INVALID_DATA") {
+          toast.error(`Invalid data !`);
           return;
         }
-
         if (status === 500) {
           toast.error("Server error");
-          return;
-        }
-
-        if (status === 404 || data?.code === 404) {
-          toast.error("Email or Password is wrong");
           return;
         }
       } else {
         // no errors dispatch to root
         // SUCCESS 🎉
-        // ✅ Redirect user after login
+        // ✅ Redirect user after register
         dispatch(setCredentials(result.data));
-        toast.success(`Welcome ${result?.data?.username}`);
+        toast.success(`User registered successfully! `);
       }
     } catch (error) {
       toast.error(error?.data?.message || "Unexpected error");
@@ -100,11 +107,11 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                id="text"
+                id="username"
                 name="username"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full"
-                value={username}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.username}
+                onChange={handleFormData}
               />
             </div>
             <div className=" w-full ">
@@ -119,8 +126,8 @@ const Register = () => {
                 id="email"
                 name="email"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleFormData}
               />
             </div>
 
@@ -136,8 +143,8 @@ const Register = () => {
                 id="password"
                 name="password"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleFormData}
               />
             </div>
             <div className=" w-full">
@@ -152,8 +159,8 @@ const Register = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full "
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={formData.confirmPassword}
+                onChange={handleFormData}
               />
             </div>
             <button
@@ -169,7 +176,7 @@ const Register = () => {
             <p className="text-white">
               {" Already a customer ?"}
               <Link
-                to={redirect ? `/login/redirect=${redirect}` : "/login"}
+                to={redirect ? `/login?redirect=${redirect}` : "/login"}
                 className="text-pink-500 hover:underline"
               >
                 Login
