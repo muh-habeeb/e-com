@@ -16,7 +16,8 @@ const createUser = asyncHandler(async (req, res) => {
     //if user exist - show error
     res.status(400).json({
       request: "success",
-      message: "User already exists with " + email,
+      message: "User already exists",
+      MESSAGE: "USER_EXIST_WITH_THE_EMAIL",
     });
     return;
   }
@@ -31,7 +32,14 @@ const createUser = asyncHandler(async (req, res) => {
     genToken(res, newUser._id); //generate  jwt token and send to user with response token as OBJ id
     res.status(201).json({
       request: "success",
-      data: { _id, username, email, password, isAdmin }, //show data to response
+      message: "OK",
+      MESSAGE: "NEW_USER_CREATED",
+      // //show data to response
+      id: _id,
+      username: username,
+      email: email,
+      password: password,
+      isAdmin: isAdmin, 
     });
   } catch (error) {
     //errors
@@ -58,14 +66,13 @@ const loginUser = asyncHandler(async (req, res) => {
       res.status(200).json({
         request: "success",
         message: "OK",
-        MESSAGE: "OK",
-        data: {
-          id: _id,
-          username: username,
-          email: email,
-          password: password,
-          isAdmin: isAdmin,
-        },
+        MESSAGE: "LOGIN_SUCCESS",
+
+        id: _id,
+        username: username,
+        email: email,
+        // password: password,
+        isAdmin: isAdmin,
       });
       return; //exit the function after sending response
     } else {
@@ -94,7 +101,6 @@ const logOutCurrentUser = asyncHandler(async (req, res) => {
   //change the jwt data to null
   res.cookie("jwt", "", {
     httpOnly: true,
-
     expires: new Date(0),
   });
   res

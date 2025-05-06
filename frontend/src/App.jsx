@@ -7,8 +7,10 @@ const App = () => {
     <>
       <ToastContainer />
       <Navigation />
-      <main className="bg-slate-400 " style={{transitionDuration:3000,transitionProperty:"all"}}>
+      <main className="bg-slate-700 h-[100vh]" style={{transitionDuration:3000,transitionProperty:"all"}}>
+      
       <Outlet />
+      
       </main>
     </>
   );

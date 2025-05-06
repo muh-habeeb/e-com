@@ -20,43 +20,62 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
+      //user info can be logged
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
 
+  //submit handler function
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    //  show error if email or password is not provided
     if (!email) {
-      toast.warn("provide email");
+      toast.warn("Provide email");
       return;
-    } else if (!password) {
-      toast.warn("provide password");
+    }
+    if (!password) {
+      toast.warn("Provide password");
       return;
-    } else {
-      try {
-        const result = await login({ email, password });
-        // if (result.error.data.code == 404)
-        if (result.error.data.MESSAGE === "NO_USER") {//check for the user existence and show error if no user is fond
-          toast.error(`No user found  Email:${email}`);
-          // throw new Error(`No user found for Email ${email}`)
-          return; //exist teh function
+    }
+
+    try {
+      const result = await login({ email, password });
+      //check for errors
+      if (result.error) {
+        const { status, data } = result.error; //destructure the result
+
+        if (data?.MESSAGE === "NO_USER") {
+          toast.error(`No user found for Email: ${email}`);
+          return;
         }
-         if (result.error.data.MESSAGE === "WRONG_PASSWORD") {
-          toast.error(`Password or Email is wrong `);
-          return; //exist teh function
-        }else if( result.error.status == 404 ||
-          (result.error.data.code == 404) ){
-            toast.error(`Email or Password is wrong `);
-            return;
-        } 
-          console.log("await result ", result);
-          dispatch(setCredentials({ ...result }));
-      
-      } catch (error) {
-        toast.error(error?.data?.message || error);
+
+        if (data?.MESSAGE === "WRONG_PASSWORD") {
+          toast.error("Password or Email is wrong");
+          return;
+        }
+
+        if (status === 500) {
+          toast.error("Server error");
+          return;
+        }
+
+        if (status === 404 || data?.code === 404) {
+          toast.error("Email or Password is wrong");
+          return;
+        }
+      } else {
+        // no errors dispatch to root
+        // SUCCESS 🎉
+        // ✅ Redirect user after login
+        dispatch(setCredentials(result.data));
+        toast.success(`Welcome ${result?.data?.username}`);
       }
+    } catch (error) {
+      toast.error(error?.data?.message || "Unexpected error");
     }
   };
+
   return (
     <div>
       <section className="login bg-gray-900 pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
@@ -113,7 +132,7 @@ const Login = () => {
             <p className="text-white">
               New Customer ? {""}
               <Link
-                to={redirect ? `/register/redirect=${redirect} ` : "/register"}
+                to={redirect ? `/register/redirect=${redirect}` : "/register"}
                 className="text-pink-500 hover:underline"
               >
                 Register

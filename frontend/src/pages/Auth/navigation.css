@@ -1,26 +1,57 @@
-#navigation-container{
-    min-width: 50px;
-    transition: all 0.3s ease-in-out;
-    overflow: hidden;
+#navigation-container {
+  min-width: 50px;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
 }
-#navigation-container:hover{
-    width: 15%;
+#navigation-container:hover {
+  width: 15%;
 }
-.nav-item-name{
-    display: none;
-    visibility: hidden;
-    transition: opacity 0.2s ease-in-out;
+.nav-item-name {
+  display: none;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
 }
-#navigation-container:hover .nav-item-name{
-    display: block;
-    visibility: visible;
-    opacity: 1;
-
+#navigation-container:hover .nav-item-name {
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
-
 
 /* login css */
 
-.login{
-    transition: all .3s ;
+.login {
+  transition: all 0.3s;
+}
+/* 
+.dashboard-ul{
+  list-style: none;
+  transform: height 2s all;
+  height: 0;
+  transition: all 0.4s;
+  display: none;
+}
+
+.dashboard-ul > .dashboard-item {
+  transform: opacity 2s all;
+  list-style: none;
+  transform: display 2s all;
+  opacity: 0;
+  display: none;
+  transition: all 0.4s;
+} */
+.dashboard-ul {
+  transition: all 0.4s;
+}
+
+.mask {
+  animation: open .4s linear forwards;
+  /* transition: all 0.4s; */
+}
+
+@keyframes open {
+  to {
+    /* transform-origin: bottom; */
+    height: 0;
+    /* transform: height 2s all; */
+  }
 }
