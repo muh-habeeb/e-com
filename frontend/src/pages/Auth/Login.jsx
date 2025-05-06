@@ -6,9 +6,16 @@ import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  //state to mange the input in modern way 
+  let [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleFormData = (e) => {
+    setFormData((old) => ({ ...old, [e.target.id]: e.target.value }));
+  };
+  //destructuring for pacing the values to sever
+  let { email, password } = formData;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,7 +45,6 @@ const Login = () => {
       toast.warn("Provide password");
       return;
     }
-
     try {
       const result = await login({ email, password });
       //check for errors
@@ -97,8 +103,8 @@ const Login = () => {
                 id="email"
                 name="email"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleFormData}
               />
             </div>
 
@@ -114,8 +120,8 @@ const Login = () => {
                 id="password"
                 name="password"
                 className="mt-1 p-2 border outline-pink-600 rounded w-full "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleFormData}
               />
             </div>
             <button
