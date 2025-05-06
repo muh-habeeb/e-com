@@ -83,9 +83,9 @@ const Login = () => {
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign In</h1>
           <form
             onSubmit={submitHandler}
-            className="container w-[40rem] flex flex-col items-center justify-center "
+            className="container w-[40rem] flex flex-col items-center justify-center  gap-2"
           >
-            <div className="my-[2rem] w-full ">
+            <div className="w-full ">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-white "
@@ -102,7 +102,7 @@ const Login = () => {
               />
             </div>
 
-            <div className="mb-[5px]  w-full">
+            <div className="w-full">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-white"
@@ -123,14 +123,13 @@ const Login = () => {
               type="submit"
               className=" bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem] w-auto flex items-center justify-center"
             >
-              {/* {isLoading ? "Signing In..." : "Sign In"}{" "} */}
-              <span>{isLoading ? <Loader /> : "Sign In"}</span>
+              <span>{isLoading ? <Loader /> : "Sign Up"}</span>
             </button>
           </form>
 
           <div className="mt-4">
             <p className="text-white">
-              New Customer ? {""}
+              {"New Customer ?"}
               <Link
                 to={redirect ? `/register/redirect=${redirect}` : "/register"}
                 className="text-pink-500 hover:underline"

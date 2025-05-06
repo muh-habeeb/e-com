@@ -19,7 +19,7 @@
 
 /* login css */
 
-.login {
+.login,.register {
   transition: all 0.3s;
 }
 /* 
