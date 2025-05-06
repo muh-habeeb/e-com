@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'sprinkle': "url('./src/assets/images for bg/engin-akyurt-Hlkuojv_P6I-unsplash.jpg')",
+        'gradientCircle': "url('./src/assets/images for bg/steve-johnson-pyQ_WaTof0U-unsplash.jpg')",
+        'gradientTexture': "url('./src/assets/images for bg/milad-fakurian-E8Ufcyxz514-unsplash.jpg')",
+      }
+    },
   },
   plugins: [],
 }

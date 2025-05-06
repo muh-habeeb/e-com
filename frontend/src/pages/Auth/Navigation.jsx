@@ -117,7 +117,7 @@ const Navigation = () => {
           {userInfo ? dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown /> : ""}
         </button>
 
-        <div className="relative flex items-center justify-center -ml-3 ">
+        <div className="relative flex items-center justify-center -ml-3 sm:m-0 ">
           {dropdownOpen && userInfo && (
             <ul
               className={`dashboard-ul absolute ${
