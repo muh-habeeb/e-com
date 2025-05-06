@@ -9,7 +9,7 @@ export default {
       backgroundImage: {
         'sprinkle': "url('./src/assets/images for bg/engin-akyurt-Hlkuojv_P6I-unsplash.jpg')",
         'gradientCircle': "url('./src/assets/images for bg/steve-johnson-pyQ_WaTof0U-unsplash.jpg')",
-        'gradientTexture': "url('./src/assets/images for bg/milad-fakurian-E8Ufcyxz514-unsplash.jpg')",
+         'gradientTexture': "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./src/assets/images for bg/milad-fakurian-E8Ufcyxz514-unsplash.jpg')"
       }
     },
   },

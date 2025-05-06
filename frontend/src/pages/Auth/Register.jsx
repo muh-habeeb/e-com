@@ -91,8 +91,8 @@ const Register = () => {
 
   return (
     <div>
-      <section className="register bg-gray-900 pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
-        <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center">
+      <section className="register   bg-gradientTexture  bg-cover  bg-no-repeat bg-center  pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
+        <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center backdrop-blur-3xl p-[50px]">
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign Up</h1>
           <form
             onSubmit={submitHandler}
@@ -109,7 +109,7 @@ const Register = () => {
                 type="text"
                 id="username"
                 name="username"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 p-2 border bg-transparent text-white  outline-pink-600 rounded w-full"
                 value={formData.username}
                 onChange={handleFormData}
               />
@@ -125,7 +125,7 @@ const Register = () => {
                 type="text"
                 id="email"
                 name="email"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 p-2 border bg-transparent text-white  outline-pink-600 rounded w-full"
                 value={formData.email}
                 onChange={handleFormData}
               />
@@ -142,7 +142,7 @@ const Register = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full "
+                className="mt-1 p-2 border bg-transparent text-white  outline-pink-600 rounded w-full "
                 value={formData.password}
                 onChange={handleFormData}
               />
@@ -158,7 +158,7 @@ const Register = () => {
                 type="text"
                 id="confirmPassword"
                 name="confirmPassword"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full "
+                className="mt-1 p-2 border bg-transparent text-white  outline-pink-600 rounded w-full "
                 value={formData.confirmPassword}
                 onChange={handleFormData}
               />
@@ -174,7 +174,7 @@ const Register = () => {
 
           <div className="mt-4">
             <p className="text-white">
-              {" Already a customer ?"}
+              {" Already a customer? "}
               <Link
                 to={redirect ? `/login?redirect=${redirect}` : "/login"}
                 className="text-pink-500 hover:underline"

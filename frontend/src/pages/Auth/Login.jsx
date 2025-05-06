@@ -83,9 +83,9 @@ const Login = () => {
   };
 
   return (
-    <div className="b">
-      <section className="login bg-gray-900 pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
-        <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center">
+    <div>
+      <section className="login bg-gradientCircle bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
+        <div className="mr-[4rem] mt-[5rem] p-4 flex flex-col items-center justify-center  backdrop-blur-[10px] rounded-2xl">
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign In</h1>
           <form
             onSubmit={submitHandler}
@@ -102,7 +102,7 @@ const Login = () => {
                 type="text"
                 id="email"
                 name="email"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 bg-transparent text-white p-2 border outline-pink-600 rounded w-full"
                 value={formData.email}
                 onChange={handleFormData}
               />
@@ -119,7 +119,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="mt-1 p-2 border outline-pink-600 rounded w-full "
+                className="mt-1 bg-transparent text-white p-2 border outline-pink-600 rounded w-full "
                 value={formData.password}
                 onChange={handleFormData}
               />
@@ -135,7 +135,7 @@ const Login = () => {
 
           <div className="mt-4">
             <p className="text-white">
-              {"New Customer ?"}
+              {"New Customer ? "}
               <Link
                 to={redirect ? `/register?${redirect}` : "/register"}
                 className="text-pink-500 hover:underline"
