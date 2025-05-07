@@ -91,6 +91,7 @@ const Register = () => {
 
   return (
     <div>
+      
       <section className="register   bg-gradientTexture  bg-cover  bg-no-repeat bg-center  pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
         <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center backdrop-blur-3xl p-[50px]">
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign Up</h1>
@@ -166,7 +167,7 @@ const Register = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className=" bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem] w-auto flex items-center justify-center"
+              className=" bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded cursor-pointer my-[1rem] w-auto flex items-center justify-center"
             >
               <span>{isLoading ? <Loader /> : "Sign In"}</span>
             </button>

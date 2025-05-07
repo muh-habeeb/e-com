@@ -102,7 +102,7 @@ const Login = () => {
                 type="text"
                 id="email"
                 name="email"
-                className="mt-1 bg-transparent text-white p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 focus:border-none active:border-none bg-transparent text-white p-2 border outline-pink-600 rounded w-full"
                 value={formData.email}
                 onChange={handleFormData}
               />
@@ -119,7 +119,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="mt-1 bg-transparent text-white p-2 border outline-pink-600 rounded w-full "
+                className="mt-1 focus:border-none bg-transparent text-white p-2 border outline-pink-600 rounded w-full "
                 value={formData.password}
                 onChange={handleFormData}
               />
@@ -127,7 +127,7 @@ const Login = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className=" bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem] w-auto flex items-center justify-center"
+              className=" bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem] w-auto flex items-center justify-center hover:bg-pink-600"
             >
               <span>{isLoading ? <Loader /> : "Sign Up"}</span>
             </button>

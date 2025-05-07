@@ -4,6 +4,7 @@ import {
   AiOutlineUserAdd,
   AiOutlineShoppingCart,
   AiOutlineLogin,
+  AiOutlineUser,
 } from "react-icons/ai";
 import { FaHeart } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -103,13 +104,17 @@ const Navigation = () => {
           </span>
         </Link>
       </div>
-      <div className="relative flex  text-white focus:outline-none ">
+      <div className="relative flex  text-white focus:outline-none  w-full ">
         <button
           onClick={toggleDropdown}
           className="flex items-center gap-1 text-white capitalize"
         >
           {userInfo ? (
-            <span className="text-white">{userInfo?.username || ""}</span>
+            <div className="flex items-center justify-center  gap-2">
+              <AiOutlineUser size={23}/>
+              {<span className="nav-item-name hidden uppercase transition-opacity duration-500 ">{userInfo?.username || ""}</span>}
+              {/* <span className="text-white"></span> */}
+            </div>
           ) : (
             <></>
           )}
@@ -117,12 +122,12 @@ const Navigation = () => {
           {userInfo ? dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown /> : ""}
         </button>
 
-        <div className="relative flex items-center justify-center -ml-3 sm:m-0 ">
+        <div className="relative flex items-center justify-center ml-[20px] ">
           {dropdownOpen && userInfo && (
             <ul
               className={`dashboard-ul absolute ${
                 userInfo.isAdmin ? " -top-80" : "-top-24"
-              } outline-none border-none flex flex-col items-center justify-center  bg-white text-gray-600 border rounded z-50`}
+              } outline-none border-none flex flex-col items-center justify-center -ml-[50px] bg-white text-gray-600 border rounded z-50`}
             >
               <span className="mask absolute bg-black top-0 left-0 h-[100%] w-[100%] pointer-events-none "></span>
               {/*  if the user is admin show all the possible places he can go */}
