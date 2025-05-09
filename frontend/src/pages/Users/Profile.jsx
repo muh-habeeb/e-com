@@ -25,18 +25,6 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
-  //   let [formData, setFormData] = useState({
-  //     username: "",
-  //     password: "",
-  //     email: "",
-  //     confirmPassword: "",
-  //   });
-
-  //   let { username, email, password,confirmPassword } = formData;
-  //   let handleFormData = (e) => {
-  //     setFormData((old) => ({ ...old, [e.target.id]: e.target.value }));
-  //   };
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -49,9 +37,9 @@ const Profile = () => {
           username,
           email,
           password,
-        });
+        }); //pass the data to update
         dispatch(setCredentials({ ...result }));
-        toast.success('Profile updated successfully')
+        toast.success("Profile updated successfully");
       } catch (error) {
         toast.error(error?.data?.MESSAGE || "error happened", error);
       }
@@ -73,7 +61,7 @@ const Profile = () => {
                 value={username}
                 id="username"
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter name"
+                placeholder="Enter Username"
                 className=" form-input text-pink-400 outline-pink-600 border-none p-4 rounded-sm w-full"
               />
             </div>

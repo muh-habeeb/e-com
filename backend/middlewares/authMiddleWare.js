@@ -11,7 +11,7 @@ const authenticated = asyncHandler(async (req, res, next) => {
     try {
       const decode = jwt.verify(token, process.env.JWT_SECRET); //decode the jwt secret with verify func with JWT_SECRET and token which wil be  mongo OBJ _id
       //######   WHAT IS THE LINE -PASS
-      req.user = await User.findById(decode.userId).select("-password"); //match the decoded value with  OBJ i_d and pass the user to next function whichever is it they can use eg : in controllers
+      req.user = await User.findById(decode.userId).select("-password"); //match the decoded value with  OBJ _id and password the user to next function whichever is it they can use eg : in controllers
       //all okay go to next function which is check is the users is admin or not
       next();
     } catch (error) {

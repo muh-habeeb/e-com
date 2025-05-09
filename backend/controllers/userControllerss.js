@@ -14,8 +14,8 @@ const createUser = asyncHandler(async (req, res) => {
       message: "All fields  are required!!",
       MESSAGE: "INVALID_DATA",
     });
-    return; 
-  };
+    return;
+  }
   const userExist = await User.findOne({ email }); //check for thw user is exist in the mail
   if (userExist) {
     //if user exist - show error
@@ -150,6 +150,7 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
     res.status(404).json({
       request: "success",
       message: "User Not Found",
+      MESSAGE: "USER_NOT_FOUND",
     });
     throw new Error("User not found. (from handler");
   }
@@ -172,23 +173,23 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save(); //update the user and save
-    const { _id, username, email, password, isAdmin } = updatedUser;
+    const { _id:id, username, email, password, isAdmin } = updatedUser;
 
     res.status(201).json({
       request: "success",
       message: " Updated current User Data",
-      data: {
-        _id,
-        username,
-        email,
-        password,
-        isAdmin,
-      },
+      MESSAGE: "USER_UPDATED",
+      id,
+      username,
+      email,
+      // password,
+      isAdmin,
     });
   } else {
     res.status(404).json({
       request: "success",
-      message: "User not found to update",
+      message: "user not found to update",
+      MESSAGE: "USER_NOT_FOUND",
     });
     throw new Error("User Not Found to Update");
   }
@@ -201,7 +202,11 @@ const deleteUserById = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
     res
       .status(400)
-      .json({ request: "success", message: "not a valid user id" });
+      .json({
+        request: "success",
+        message: "not a valid user id",
+        MESSAGE: "NOT_VALID_ID",
+      });
   } else {
     // if id is valid
     const user = await User.findById(req.params.id);
@@ -211,7 +216,11 @@ const deleteUserById = asyncHandler(async (req, res) => {
       if (user.isAdmin) {
         res
           .status(400)
-          .json({ request: "success", message: "cannot delete admin user" });
+          .json({
+            request: "success",
+            message: "cannot delete admin user",
+            MESSAGE: "CANNOT_DELETE_ADMIN",
+          });
         return;
       }
 
@@ -220,11 +229,13 @@ const deleteUserById = asyncHandler(async (req, res) => {
       res.status(201).json({
         request: "success",
         message: `${username} removed successfully`,
+        MESSAGE: "USER_REMOVED",
       });
     } else {
       res.status(404).json({
         request: "success",
         message: ` user with  id :${req.params.id} is not found`,
+        MESSAGE: "USER_NOT_FOUND",
       });
     }
   }
@@ -267,6 +278,7 @@ const updateUserById = asyncHandler(async (req, res) => {
     res.status(200).json({
       request: "success",
       message: "updated user data from admin side",
+      MESSAGE: "USER_UPDATED",
       data: updatedUser,
     });
   } else {

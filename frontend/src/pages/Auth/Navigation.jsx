@@ -112,7 +112,7 @@ const Navigation = () => {
           {userInfo ? (
             <div className="flex items-center justify-center  gap-2">
               <AiOutlineUser size={23}/>
-              {<span className="nav-item-name hidden uppercase transition-opacity duration-500 ">{userInfo?.username || ""}</span>}
+              {<span className="nav-item-name  uppercase transition-opacity duration-500 ">{userInfo?.username || ""}</span>}
               {/* <span className="text-white"></span> */}
             </div>
           ) : (
