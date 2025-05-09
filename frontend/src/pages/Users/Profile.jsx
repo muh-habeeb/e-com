@@ -14,6 +14,7 @@ const Profile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
+
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
 
@@ -22,7 +23,7 @@ const Profile = () => {
     setEmail(userInfo.email);
   }, [userInfo.email, userInfo.username]);
 
-  const result = useDispatch();
+  const dispatch = useDispatch();
 
   //   let [formData, setFormData] = useState({
   //     username: "",
@@ -35,6 +36,27 @@ const Profile = () => {
   //   let handleFormData = (e) => {
   //     setFormData((old) => ({ ...old, [e.target.id]: e.target.value }));
   //   };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Password do not match");
+    } else {
+      try {
+        const result = await updateProfile({
+          _id: userInfo.id,
+          username,
+          email,
+          password,
+        });
+        dispatch(setCredentials({ ...result }));
+        toast.success('Profile updated successfully')
+      } catch (error) {
+        toast.error(error?.data?.MESSAGE || "error happened", error);
+      }
+    }
+  };
   return (
     <div className=" container text-white">
       <div className="flex justify-center items-center h-[100vh] md:flex-col md:space-x-4">
@@ -43,7 +65,7 @@ const Profile = () => {
             Update Profile
           </h2>
 
-          <form className="">
+          <form className="" onSubmit={submitHandler}>
             <div className="mb-4">
               <label htmlFor="username">UserName</label>
               <input
@@ -77,7 +99,7 @@ const Profile = () => {
               />
             </div>
             <div className="mb-4">
-              <label>confirmPassword</label>
+              <label>Confirm Password</label>
               <input
                 type="text"
                 value={confirmPassword}
@@ -93,9 +115,16 @@ const Profile = () => {
               >
                 Update
               </button>
+              <Link
+                to="/user-orders"
+                className="capitalize bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700 1"
+              >
+                My orders{" "}
+              </Link>
             </div>
           </form>
         </div>
+        {loadingUpdateProfile && <Loader />}
       </div>
     </div>
   );

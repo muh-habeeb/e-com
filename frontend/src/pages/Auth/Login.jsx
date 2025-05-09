@@ -71,7 +71,6 @@ const Login = () => {
           return;
         }
       } else {
-        // no errors dispatch to root
         // SUCCESS 🎉
         // ✅ Redirect user after login
         dispatch(setCredentials(result.data));
