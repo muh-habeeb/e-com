@@ -2,7 +2,7 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import User from "../models/userModel.js";
 import bcrypt, { hash } from "bcryptjs";
 import genToken from "../utils/userToken.js";
-import { request } from "express";
+// import { request } from "express";
 import mongoose from "mongoose";
 
 const createUser = asyncHandler(async (req, res) => {

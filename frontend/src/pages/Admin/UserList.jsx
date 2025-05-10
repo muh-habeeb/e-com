@@ -167,10 +167,11 @@ export const UserList = () => {
                       </div>
                     )}
                   </td>
-                  <td className="px-4 py2 border">
+                  <td className="px-4 py2 border ">
                     {editableUserId === user._id ? (
                       <input
                         type="checkbox"
+                        className="size-5"
                         checked={editableUserIsAdmin}
                         onChange={(e) =>
                           setEditableUserIsAdmin(e.target.checked)
