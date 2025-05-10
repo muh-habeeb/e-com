@@ -4,10 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
-    <div className="bg-slate-800">
+    <div>
       <ToastContainer />
       <Navigation />
-      <main className="bg-slate-700 h-[100vh]" style={{transitionDuration:3000,transitionProperty:"all"}}>
+      <main className="bg-slate-900 h-[100vh] w-screen" style={{transitionDuration:3000,transitionProperty:"all"}}>
       
       <Outlet />
       

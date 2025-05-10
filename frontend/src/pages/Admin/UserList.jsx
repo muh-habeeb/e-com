@@ -60,7 +60,7 @@ export const UserList = () => {
   }, [refetch]);
 
   return (
-    <div className="p-4  h-[100vh] flex flex-col items-center justify-center">
+    <div className="ml-10 h-[100vh] flex flex-col items-center justify-center">
       <h1 className="text-2xl font-semibold mb-4 text-white ">Users</h1>
       {isLoading ? (
         <Loader />
@@ -70,7 +70,7 @@ export const UserList = () => {
           {error?.data?.message || error.message}
         </Message>
       ) : (
-        <div className="flex flex-col md:flex-row text-white">
+        <div className="flex flex-col md:flex-row text-white w-full">
           {/* admin menu */}
           <table className="w-full md:w-4/5 mx-auto  border-collapse  border">
             <thead>
@@ -97,7 +97,7 @@ export const UserList = () => {
                           id="editableUserName"
                           name="editableUserName"
                           onChange={(e) => setEditableUserName(e.target.value)}
-                          className="min-w-[250px] p-2 border rounded-lg bg-transparent"
+                          className="lg:min-w-[250px] w-full p-2 border rounded-lg bg-transparent"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -130,7 +130,7 @@ export const UserList = () => {
                           name="editableUserEmail"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                          className="min-w-[250px] border rounded-lg bg-transparent "
+                         className="lg:min-w-[250px] w-full p-2 border rounded-lg bg-transparent"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}

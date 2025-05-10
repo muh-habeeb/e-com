@@ -57,7 +57,7 @@ const Login = () => {
         }
 
         if (data?.MESSAGE === "WRONG_PASSWORD") {
-          toast.error("Password or Email is wrong");
+          toast.error("Password is wrong");
           return;
         }
 

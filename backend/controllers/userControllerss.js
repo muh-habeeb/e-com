@@ -82,11 +82,11 @@ const loginUser = asyncHandler(async (req, res) => {
       return; //exit the function after sending response
     } else {
       // show if the password is wrong
-      res.status(404).json({
+      res.status(400).json({
         request: "success",
         message: "password is wrong",
         MESSAGE: "WRONG_PASSWORD",
-        code: 404,
+        code: 400,
       });
     }
   } else {
