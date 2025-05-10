@@ -83,9 +83,9 @@ const Login = () => {
 
   return (
     <div>
-      <section className="login bg-gradientCircle bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
-        <div className="mr-[4rem] mt-[5rem] p-4 flex flex-col items-center justify-center  backdrop-blur-[10px] rounded-2xl">
-          <h1 className="text-2xl font-semibold mb-4 text-white">Sign In</h1>
+      <section className="login bg-stoke2 bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
+        <div className=" mr-[4rem] mt-[5rem] p-4 flex flex-col items-center justify-center  backdrop-blur-[10px] rounded-2xl">
+          <h1 className="text-2xl font-semibold mb-4 text-slate-800">Sign In</h1>
           <form
             onSubmit={submitHandler}
             className="container w-[40rem] flex flex-col items-center justify-center  gap-2"
@@ -93,7 +93,7 @@ const Login = () => {
             <div className="w-full ">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-white "
+                className="block text-sm font-medium text-slate-800"
               >
                 Email Address
               </label>
@@ -101,7 +101,7 @@ const Login = () => {
                 type="text"
                 id="email"
                 name="email"
-                className="mt-1 focus:border-none active:border-none bg-transparent text-white p-2 border outline-pink-600 rounded w-full"
+                className="mt-1  bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full"
                 value={formData.email}
                 onChange={handleFormData}
               />
@@ -110,7 +110,7 @@ const Login = () => {
             <div className="w-full">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-white"
+                className="block text-sm font-medium text-slate-800"
               >
                 Password
               </label>
@@ -118,7 +118,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="mt-1 focus:border-none bg-transparent text-white p-2 border outline-pink-600 rounded w-full "
+                className="mt-1  bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full"
                 value={formData.password}
                 onChange={handleFormData}
               />
@@ -137,7 +137,7 @@ const Login = () => {
               {"New Customer ? "}
               <Link
                 to={redirect ? `/register?${redirect}` : "/register"}
-                className="text-pink-500 hover:underline"
+                className="text-pink-500 hover:bg-pink-900 hover:duration-300 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
               >
                 Register
               </Link>

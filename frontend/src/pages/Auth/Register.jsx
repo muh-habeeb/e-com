@@ -92,7 +92,7 @@ const Register = () => {
   return (
     <div>
       
-      <section className="register   bg-gradientTexture  bg-cover  bg-no-repeat bg-center  pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
+      <section className="register   bg-stoke1  bg-cover bg-no-repeat bg-center  flex flex-wrap justify-center items-center w-screen h-[100vh] ">
         <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center backdrop-blur-3xl p-[50px]">
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign Up</h1>
           <form
@@ -178,7 +178,7 @@ const Register = () => {
               {" Already a customer? "}
               <Link
                 to={redirect ? `/login?redirect=${redirect}` : "/login"}
-                className="text-pink-500 hover:underline"
+                className="text-pink-500 hover:bg-pink-900 hover:duration-300 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
               >
                 Login
               </Link>
