@@ -110,7 +110,11 @@ const logOutCurrentUser = asyncHandler(async (req, res) => {
   });
   res
     .status(200)
-    .json({ request: "success", message: "User Logged Out Successfully ",MESSAGE:"LOGGED_OUTED" });
+    .json({
+      request: "success",
+      message: "User Logged Out Successfully ",
+      MESSAGE: "LOGGED_OUTED",
+    });
 });
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -123,7 +127,7 @@ const getAllUser = asyncHandler(async (req, res) => {
   res.status(200).json({
     request: "success",
     message: "ALL USER DATA",
-    MESSAGE:"ALL_USERS",
+    MESSAGE: "ALL_USERS",
     length: users.length,
     users,
   });
@@ -173,7 +177,7 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save(); //update the user and save
-    const { _id:id, username, email, password, isAdmin } = updatedUser;
+    const { _id: id, username, email, password, isAdmin } = updatedUser;
 
     res.status(201).json({
       request: "success",
@@ -200,13 +204,11 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
 
 const deleteUserById = asyncHandler(async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id)) {
-    res
-      .status(400)
-      .json({
-        request: "success",
-        message: "not a valid user id",
-        MESSAGE: "NOT_VALID_ID",
-      });
+    res.status(400).json({
+      request: "success",
+      message: "not a valid user id",
+      MESSAGE: "NOT_VALID_ID",
+    });
   } else {
     // if id is valid
     const user = await User.findById(req.params.id);
@@ -214,13 +216,11 @@ const deleteUserById = asyncHandler(async (req, res) => {
       const { _id: id, username } = user;
       //check is the id is admin or not
       if (user.isAdmin) {
-        res
-          .status(400)
-          .json({
-            request: "success",
-            message: "cannot delete admin user",
-            MESSAGE: "CANNOT_DELETE_ADMIN",
-          });
+        res.status(403).json( { //send forbidden 
+          request: "success",
+          message: "cannot delete admin user",
+          MESSAGE: "CANNOT_DELETE_ADMIN",
+        });
         return;
       }
 
@@ -274,12 +274,16 @@ const updateUserById = asyncHandler(async (req, res) => {
     // waiting to updated the user
 
     const updatedUser = await user.save();
+    const { _id: id, username, email, isAdmin } = updatedUser;
 
-    res.status(200).json({
+    res.status(201).json({
       request: "success",
       message: "updated user data from admin side",
       MESSAGE: "USER_UPDATED",
-      data: updatedUser,
+      id,
+      username,
+      email,
+      isAdmin,
     });
   } else {
     res.status(404).json({

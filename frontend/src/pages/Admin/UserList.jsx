@@ -14,32 +14,54 @@ export const UserList = () => {
   const [updateUser] = useUpdateUserMutation();
 
   const [editableUserId, setEditableUserId] = useState(null);
-  const [editableUsername, setEditableUsername] = useState("");
-  const [editableUserEmail, setEditableUseremail] = useState("");
-  const updateHandler = () => {
-    console.log("clikde");
-  };
-  const toggleEdit = () => {
-    console.log("clikd");
-  };
-  const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure want to delete?")) {
-      try {
-        const result = await deleteUser(id);
-        console.log(result);
-      } catch (error) {
-        toast.error(error?.data?.message || error);
-      }
+  const [editableUserName, setEditableUserName] = useState("");
+  const [editableUserEmail, setEditableUserEmail] = useState("");
+
+  //update data hndle  i think
+  const updateHandler = async (id) => {
+
+    try {
+      await updateUser({
+        userId: id,
+        username: editableUserName,
+        email: editableUserEmail,
+      });
+
+      setEditableUserId(null);
+      refetch();
+
+      toast.success("User Updated");
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
     }
-    console.log("deleted");
+  };
+  // enable edit
+  const toggleEdit = (id, username, email) => {
+    setEditableUserId(id);
+    setEditableUserName(username);
+    setEditableUserEmail(email);
+  };
+  ///delete user
+  const deleteHandler = async (id) => {
+    let deleteConfirmation = window.confirm("Are you sure want to delete?");
+    if (deleteConfirmation) {
+      try {
+        await deleteUser(id);
+        toast.success("User Removed");
+      } catch (error) {
+        toast.error(error?.data?.message || error.error);
+      }
+    } else {
+      return toast.info("User Not Deleted");
+    }
   };
   useEffect(() => {
     refetch();
   }, [refetch]);
 
   return (
-    <div className="p-4 text-white h-[100vh] flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold mb-4  ">Users</h1>
+    <div className="p-4  h-[100vh] flex flex-col items-center justify-center">
+      <h1 className="text-2xl font-semibold mb-4 text-white ">Users</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -48,11 +70,12 @@ export const UserList = () => {
           {error?.data?.message || error.message}
         </Message>
       ) : (
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row text-white">
           {/* admin menu */}
           <table className="w-full md:w-4/5 mx-auto  border-collapse  border">
             <thead>
               <tr className="border">
+                <th className="px-4 py-2 text-CENTER border">Sl.NO</th>
                 <th className="px-4 py-2 text-CENTER border">USER ID</th>
                 <th className="px-4 py-2 text-CENTER border">NAME</th>
                 <th className="px-4 py-2 text-CENTER border">EMAIL</th>
@@ -61,19 +84,20 @@ export const UserList = () => {
               </tr>
             </thead>
             <tbody>
-              {users.users.map((user) => (
+              {users.users.map((user, index) => (
                 <tr key={user._id} className="border">
+                  <td className="px-4 py-2 border">{index + 1}</td>
                   <td className="px-4 py-2 border">{user._id}</td>
                   <td className="px-4 py-2 border">
                     {editableUserId === user._id ? (
                       <div className="flex item-center">
                         <input
                           type="text"
-                          value={editableUsername}
-                          id="editableUsername"
-                          name="editableUsername"
-                          onChange={(e) => setEditableUsername(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          value={editableUserName}
+                          id="editableUserName"
+                          name="editableUserName"
+                          onChange={(e) => setEditableUserName(e.target.value)}
+                          className="min-w-[250px] p-2 border rounded-lg bg-transparent"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -105,8 +129,8 @@ export const UserList = () => {
                           id="editableUserEmail"
                           name="editableUserEmail"
                           value={editableUserEmail}
-                          onChange={(e) => setEditableUseremail(e.target.value)}
-                          className="w-full border rounded-lg "
+                          onChange={(e) => setEditableUserEmail(e.target.value)}
+                          className="min-w-[250px] border rounded-lg bg-transparent "
                         />
                         <button
                           onClick={() => updateHandler(user._id)}

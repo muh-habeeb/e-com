@@ -29,8 +29,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial state where userInfo is fetched from localStorage, or set to null if not available
 const initialState = {
-  userInfo: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo")) // Parse the stored user info if available
+  // userInfo: localStorage.getItem("userInfo")
+  //   ? JSON.parse(localStorage.getItem("userInfo")) // Parse the stored user info if available
+  //   : null, // If not, set userInfo to null
+  userInfo: sessionStorage.getItem("userInfo")
+    ? JSON.parse(sessionStorage.getItem("userInfo")) // Parse the stored user info if available
     : null, // If not, set userInfo to null
 };
 
@@ -44,13 +47,15 @@ const authSlice = createSlice({
       state.userInfo = action.payload;
 
       // Store the updated user info in localStorage
-      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      // localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      sessionStorage.setItem("userInfo", JSON.stringify(action.payload));
 
       // Calculate the expiration time for the session (30 days from now)
       const expirationTime = new Date().getTime() + 30 * 24 * 60 * 60 * 1000;
 
       // Store the expiration time in localStorage
-      localStorage.setItem("expirationTime", expirationTime);
+      // localStorage.setItem("expirationTime", expirationTime);
+      sessionStorage.setItem("expirationTime", expirationTime);
     },
 
     // Action to log the user out
@@ -59,7 +64,8 @@ const authSlice = createSlice({
       state.userInfo = null;
 
       // Clear all localStorage items (including userInfo and expirationTime)
-      localStorage.clear();
+      // localStorage.clear();
+      sessionStorage.clear();
     },
   },
 });

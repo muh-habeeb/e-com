@@ -48,7 +48,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
     //delete users for admin user
     deleteUser: builder.mutation({
-      query: () => ({
+      query: (userId) => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URI}/${userId}`,
         method: "DELETE",
