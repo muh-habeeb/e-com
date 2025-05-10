@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 #navigation-container:hover {
-  width: 15%;
+  width: 200px;
 }
 .nav-item-name {
   display: none;

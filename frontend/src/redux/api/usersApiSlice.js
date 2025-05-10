@@ -38,6 +38,38 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    //get users for admin user
+    getUsers: builder.query({
+      query: () => ({
+        url: `${USERS_URI}`,
+      }),
+      providesTags: ["User"],
+      keepUnusedDataFor: 5,
+    }),
+    //delete users for admin user
+    deleteUser: builder.mutation({
+      query: () => ({
+        // eslint-disable-next-line no-undef
+        url: `${USERS_URI}/${userId}`,
+        method: "DELETE",
+      }),
+    }),
+    getUserDetails: builder.query({
+      query: (id) => ({
+        url: `${USERS_URI}/${id}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+
+    //update user by id for admin
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URI}/${data.userId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -45,9 +77,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
 // http://localhost:9999/api/users/auth
 
 //  use${Login}Mutation
+//hooked
 export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
   useProfileMutation,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation,
 } = userApiSlice;

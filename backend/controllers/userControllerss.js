@@ -73,7 +73,6 @@ const loginUser = asyncHandler(async (req, res) => {
         request: "success",
         message: "OK",
         MESSAGE: "LOGIN_SUCCESS",
-
         id: _id,
         username: username,
         email: email,
@@ -111,7 +110,7 @@ const logOutCurrentUser = asyncHandler(async (req, res) => {
   });
   res
     .status(200)
-    .json({ request: "success", message: "User Logged Out Successfully " });
+    .json({ request: "success", message: "User Logged Out Successfully ",MESSAGE:"LOGGED_OUTED" });
 });
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -124,8 +123,9 @@ const getAllUser = asyncHandler(async (req, res) => {
   res.status(200).json({
     request: "success",
     message: "ALL USER DATA",
+    MESSAGE:"ALL_USERS",
     length: users.length,
-    data: users,
+    users,
   });
 });
 

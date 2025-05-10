@@ -37,7 +37,8 @@ const Profile = () => {
           username,
           email,
           password,
-        }); //pass the data to update
+        }).unwrap(); //pass the data to update
+
         dispatch(setCredentials({ ...result }));
         toast.success("Profile updated successfully");
       } catch (error) {
@@ -47,19 +48,21 @@ const Profile = () => {
   };
   return (
     <div className=" container text-white">
-      <div className="flex justify-center items-center h-[100vh] md:flex-col md:space-x-4">
+      <div className=" relative flex justify-center items-center h-[100vh] md:flex-col md:space-x-4">
         <div className="md:w-1/3">
           <h2 className="text-2xl font-semibold mb-4 capitalize">
             Update Profile
           </h2>
 
-          <form className="" onSubmit={submitHandler}>
+          <form className="" onSubmit={submitHandler} autoComplete="true">
             <div className="mb-4">
               <label htmlFor="username">UserName</label>
               <input
                 type="text"
                 value={username}
                 id="username"
+                name="username"
+                autoComplete="true"
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter Username"
                 className=" form-input text-pink-400 outline-pink-600 border-none p-4 rounded-sm w-full"
@@ -70,26 +73,32 @@ const Profile = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 value={email}
+                autoComplete="true"
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 className=" form-input text-pink-400 outline-pink-600 border-none p-4 rounded-sm w-full"
               />
             </div>
             <div className="mb-4">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 value={password}
+                id="password"
+                name="password"
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter new password"
                 className=" form-input text-pink-400 outline-pink-600 border-none p-4 rounded-sm w-full"
               />
             </div>
             <div className="mb-4">
-              <label>Confirm Password</label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="text"
+                id="confirmPassword"
+                name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Enter password again to confirm"
@@ -98,6 +107,7 @@ const Profile = () => {
             </div>
             <div className="flex justify-between text-white ">
               <button
+                disabled={loadingUpdateProfile}
                 type="submit"
                 className="bg-pink-500 text-white py-2 px-4 rounded hover:bg-pink-600"
               >
