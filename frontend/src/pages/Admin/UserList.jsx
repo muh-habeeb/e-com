@@ -16,19 +16,20 @@ export const UserList = () => {
   const [editableUserId, setEditableUserId] = useState(null);
   const [editableUserName, setEditableUserName] = useState("");
   const [editableUserEmail, setEditableUserEmail] = useState("");
+  const [editableUserIsAdmin, setEditableUserIsAdmin] = useState(false);
 
   //update data hndle  i think
   const updateHandler = async (id) => {
-
     try {
       await updateUser({
         userId: id,
         username: editableUserName,
         email: editableUserEmail,
-      });
+        isAdmin: editableUserIsAdmin,
+      }); //passing data as object
 
-      setEditableUserId(null);
-      refetch();
+      setEditableUserId(null); 
+      refetch(); //what  it do
 
       toast.success("User Updated");
     } catch (error) {
@@ -36,11 +37,13 @@ export const UserList = () => {
     }
   };
   // enable edit
-  const toggleEdit = (id, username, email) => {
-    setEditableUserId(id);
-    setEditableUserName(username);
-    setEditableUserEmail(email);
+  const toggleEdit = (id, username, email, isAdmin) => {
+    setEditableUserId(id); //set the id
+    setEditableUserName(username); //set the username
+    setEditableUserEmail(email); //set email
+    setEditableUserIsAdmin(isAdmin); //set admin or not
   };
+
   ///delete user
   const deleteHandler = async (id) => {
     let deleteConfirmation = window.confirm("Are you sure want to delete?");
@@ -55,6 +58,7 @@ export const UserList = () => {
       return toast.info("User Not Deleted");
     }
   };
+  //waht hapening
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -113,7 +117,12 @@ export const UserList = () => {
                         {""}
                         <button
                           onClick={() =>
-                            toggleEdit(user._id, user.username, user.email)
+                            toggleEdit(
+                              user._id,
+                              user.username,
+                              user.email,
+                              user.isAdmin
+                            )
                           }
                         >
                           <FaEdit className="ml-[1rem]" />
@@ -130,7 +139,7 @@ export const UserList = () => {
                           name="editableUserEmail"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                         className="lg:min-w-[250px] w-full p-2 border rounded-lg bg-transparent"
+                          className="lg:min-w-[250px] w-full p-2 border rounded-lg bg-transparent"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -145,7 +154,12 @@ export const UserList = () => {
 
                         <button
                           onClick={() =>
-                            toggleEdit(user._id, user.username, user.email)
+                            toggleEdit(
+                              user._id,
+                              user.username,
+                              user.email,
+                              user.isAdmin
+                            )
                           }
                         >
                           <FaEdit className="ml-[1rem]" />
@@ -154,7 +168,15 @@ export const UserList = () => {
                     )}
                   </td>
                   <td className="px-4 py2 border">
-                    {user.isAdmin ? (
+                    {editableUserId === user._id ? (
+                      <input
+                        type="checkbox"
+                        checked={editableUserIsAdmin}
+                        onChange={(e) =>
+                          setEditableUserIsAdmin(e.target.checked)
+                        }
+                      />
+                    ) : user.isAdmin ? (
                       <FaCheck style={{ color: "green" }} />
                     ) : (
                       <FaTimes style={{ color: "red" }} />
