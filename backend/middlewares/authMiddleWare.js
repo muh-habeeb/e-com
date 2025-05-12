@@ -6,7 +6,7 @@ const authenticated = asyncHandler(async (req, res, next) => {
   //read JWT from the jwt cookie
 
   let token;
-  token = req.cookies.jwt; //get token from the request
+  token = req.cookies.jwt; //get token from the request with token name as jwt
   if (token) {
     try {
       const decode = jwt.verify(token, process.env.JWT_SECRET); //decode the jwt secret with verify func with JWT_SECRET and token which wil be  mongo OBJ _id

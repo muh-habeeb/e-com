@@ -44,7 +44,7 @@ const createUser = asyncHandler(async (req, res) => {
       id: _id,
       username: username,
       email: email,
-      password: password,
+      // password: password,
       isAdmin: isAdmin,
     });
   } catch (error) {

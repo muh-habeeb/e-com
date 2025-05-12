@@ -20,9 +20,11 @@ const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+  //for responsive
   const toggleSideBar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -111,8 +113,12 @@ const Navigation = () => {
         >
           {userInfo ? (
             <div className="flex items-center justify-center  gap-2">
-              <AiOutlineUser size={23}/>
-              {<span className="nav-item-name  uppercase transition-opacity duration-500 ">{userInfo?.username || ""}</span>}
+              <AiOutlineUser size={23} />
+              {
+                <span className="nav-item-name  uppercase transition-opacity duration-500 ">
+                  {userInfo?.username || ""}
+                </span>
+              }
               {/* <span className="text-white"></span> */}
             </div>
           ) : (
