@@ -13,11 +13,10 @@ import {
   listCategory,
 } from "../controllers/categoryController.js";
 
-//root of category 
+//root of category
 router.route("/").post(authenticated, authorizedAdmin, createCategory);
 // root of category/categories  for all categories
 router.route("/categories").get(listCategory);
-
 
 // methods by id
 router
@@ -25,8 +24,5 @@ router
   .get(readCategory)
   .put(authenticated, authorizedAdmin, updateCategory)
   .delete(authenticated, authorizedAdmin, deleteCategory);
-
-
-
 
 export default router;

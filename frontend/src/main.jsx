@@ -14,6 +14,7 @@ import Profile from "./pages/Users/Profile.jsx";
 import { AdminRoute } from "./pages/Admin/AdminRoute.jsx";
 import { UserList } from "./pages/Admin/UserList.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import CategoryList from "./pages/Admin/CategoryList.jsx";
 
 //  define routes
 
@@ -22,7 +23,6 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
       {""}
       {/* for error redetection */}
-
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -33,6 +33,7 @@ const router = createBrowserRouter(
       {/* admin route */}
       <Route path="/admin" element={<AdminRoute />}>
         <Route path="userlist" element={<UserList />} />
+        <Route path="categorylist" element={<CategoryList />} />
       </Route>
     </Route>
   )

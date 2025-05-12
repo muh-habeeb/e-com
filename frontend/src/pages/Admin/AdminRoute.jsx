@@ -15,9 +15,8 @@ export const AdminRoute = () => {
     );
   }else{
     console.log('nop');
-    
     toast.error("you are not authorized to access! ")
   }
 
-  // the erro thing not working as expected
+  // the error thing not working as expected
 };
