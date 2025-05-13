@@ -62,7 +62,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
       query: (newCategory) => ({
         url: `${CATEGORY_URL}`,
         method: "POST",
-        data: newCategory,
+        body: newCategory,
         headers: {
           "Content-Type": "application/json",
         },
