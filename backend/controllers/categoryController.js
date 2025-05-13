@@ -5,7 +5,7 @@ import Category from "../models/categoryModel.js";
 const createCategory = asyncHandler(async (req, res) => {
   try {
     const { name } = req.body;
-
+    
     if (!name) {
       return res.status(400).json({
         request: "success",

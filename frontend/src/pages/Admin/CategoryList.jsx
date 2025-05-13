@@ -38,14 +38,12 @@ const CategoryList = () => {
         toast.error(result?.error);
       } else {
         setName("");
-        toast.success(`${result.name} is created.`);
+        toast.success(`${result?.data?.name} is created.`);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("creating category failed.");
+      toast.error(`creating category failed. ${error?.data?.MESSAGE}`);
     }
   };
-  // categories?.data?.map((category) => console.log(category));
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row text-white">
       {/* admin menu */}
