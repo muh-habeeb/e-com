@@ -75,7 +75,19 @@ const CategoryList = () => {
 
   const handleDeleteCategory = async (e) => {
     e.preventDefault();
-    return;
+    try {
+      const result = await deleteCategory(selectedCategory._id).unwrap();
+      if (result?.error) {
+        toast.error(result?.error);
+      } else {
+        toast.success(`${result?.data?.name} Deleted.`);
+        setSelectedCategory(null);
+        setModelVisible(false);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("category deletion failed,try again");
+    }
   };
 
   return (
