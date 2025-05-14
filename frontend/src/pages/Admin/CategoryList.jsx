@@ -8,7 +8,7 @@ import {
   useGatAllCategoriesQuery,
 } from "../../redux/api/categoryApiSlice";
 import { CategoryForm } from "../../components/CategoryForm";
-
+import Model from "../../components/Model";
 const CategoryList = () => {
   //mutations idkn
   const { data: categories } = useGatAllCategoriesQuery();
@@ -19,10 +19,11 @@ const CategoryList = () => {
   //satess
   const [name, setName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [updateName, setUpdateName] = useState(null);
+  const [updatingName, setUpdatingName] = useState(null);
   const [ModelVisible, setModelVisible] = useState(false);
 
   //functions
+  //create
   const handleCreateCategory = async (e) => {
     e.preventDefault();
     if (!name) {
@@ -31,10 +32,8 @@ const CategoryList = () => {
     }
     try {
       const result = await createCategory({ name: name }).unwrap();
-      console.log(result);
 
       if (result?.error) {
-        console.log(result.error);
         toast.error(result?.error);
       } else {
         setName("");
@@ -44,6 +43,41 @@ const CategoryList = () => {
       toast.error(`creating category failed. ${error?.data?.MESSAGE}`);
     }
   };
+
+  //update
+  const handleUpdateCategory = async (e) => {
+    e.preventDefault();
+    if (!updatingName) {
+      toast.warn("Category name required!");
+      return;
+    }
+    try {
+      const result = await updateCategory({
+        categoryId: selectedCategory._id,
+        updatedCategory: { name: updatingName },
+      }).unwrap();
+
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(`${result?.data?.name} updated`);
+        setSelectedCategory(null);
+        setUpdatingName("");
+        setModelVisible(false);
+      }
+    } catch (error) {
+      toast.error("Category Updating failed");
+      console.log(error);
+    }
+  };
+
+  //delete
+
+  const handleDeleteCategory = async (e) => {
+    e.preventDefault();
+    return;
+  };
+
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row text-white">
       {/* admin menu */}
@@ -65,7 +99,7 @@ const CategoryList = () => {
                 onClick={() => {
                   setModelVisible(true);
                   setSelectedCategory(category);
-                  setUpdateName(category.name);
+                  setUpdatingName(category.name);
                 }}
                 className="bg-white border border-pink-500 text-pink-500 py-2 px-4 rounded-lg m-3 hover:bg-pink-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50"
               >
@@ -74,6 +108,16 @@ const CategoryList = () => {
             </div>
           ))}
         </div>
+
+        <Model isOpen={ModelVisible} onClose={() => setModelVisible(false)}>
+          <CategoryForm
+            value={updatingName}
+            setaValue={(value) => setUpdatingName(value)}
+            handleSubmit={handleUpdateCategory}
+            buttonText="Update"
+            handleDelete={handleDeleteCategory}
+          />
+        </Model>
       </div>
     </div>
   );
