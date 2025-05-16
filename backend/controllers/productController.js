@@ -244,43 +244,43 @@ const fetchAllProduct = asyncHandler(async (req, res) => {
 const addProductReview = asyncHandler(async (req, res) => {
   try {
     const { rating, comment } = req.body;
-    console.log('req',req.user);
-    
+
     const product = await Product.findById(req.params.id);
 
     if (product) {
+      //check if the user is already reviewed the product
       const alreadyReviewed = product.reviews.find(
-        (r) => r.user.toString() === req.user._id.toString()
+        (review) => review.user.toString() === req.user._id.toString()
       );
-
+      // alredy then show error
       if (alreadyReviewed) {
-        res.status(200).json({
+        return res.status(200).json({
           code: 400,
           request: "success",
-          message: "product already reviewed",
-          MESSAGE: "ALREADY_REVIEWED",
-          data: [],
+          message: "product already reviewed by the user once",
+          MESSAGE: "ALREADY_REVIEWED_BY_THE USER_ONCE",
+        });
+      } else {
+        const review = {
+          name: req.user.username,
+          rating: Number(rating),
+          comment,
+          user: req.user._id,
+        };
+        product.reviews.push(review);
+        product.numReviews = product.reviews.length;
+        product.rating =
+          product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+          product.reviews.length;
+        let saved = await product.save();
+        return res.status(201).json({
+          code: 201,
+          request: "success",
+          message: "review added",
+          MESSAGE: "REVIEW_ADDED",
+          data: saved,
         });
       }
-      const review = {
-        name: req.user.username,
-        rating: Number(rating),
-        comment,
-        user: req.user._id,
-      };
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((acc, item) => item.rating * acc, 0) /
-        product.reviews.length;
-      let p = await product.save();
-      res.status(201).json({
-        code: 201,
-        request: "success",
-        message: "review added",
-        MESSAGE: "REVIEW_ADDED",
-        data: p,
-      });
     } else {
       return res.status(404).json({
         request: "success",
@@ -296,7 +296,46 @@ const addProductReview = asyncHandler(async (req, res) => {
     });
   }
 });
+const fetchTopProducts = asyncHandler(async (req, res) => {
+  try {
+    const topProducts = await Product.find({}).sort({ rating: -1 }).limit(4);
 
+    return res.status(201).json({
+      code: 200,
+      request: "success",
+      message: "top products",
+      MESSAGE: "TOP_PRODUCTS",
+      data: topProducts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      request: "success",
+      message: error.message,
+      MESSAGE: "internal server error",
+    });
+  }
+});
+
+//new product
+const fetchNewProducts = asyncHandler(async (req, res) => {
+  try {
+    const newProducts = await Product.find({}).sort({ _id: -1 }).limit(4);
+
+    return res.status(201).json({
+      code: 200,
+      request: "success",
+      message: "top products",
+      MESSAGE: "TOP_PRODUCTS",
+      data: newProducts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      request: "success",
+      message: error.message,
+      MESSAGE: "internal server error",
+    });
+  }
+});
 export {
   addProduct,
   updateProductDetails,
@@ -305,4 +344,6 @@ export {
   fetchProductById,
   fetchAllProduct,
   addProductReview,
+  fetchTopProducts,
+  fetchNewProducts,
 };

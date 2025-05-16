@@ -14,23 +14,31 @@ import {
   fetchProductById,
   fetchAllProduct,
   addProductReview,
+  fetchTopProducts,fetchNewProducts
 } from "../controllers/productController.js";
 
 import checkId from "../middlewares/checkId.js";
 
+router.get("/top", fetchTopProducts); /// in top working in bottom not working
+router.get("/new",fetchNewProducts);
 router
   .route("/")
   .get(fetchProduct)
   .post(authenticated, authorizedAdmin, formidable(), addProduct); //what  is formidable
 router.route("/allproducts").get(fetchAllProduct);
 
+//review add
 router
   .route("/:id/reviews")
-  .post(authenticated, authorizedAdmin, addProductReview);
+  // .post(authenticated, authorizedAdmin,checkId, addProductReview);
+  .post(authenticated,checkId, addProductReview);
 
+// methods by using id
 router
   .route("/:id")
   .get(fetchProductById)
   .put(authenticated, authorizedAdmin, formidable(), updateProductDetails)
   .delete(authenticated, authorizedAdmin, removeProduct);
+// top product
+
 export default router;

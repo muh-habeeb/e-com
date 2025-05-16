@@ -8,6 +8,7 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
+import uploadRouts from "./routes/uploadRoutes.js";
 dotenv.config();
 const port = process.env.PORT || 9999;
 //connect datable
@@ -23,5 +24,6 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes); //importing from routes for post method
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
+app.use('/api/upload',uploadRouts)
 
 app.listen(port, () => console.log(`Server running on PORT ${port}`));
