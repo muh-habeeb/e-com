@@ -6,9 +6,19 @@ import {
   authorizedAdmin,
 } from "../middlewares/authMiddleWare.js";
 
-import { addProduct } from "../controllers/productController.js";
+import {
+  addProduct,
+  updateProductDetails,
+  removeProduct,
+} from "../controllers/productController.js";
 
 import checkId from "../middlewares/checkId.js";
 
-router.route("/").post(authenticated, authorizedAdmin, formidable(), addProduct); //what  is formidable
+router
+  .route("/")
+  .post(authenticated, authorizedAdmin, formidable(), addProduct); //what  is formidable
+router
+  .route("/:id")
+  .put(authenticated, authorizedAdmin, formidable(), updateProductDetails)
+  .delete(authenticated, authorizedAdmin, removeProduct);
 export default router;
