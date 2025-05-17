@@ -1,57 +1,3 @@
-// import { apiSlice } from "./apiSlice";
-
-// import { CATEGORY_URL } from "../constants";
-// import { Query } from "mongoose";
-
-// export const categoryApiSlice = apiSlice.injectEndpoints({
-//   endpoints: (builder) => ({
-//     //create
-//     createCategory: builder.mutation({
-//       query: (newCategory) => ({
-//         url: `${CATEGORY_URL}`,
-//         method: "POST",
-//         data: newCategory,
-//       }),
-//     }),
-//     //update
-//     getCategory: builder.mutation({
-//       query: (categoryId) => ({
-//         url: `${CATEGORY_URL}/${categoryId}`,
-//         // method: "GET",
-//       }),
-//     }),
-//     //update
-//     updateCategory: builder.mutation({
-//       query: ({ categoryId, updatedCategory }) => ({
-//         url: `${CATEGORY_URL}/${categoryId}`,
-//         method: "PUT",
-//         data: updatedCategory,
-//       }),
-//     }),
-//     //delete
-//     deleteCategory: builder.mutation({
-//       query: (categoryId) => ({
-//         url: `${CATEGORY_URL}/${categoryId}`,
-//         method: "DELETE",
-//       }),
-//     }),
-//     //GET  ALL CATEGORY
-//     gatAllCategories: builder.query({
-//       query: () => ({
-//         url: `${CATEGORY_URL}/categories`,
-//         // method:"GET" is this here ?
-//       }),
-//     }),
-//   }),
-// });
-
-// export const {
-//   useCreateCategoryMutation,
-//   useGetCategoryMutation,
-//   useUpdateCategoryMutation,
-//   useDeleteCategoryMutation,
-//   useGatAllCategoriesQuery,
-// } = categoryApiSlice;
 
 // Importing the base API slice and constants
 import { apiSlice } from "./apiSlice";
@@ -105,7 +51,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
     }),
 
     // Endpoint to get all categories
-    gatAllCategories: builder.query({
+    fetchCategories: builder.query({
       query: () => ({
         url: `${CATEGORY_URL}/categories`, // Endpoint for all categories
         method: "GET", // HTTP method
@@ -121,7 +67,7 @@ export const {
   useGetCategoryQuery, // Hook to get a category by ID
   useUpdateCategoryMutation, // Hook to update a category
   useDeleteCategoryMutation, // Hook to delete a category
-  useGatAllCategoriesQuery, // Hook to fetch all categories
+  useFetchCategoriesQuery, // Hook to fetch all categories
 } = categoryApiSlice;
 
 

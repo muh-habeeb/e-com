@@ -5,13 +5,13 @@ import {
   // useGetCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
-  useGatAllCategoriesQuery,
+  useFetchCategoriesQuery,
 } from "../../redux/api/categoryApiSlice";
 import { CategoryForm } from "../../components/CategoryForm";
 import Model from "../../components/Model";
 const CategoryList = () => {
   //mutations idkn
-  const { data: categories } = useGatAllCategoriesQuery();
+  const { data: categories } = useFetchCategoriesQuery();
   const [deleteCategory] = useDeleteCategoryMutation();
   const [createCategory] = useCreateCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
@@ -91,10 +91,13 @@ const CategoryList = () => {
   };
 
   return (
-    <div className="ml-[10rem] flex flex-col md:flex-row text-white">
+    <div className="ml-[3.4rem] md:ml-[3.4rem] lg:ml-[5rem] xl:ml-[10rem] flex flex-col md:flex-row text-white">
       {/* admin menu */}
       <div className="md:w-3/4 p-3">
-        <div className="h-12 mt-9 text-2xl "> Manage categories</div>
+        <div className="h-12 mt-9 mb-3 text-2xl capitalize">
+          {" "}
+          Manage categories
+        </div>
 
         <CategoryForm
           value={name}

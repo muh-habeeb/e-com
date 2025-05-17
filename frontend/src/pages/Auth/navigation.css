@@ -1,3 +1,22 @@
+* {
+  /* transition: all 0.2s ease-in; */
+}
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Hide spinner buttons in Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide spinner buttons in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 #navigation-container {
   min-width: 50px;
   transition: all 0.3s ease-in-out;
@@ -16,10 +35,14 @@
   visibility: visible;
   opacity: 1;
 }
+label {
+  user-select: none;
+}
 
 /* login css */
 
-.login,.register {
+.login,
+.register {
   transition: all 0.3s;
 }
 
@@ -42,6 +65,7 @@
 } */
 .dashboard-ul {
   transition: all 0.4s;
+  margin-left: calc(100% / 2);
 }
 
 .mask {

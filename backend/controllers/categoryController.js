@@ -5,7 +5,7 @@ import Category from "../models/categoryModel.js";
 const createCategory = asyncHandler(async (req, res) => {
   try {
     const { name } = req.body;
-    
+
     if (!name) {
       return res.status(400).json({
         request: "success",
@@ -117,7 +117,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
 
 const listCategory = asyncHandler(async (req, res) => {
   try {
-    const all = await Category.find({});
+    const all = await Category.find({}).sort({ name: 1 });
     return res.status(200).json({
       length: all.length,
       code: 200,

@@ -8,7 +8,7 @@ import {
 } from "../../redux/api/usersApiSlice";
 import Loader from "../../components/Loader";
 import { Message } from "../../components/Message";
-export const UserList = () => {
+const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();
@@ -28,7 +28,7 @@ export const UserList = () => {
         isAdmin: editableUserIsAdmin,
       }); //passing data as object
 
-      setEditableUserId(null); 
+      setEditableUserId(null);
       refetch(); //what  it do
 
       toast.success("User Updated");
@@ -64,7 +64,7 @@ export const UserList = () => {
   }, [refetch]);
 
   return (
-    <div className="ml-10 h-[100vh] flex flex-col items-center justify-center">
+    <div className="ml-10 h-[100%]  w-full flex flex-col items-center justify-center bg-slate-900 sm:ml-[50px] mx-auto my-auto ">
       <h1 className="text-2xl font-semibold mb-4 text-white ">Users</h1>
       {isLoading ? (
         <Loader />
@@ -204,3 +204,5 @@ export const UserList = () => {
     </div>
   );
 };
+
+export default UserList;

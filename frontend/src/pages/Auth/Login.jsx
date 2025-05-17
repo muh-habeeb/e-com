@@ -83,17 +83,19 @@ const Login = () => {
 
   return (
     <div>
-      <section className="login bg-stoke2 bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh] ">
+      <section className="login bg-stoke2 bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh]  ">
         <div className=" mr-[4rem] mt-[5rem] p-4 flex flex-col items-center justify-center  backdrop-blur-[10px] rounded-2xl">
-          <h1 className="text-2xl font-semibold mb-4 text-slate-800">Sign In</h1>
+          <h1 className="text-2xl font-semibold mb-4 text-slate-100">
+            Sign In
+          </h1>
           <form
             onSubmit={submitHandler}
             className="container w-[40rem] flex flex-col items-center justify-center  gap-2"
           >
-            <div className="w-full ">
+            <div className="w-full  h-[40px] mb-5 ">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-slate-800"
+                className="block text-md font-medium text-white"
               >
                 Email Address
               </label>
@@ -101,16 +103,16 @@ const Login = () => {
                 type="text"
                 id="email"
                 name="email"
-                className="mt-1  bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 text-white bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full h-full"
                 value={formData.email}
                 onChange={handleFormData}
               />
             </div>
 
-            <div className="w-full">
+            <div className="w-full h-[40px] mb-5 ">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-slate-800"
+                className="block text-md font-medium text-white"
               >
                 Password
               </label>
@@ -118,7 +120,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="mt-1  bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full"
+                className="mt-1 text-white bg-transparent text-slate-800p-2 border outline-pink-600 rounded w-full h-full"
                 value={formData.password}
                 onChange={handleFormData}
               />
@@ -137,7 +139,7 @@ const Login = () => {
               {"New Customer ? "}
               <Link
                 to={redirect ? `/register?${redirect}` : "/register"}
-                className="text-pink-500 hover:bg-pink-900 hover:duration-300 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
+                className="text-pink-800 hover:bg-pink-900 hover:duration-300 duration-500 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
               >
                 Register
               </Link>

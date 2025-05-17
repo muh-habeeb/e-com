@@ -21,7 +21,7 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  let { username, email, password,confirmPassword } = formData;
+  let { username, email, password, confirmPassword } = formData;
   let handleFormData = (e) => {
     setFormData((old) => ({ ...old, [e.target.id]: e.target.value }));
   };
@@ -91,9 +91,8 @@ const Register = () => {
 
   return (
     <div>
-      
       <section className="register   bg-stoke1  bg-cover bg-no-repeat bg-center  flex flex-wrap justify-center items-center w-screen h-[100vh] ">
-        <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center backdrop-blur-3xl p-[50px]">
+        <div className="mr-[4rem] mt-[5rem] flex flex-col items-center justify-center rounded-lg  p-[50px] backdrop-blur-3xl  ">
           <h1 className="text-2xl font-semibold mb-4 text-white">Sign Up</h1>
           <form
             onSubmit={submitHandler}
@@ -162,6 +161,7 @@ const Register = () => {
                 className="mt-1 p-2 border bg-transparent text-white  outline-pink-600 rounded w-full "
                 value={formData.confirmPassword}
                 onChange={handleFormData}
+                autoComplete="false"
               />
             </div>
             <button

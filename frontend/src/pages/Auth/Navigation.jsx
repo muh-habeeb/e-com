@@ -53,7 +53,7 @@ const Navigation = () => {
       id="navigation-container"
       className={`${
         showSidebar ? "hidden" : "flex"
-      } xl:flex lg:flex md:flex sm:hidden flex-col justify-between p-4 text-white bg-black w-[4%] hover:w-[15%] h-[100vh] fixed `}
+      } xl:flex lg:flex md:flex sm:flex hidden xs:hidden flex-col justify-between p-4 text-white bg-black w-[4%] hover:w-[15%] h-[100vh] fixed `}
     >
       <div className="flex flex-col my-3  items-start justify-center  ">
         <Link
@@ -147,17 +147,10 @@ const Navigation = () => {
                       Dashboard
                     </Link>
                   </li>
+
                   <li className="dashboard-item rounded-xl hover:transform hover:scale-[0.9] m-0 p-0 hover:transition-all hover:text-pink-500 active:font-semibold   hover:duration-200">
                     <Link
-                      to="/admin/product"
-                      className="block px-4 py-2 hover:bg-gray-100 capitalize"
-                    >
-                      product
-                    </Link>
-                  </li>
-                  <li className="dashboard-item rounded-xl hover:transform hover:scale-[0.9] m-0 p-0 hover:transition-all hover:text-pink-500 active:font-semibold   hover:duration-200">
-                    <Link
-                      to="/admin/productlist"
+                      to="/admin/productList"
                       className="block px-4 py-2 hover:bg-gray-100 capitalize"
                     >
                       products
@@ -173,7 +166,7 @@ const Navigation = () => {
                   </li>
                   <li className="dashboard-item rounded-xl hover:transform hover:scale-[0.9] m-0 p-0 hover:transition-all hover:text-pink-500 active:font-semibold   hover:duration-200">
                     <Link
-                      to="/admin/orderlist"
+                      to="/admin/orderList"
                       className="block px-4 py-2 hover:bg-gray-100 capitalize"
                     >
                       orders
@@ -181,7 +174,7 @@ const Navigation = () => {
                   </li>
                   <li className="dashboard-item rounded-xl hover:transform hover:scale-[0.9] m-0 p-0 hover:transition-all hover:text-pink-500 active:font-semibold   hover:duration-200">
                     <Link
-                      to="/admin/userlist"
+                      to="/admin/userList"
                       className="block px-4 py-2 hover:bg-gray-100 capitalize"
                     >
                       users

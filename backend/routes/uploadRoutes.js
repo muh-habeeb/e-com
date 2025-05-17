@@ -10,7 +10,6 @@ import multer from "multer";
 // Create a new Express router object
 const router = express.Router();
 
-
 // Format the current time (HH:MM), remove seconds, and replace ":" with "-" for filename safety
 // let formattedFileDate = date
 //   .toLocaleTimeString()
@@ -68,7 +67,8 @@ router.post("/", (req, res) => {
       return res.status(201).json({
         request: "success",
         message: "Image uploaded successfully",
-        image: req.file.path, // File path on server
+        image: `/${req.file.path.replace(/\\/g, "/")}`, //windows
+        //image: `${req.file.path}`,//linux
         MESSAGE: "IMAGE_UPLOADED",
       });
     }
