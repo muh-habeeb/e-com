@@ -1,8 +1,11 @@
 {
     "cSpell.words": [
         "allproducts",
+        "allproductslist",
         "categorylist",
         "Controllerss",
+        "orderlist",
+        "productlist",
         "userlist"
     ],
     "svg.preview.background": "black"

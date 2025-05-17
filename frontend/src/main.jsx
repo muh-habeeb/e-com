@@ -5,6 +5,7 @@ import { createBrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import App from "./App";
 import "./index.css";
+import ErrorPage from "./components/ErrorPage.jsx";
 import store from "./redux/store.js";
 import Login from "./pages/Auth/Login.jsx";
 import Logout from "./pages/Auth/LogOut.jsx";
@@ -13,18 +14,19 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/Users/Profile.jsx";
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
 import UserList from "./pages/Admin/UserList.jsx";
-import ProductList from "./pages/Admin/ProductList.jsx";
-import ErrorPage from "./components/ErrorPage.jsx";
 import CategoryList from "./pages/Admin/CategoryList.jsx";
+import ProductList from "./pages/Admin/ProductList.jsx";
+import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
+import AllProducts from "./pages/Admin/AllProducts.jsx";
 
 //  define routes
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} >
+    <Route path="/" element={<App />}>
       {""}
       {/* for error redetection */}
-      <Route path="*" element={<ErrorPage />} />
+      {/* <Route path="*" element={<ErrorPage />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/logout" element={<Logout />} />
@@ -35,7 +37,9 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<AdminRoute />}>
         <Route path="userList" element={<UserList />} />
         <Route path="categoryList" element={<CategoryList />} />
-        <Route path="ProductList" element={<ProductList />} />
+        <Route path="allproductslist" element={<AllProducts />} />
+        <Route path="productlist/pageNumber" element={<ProductList />} />
+        <Route path="product/update/:_id" element={<ProductUpdate />} />
       </Route>
     </Route>
   )

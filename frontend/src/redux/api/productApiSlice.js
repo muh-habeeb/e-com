@@ -25,9 +25,11 @@ export const productApiSlice = apiSlice.injectEndpoints({
         },
       ],
     }),
-    allProduct: builder.query({
-      query: () => `${PRODUCT_URL}/s`,
+    allProducts: builder.query({
+      query: () => `${PRODUCT_URL}/allproducts`,
     }),
+
+
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCT_URL}/${productId}`,
@@ -97,7 +99,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useAllProductQuery, //all
+  useAllProductsQuery, //all
   useCrateProductMutation, //create
   useGetProductsQuery, //get product 6
   useGetProductByIdQuery, //get by id

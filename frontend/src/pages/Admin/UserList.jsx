@@ -8,6 +8,7 @@ import {
 } from "../../redux/api/usersApiSlice";
 import Loader from "../../components/Loader";
 import { Message } from "../../components/Message";
+import AdminMenu from "./components/AdminMenu";
 const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
@@ -75,7 +76,7 @@ const UserList = () => {
         </Message>
       ) : (
         <div className="flex flex-col md:flex-row text-white w-full">
-          {/* admin menu */}
+          <AdminMenu />
           <table className="w-full md:w-4/5 mx-auto  border-collapse  border">
             <thead>
               <tr className="border">

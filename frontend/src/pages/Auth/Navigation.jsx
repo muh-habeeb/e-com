@@ -150,7 +150,7 @@ const Navigation = () => {
 
                   <li className="dashboard-item rounded-xl hover:transform hover:scale-[0.9] m-0 p-0 hover:transition-all hover:text-pink-500 active:font-semibold   hover:duration-200">
                     <Link
-                      to="/admin/productList"
+                      to="/admin/productlist"
                       className="block px-4 py-2 hover:bg-gray-100 capitalize"
                     >
                       products

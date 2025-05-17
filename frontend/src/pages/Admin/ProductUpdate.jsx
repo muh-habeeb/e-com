@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "../Auth/navigation.css";
 import {
   // useAllProductQuery, //all
-  useCrateProductMutation, //create
   // useGetProductsQuery, //get product 6
-  // useGetProductByIdQuery, //get by id
+  useGetProductByIdQuery, //get by id
   // useGetProductDetailsQuery, //get product details
-  // useUpdateProductMutation, //update
-  // useDeleteProductMutation, //delete
+  useUpdateProductMutation, //update
+  useDeleteProductMutation, //delete
   // useCreateReviewMutation, //review
   // useGetTopProductsQuery, //top
   // useGetNewProductsQuery, //new
@@ -17,104 +16,42 @@ import {
 import { useFetchCategoriesQuery } from "../../redux/api/categoryApiSlice";
 import { toast } from "react-toastify";
 import AdminMenu from "./components/AdminMenu";
-
-const ProductList = () => {
-  // 🖼️ Store uploaded image URL from server response
-  const [imageUrl, setImageUrl] = useState(null);
-  // 🧾 Store the image file name or object for display only
-  const [imageName, setImageName] = useState("");
-
-  // 📝 Store product fields
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [brand, setBrand] = useState("");
-  const [stock, setStock] = useState(0);
+const ProductUpdate = () => {
+  const params = useParams();
+  const { data: productData } = useGetProductByIdQuery(params._id);
+  const [imageName, setImageName] = useState(productData?.image || "");
+  const [name, setName] = useState(productData?.name || "");
+  const [description, setDescription] = useState(
+    productData?.description || ""
+  );
+  const [price, setPrice] = useState(productData?.price || 0);
+  const [category, setCategory] = useState(productData?.category || "");
+  const [quantity, setQuantity] = useState(productData?.quantity || 0);
+  const [brand, setBrand] = useState(productData?.brand || "");
+  const [stock, setStock] = useState(productData?.stock || 0);
 
   const navigate = useNavigate();
 
-  // 📤 RTK mutation hooks for image upload and product creation
+  const { data: categories = [] } = useFetchCategoriesQuery();
   const [uploadProductImage] = useUploadProductImageMutation();
-  const [createProduct] = useCrateProductMutation();
+  const [uploadProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
-  // 📥 Fetch categories for dropdown (if needed)
-  const { data: categories } = useFetchCategoriesQuery();
-  //======================================================================================================================================
-  //======================================================================================================================================
-  // 📁 Handle image upload immediately after file selection
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return; // Exit if no file selected
-
-    setImageName(file.name); // Show file name in UI
-
-    // Prepare FormData for file upload
-    const formData = new FormData();
-    formData.append("image", file);
-
-    try {
-      // 🔼 Upload image file to server
-      const res = await uploadProductImage(formData).unwrap();
-      toast.success(res?.message || "Image uploaded successfully!");
-
-      // 🖼️ Save image URL from server response
-      const imgUrl = res.image.startsWith("/") ? res.image : `/${res.image}`;
-      setImageUrl(imgUrl);
-    } catch (error) {
-      toast.error("File upload failed. Please try again.");
-      console.error("Upload error:", error);
+  useEffect(() => {
+    if (productData && productData._id) {
+      setImageName(productData.imageName);
+      setName(productData.name);
+      setDescription(productData.description);
+      setPrice(productData.price);
+      setCategory(productData.category);
+      setQuantity(productData.quantity);
+      setStock(productData.stock);
+      setName(productData.name);
     }
-  };
-  //======================================================================================================================================
-  //======================================================================================================================================
-  // 📨 Handle form submit: send product data (with image URL) to backend
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const productData = new FormData();
-      productData.append("image", imageUrl);
-      productData.append("name", name);
-      productData.append("description", description);
-      productData.append("price", price);
-      productData.append("category", category);
-      productData.append("quantity", quantity);
-      productData.append("brand", brand);
-      productData.append("countInStock", stock);
+  }, [productData]);
 
-      const result = await createProduct(productData);
-      if (result?.error) {
-        toast.error(`Product Creation Failed!. ${result?.error?.data?.error}`);
-        console.log(result?.error?.data?.error || result?.error?.data?.message);
-      } else {
-        toast.success(`${result?.data?.data?.name} is created`);
-        console.log(result?.data?.MESSAGE);
-        //navigate to home
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error("Product Creation Failed!.Try Again.");
-      console.log(error?.data?.message || error?.error);
-      console.log(error);
-    }
-  };
+  const handleSubmit = () => {};
 
-  //======================================================================================================================================
-
-  //======================================================================================================================================
-  //   // this function is u used to change th height of the text area dynamical  whe content is more
-  const resizeHandler = () => {
-    const textarea = document.getElementById("description");
-    textarea.addEventListener("keyup", (e) => {
-      textarea.style.height = "105px";
-      let scHeight = e.target.scrollHeight;
-      textarea.style.height = `${scHeight}px`;
-    });
-  };
-
-  //======================================================================================================================================
-  //======================================================================================================================================
   return (
     <>
       <div className="">
@@ -125,7 +62,7 @@ const ProductList = () => {
         className="max-w-4xl  ml-[1rem] p-4 sm:p-6 bg-gray-900 sm:ml-[3rem] rounded-l  lg:mx-auto "
       >
         {/* 🖼️ Image Preview */}
-        {imageUrl && (
+        {/* {imageUrl && (
           <div className="mb-4 text-center rounded-lg ">
             <img
               src={imageUrl}
@@ -133,7 +70,7 @@ const ProductList = () => {
               className="inline-block object-cover h-72 w-80 rounded-lg "
             />
           </div>
-        )}
+        )} */}
         <label
           htmlFor="image"
           className="block mb-4 cursor-pointer border rounded-lg p-8 text-center text-white font-bold bg-gray-800 hover:bg-gray-700"
@@ -150,7 +87,7 @@ const ProductList = () => {
             id="image"
             name="image"
             accept="image/*"
-            onChange={uploadFileHandler}
+            // onChange={uploadFileHandler}
             className="hidden "
           />
         </label>
@@ -206,7 +143,6 @@ const ProductList = () => {
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);
-              resizeHandler();
             }}
             rows={2}
             required
@@ -313,4 +249,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductUpdate;

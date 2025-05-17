@@ -9,6 +9,8 @@ import {
 } from "../../redux/api/categoryApiSlice";
 import { CategoryForm } from "../../components/CategoryForm";
 import Model from "../../components/Model";
+import AdminMenu from "./components/AdminMenu";
+
 const CategoryList = () => {
   //mutations idkn
   const { data: categories } = useFetchCategoriesQuery();
@@ -92,7 +94,7 @@ const CategoryList = () => {
 
   return (
     <div className="ml-[3.4rem] md:ml-[3.4rem] lg:ml-[5rem] xl:ml-[10rem] flex flex-col md:flex-row text-white">
-      {/* admin menu */}
+      <AdminMenu />
       <div className="md:w-3/4 p-3">
         <div className="h-12 mt-9 mb-3 text-2xl capitalize">
           {" "}
