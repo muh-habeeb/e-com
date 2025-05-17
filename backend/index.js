@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-
+import path from "path";
 //utils
 
 import connectDB from "./config/db.js";
@@ -24,6 +24,8 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes); //importing from routes for post method
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
-app.use('/api/upload',uploadRouts)
+app.use("/api/upload", uploadRouts);
 
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 app.listen(port, () => console.log(`Server running on PORT ${port}`));
