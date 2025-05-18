@@ -2,6 +2,7 @@ import express from "express";
 import Product from "../models/productModel.js";
 
 import asyncHandler from "../middlewares/asyncHandler.js";
+import mongoose from "mongoose";
 //add product
 const addProduct = asyncHandler(async (req, res) => {
   try {
@@ -71,7 +72,23 @@ const addProduct = asyncHandler(async (req, res) => {
 //update product
 const updateProductDetails = asyncHandler(async (req, res) => {
   try {
-    const { name, description, price, category, quantity, brand } = req.fields;
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({
+        error: "Invalid product ID format",
+        MESSAGE: "INVALID_ID",
+        message: "invalid id",
+      });
+    }
+
+    const {
+      name,
+      description,
+      price,
+      category,
+      quantity,
+      brand,
+      countInStock,
+    } = req.fields;
 
     switch (true) {
       case !name:
@@ -88,7 +105,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
           error: "description is required",
           MESSAGE: "INVALID_DATA",
         });
-      case !price:
+      case typeof price === "undefined":
         return res.status(400).json({
           request: "success",
           message: "invalid data provided",
@@ -102,7 +119,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
           error: "category is required",
           MESSAGE: "INVALID_DATA",
         });
-      case !quantity:
+      case typeof quantity === "undefined":
         return res.status(400).json({
           request: "success",
           message: "invalid data provided",
@@ -116,6 +133,13 @@ const updateProductDetails = asyncHandler(async (req, res) => {
           error: "brand is required",
           MESSAGE: "INVALID_DATA",
         });
+      case typeof countInStock === "undefined":
+        return res.status(400).json({
+          request: "success",
+          message: "invalid data provided",
+          error: "count in stock is required",
+          MESSAGE: "INVALID_DATA",
+        });
     }
 
     const product = await Product.findByIdAndUpdate(
@@ -123,9 +147,18 @@ const updateProductDetails = asyncHandler(async (req, res) => {
       { ...req.fields },
       { new: true }
     );
-    // save
 
-    await product.save();
+    if (!product) {
+      return res.status(404).json({
+        request: "failed",
+        message: "Product not found",
+        error: "No product with given ID",
+        MESSAGE: "PRODUCT_NOT_FOUND",
+      });
+    }
+
+    await product.save(); // now it's safe
+
     return res.status(201).json({
       code: 201,
       request: "success",

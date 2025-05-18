@@ -28,8 +28,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
     allProducts: builder.query({
       query: () => `${PRODUCT_URL}/allproducts`,
     }),
-
-
+    // by id
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCT_URL}/${productId}`,
@@ -42,7 +41,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}`,
         method: "POST",
         body: productData,
-        
       }),
       invalidatesTags: ["Product"],
     }),
@@ -52,9 +50,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
         body: formData,
-        headers: {
-          "Content-Type": "application/json", // Specifying data format
-        },
+       
       }),
     }),
 

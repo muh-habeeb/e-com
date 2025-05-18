@@ -26,6 +26,7 @@ export default {
       md: { min: "767px" }, // min 767px
       lg: { min: "1023px" }, // min 1023px
       xl: { min: "1279px" }, // min 1279px
+      "1xl": { min: "1379px" }, // min 1279px
       "2xl": { min: "1535px" }, // min 1535px
     },
   },

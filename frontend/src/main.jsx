@@ -18,18 +18,21 @@ import CategoryList from "./pages/Admin/CategoryList.jsx";
 import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
+import Home from "./Home.jsx";
 
 //  define routes
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<App />} errorElement={<ErrorPage />}>
       {""}
       {/* for error redetection */}
       {/* <Route path="*" element={<ErrorPage />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/logout" element={<Logout />} />
+      <Route pah="" index={true} element={<Home />} /> {/* main HOME page*/}
+      {/* private */}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
       </Route>
@@ -37,8 +40,8 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<AdminRoute />}>
         <Route path="userList" element={<UserList />} />
         <Route path="categoryList" element={<CategoryList />} />
+        <Route path="productlist" element={<ProductList />} />
         <Route path="allproductslist" element={<AllProducts />} />
-        <Route path="productlist/pageNumber" element={<ProductList />} />
         <Route path="product/update/:_id" element={<ProductUpdate />} />
       </Route>
     </Route>
@@ -48,8 +51,8 @@ createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     {" "}
     {/* redux thing*/}
-    {/* <StrictMode> */}
-    <RouterProvider router={router} /> {/* router dom thing*/}
-    {/* </StrictMode> */}
+    <StrictMode>
+      <RouterProvider router={router} /> {/* router dom thing*/}
+    </StrictMode>
   </Provider>
 );

@@ -71,8 +71,9 @@ const UserList = () => {
         <Loader />
       ) : error ? (
         <Message variant="danger">
-          {" "}
-          {error?.data?.message || error.message}
+          {error?.data?.message || error.message
+            ? error?.data?.message || error.message
+            : "Error while fetching Data"}
         </Message>
       ) : (
         <div className="flex flex-col md:flex-row text-white w-full">

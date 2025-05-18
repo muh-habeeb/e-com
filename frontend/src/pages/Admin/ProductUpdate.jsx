@@ -2,33 +2,38 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../Auth/navigation.css";
 import {
-  // useAllProductQuery, //all
-  // useGetProductsQuery, //get product 6
   useGetProductByIdQuery, //get by id
-  // useGetProductDetailsQuery, //get product details
   useUpdateProductMutation, //update
   useDeleteProductMutation, //delete
-  // useCreateReviewMutation, //review
-  // useGetTopProductsQuery, //top
-  // useGetNewProductsQuery, //new
   useUploadProductImageMutation, //image upload
 } from "../../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../../redux/api/categoryApiSlice";
 import { toast } from "react-toastify";
 import AdminMenu from "./components/AdminMenu";
+import Loader from "../../components/Loader";
+import { Message } from "../../components/Message";
 const ProductUpdate = () => {
-  const params = useParams();
-  const { data: productData } = useGetProductByIdQuery(params._id);
-  const [imageName, setImageName] = useState(productData?.image || "");
-  const [name, setName] = useState(productData?.name || "");
+  const params = useParams(); // why
+  // setting default vals
+  const {
+    data: productData,
+    isLoading,
+    isError,
+    refetch, //reetfet not worikng
+  } = useGetProductByIdQuery(params._id); //what?
+
+  const [imageName, setImageName] = useState(productData?.data?.image || "");
+  const [name, setName] = useState(productData?.data?.name || "");
+  const [price, setPrice] = useState(productData?.data?.price || 0);
   const [description, setDescription] = useState(
-    productData?.description || ""
+    productData?.data?.description || ""
   );
-  const [price, setPrice] = useState(productData?.price || 0);
-  const [category, setCategory] = useState(productData?.category || "");
-  const [quantity, setQuantity] = useState(productData?.quantity || 0);
-  const [brand, setBrand] = useState(productData?.brand || "");
-  const [stock, setStock] = useState(productData?.stock || 0);
+
+  const [category, setCategory] = useState(productData?.data?.category || "");
+  const [quantity, setQuantity] = useState(productData?.data?.quantity || 0);
+  const [brand, setBrand] = useState(productData?.data?.brand || "");
+  const [stock, setStock] = useState(productData?.data?.countInStock || 0);
+  const [uploadedImageName, setUploadedImageName] = useState(null);
 
   const navigate = useNavigate();
 
@@ -38,19 +43,102 @@ const ProductUpdate = () => {
   const [deleteProduct] = useDeleteProductMutation();
 
   useEffect(() => {
-    if (productData && productData._id) {
-      setImageName(productData.imageName);
-      setName(productData.name);
-      setDescription(productData.description);
-      setPrice(productData.price);
-      setCategory(productData.category);
-      setQuantity(productData.quantity);
-      setStock(productData.stock);
-      setName(productData.name);
+    if (productData && productData?.data?._id) {
+      setImageName(productData?.data?.image);
+      setName(productData?.data?.name);
+      setPrice(productData?.data?.price);
+      setDescription(productData?.data?.description);
+      setCategory(productData?.data?.category);
+      setQuantity(productData?.data?.quantity);
+      setBrand(productData?.data?.brand);
+      setStock(productData?.data?.countInStock);
     }
-  }, [productData]);
+  }, [productData, refetch]);
 
-  const handleSubmit = () => {};
+  // ====================================================================================
+  // ====================================================================================
+
+  if (isLoading) return <Loader />;
+  if (isError)
+    return <Message variant="danger">Error fetching products</Message>;
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return; // Exit if no file selected
+
+    setUploadedImageName(file.name); // Show file name in UI
+
+    // Prepare FormData for file upload
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      // 🔼 Upload image file to server
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success("Image Updated successfully!");
+      // 🖼️ Save image URL from server response
+      const imgUrl = res.image.startsWith("/") ? res.image : `/${res.image}`;
+      setImageName(imgUrl); //setting t he url to image name state
+    } catch (error) {
+      toast.error("File upload failed. Please try again.");
+      console.error("Upload error:", error);
+    }
+  };
+
+  //======================================================================================================================================
+  //======================================================================================================================================
+  // 📨 Handle form submit: send product data (with image URL) to backend
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formdata = new FormData();
+      formdata.append("image", imageName);
+      formdata.append("name", name);
+      formdata.append("description", description);
+      formdata.append("price", price);
+      formdata.append("category", category);
+      formdata.append("quantity", quantity);
+      formdata.append("brand", brand);
+      formdata.append("countInStock", stock);
+
+      const result = await uploadProduct({
+        productId: params._id,
+        formData: formdata,
+      });
+
+      if (result?.error) {
+        toast.error(`Updating Failed!. ${result?.error?.data?.error}`);
+        console.log(result?.error?.data?.error || result?.error?.data?.message);
+      } else {
+        toast.success(`${result?.data?.data?.name} is updated`);
+        console.log(result?.data?.MESSAGE);
+        //navigate to home
+        navigate("/admin/allproductslist");
+      }
+    } catch (error) {
+      toast.error("Product Update Failed!.Try Again.");
+      console.log(error?.data?.message || error?.error);
+      console.log(error);
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      let confirmation = window.confirm(
+        "Are you want to delete this product? "
+      );
+      if (!confirmation) {
+        return;
+      } else {
+        const data = await deleteProduct(params._id);
+        toast.success(`${data?.data?.message} Successfully`);
+        navigate("/admin/allproductslist");
+      }
+    } catch (error) {
+      toast.error("Product Deletion Failed!.Try Again.");
+      console.log(error?.data?.message || error?.error);
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -62,15 +150,15 @@ const ProductUpdate = () => {
         className="max-w-4xl  ml-[1rem] p-4 sm:p-6 bg-gray-900 sm:ml-[3rem] rounded-l  lg:mx-auto "
       >
         {/* 🖼️ Image Preview */}
-        {/* {imageUrl && (
+        {imageName && (
           <div className="mb-4 text-center rounded-lg ">
             <img
-              src={imageUrl}
+              src={imageName}
               alt="Uploaded product Image"
               className="inline-block object-cover h-72 w-80 rounded-lg "
             />
           </div>
-        )} */}
+        )}
         <label
           htmlFor="image"
           className="block mb-4 cursor-pointer border rounded-lg p-8 text-center text-white font-bold bg-gray-800 hover:bg-gray-700"
@@ -81,14 +169,14 @@ const ProductUpdate = () => {
             textOverflow: "ellipsis",
           }}
         >
-          {imageName || "Upload Image"}
+          {uploadedImageName || ""}
           <input
             type="file"
             id="image"
             name="image"
             accept="image/*"
-            // onChange={uploadFileHandler}
-            className="hidden "
+            onChange={uploadFileHandler}
+            className={uploadedImageName ? "hidden" : "text-red-500"}
           />
         </label>
 
@@ -236,14 +324,23 @@ const ProductUpdate = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
-        <button
-          onClick={handleSubmit}
-          type="submit"
-          className="w-full py-3 rounded bold bg-pink-600 hover:bg-pink-500 duration-300 text-white font-bold tracking-[1.4px]"
-        >
-          {"Create Product"}
-        </button>
+        {/*  Buttons */}
+        <div className="flex gap-4">
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full py-3 rounded bold bg-emerald-600 hover:bg-emerald-500 duration-300 text-white font-bold tracking-[1.4px]"
+          >
+            {"Update Product"}
+          </button>
+          <button
+            onClick={handleDelete}
+            type="submit"
+            className="w-full py-3 rounded bold bg-pink-600 hover:bg-pink-500 duration-300 text-white font-bold tracking-[1.4px]"
+          >
+            {"Delete Product"}
+          </button>
+        </div>
       </form>
     </>
   );

@@ -90,8 +90,8 @@ const ProductList = () => {
       } else {
         toast.success(`${result?.data?.data?.name} is created`);
         console.log(result?.data?.MESSAGE);
-        //navigate to home
-        navigate("/");
+        //navigate to all product
+        navigate("/admin/allproductslist");
       }
     } catch (error) {
       toast.error("Product Creation Failed!.Try Again.");
