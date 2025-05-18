@@ -36,7 +36,7 @@ const ProductCarousel = () => {
       ) : (
         <Slider
           {...settings}
-          className="xl:w-[50rem] lg:w-[50rem] md-[56rem] sm:w-[40rem] sm:block border-none outline-none md:ml-[5rem]"
+          className="xl:w-[50rem] lg:w-[50rem] md:w-[40rem] lg:ml-[5rem] xl:ml-[0rem]  md:ml-[5rem]  sm:w-[40rem] sm:hidden border-none outline-none"
         >
           {products?.data.map(
             ({
@@ -56,7 +56,7 @@ const ProductCarousel = () => {
                 <img
                   src={image}
                   alt={productName}
-                  className="w-full rounded-lg object-cover h-[30rem]"
+                  className="w-full rounded-lg object-cover h-[31.5rem]"
                 />
                 <div className="flex justify-between w-[20rem] p-3 text-white">
                   <div className="one justify-between w-full">
@@ -65,7 +65,7 @@ const ProductCarousel = () => {
                     <br />
                     <br />
                     <br />
-                    <p className="min-w-[20rem]">
+                    <p className="w-[25rem] mt-[20px]">
                       {description.substring(0, 170)}...
                     </p>
                   </div>

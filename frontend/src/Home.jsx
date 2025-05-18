@@ -8,8 +8,6 @@ const Home = () => {
   const { keyword } = useParams();
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
 
-  console.log(data);
-
   if (isLoading) {
     return <Loader />;
   }
@@ -38,6 +36,8 @@ const Home = () => {
             >
               Shop
             </Link>
+          </div>
+          <div>
             <div className="flex justify-center flex-wrap mt-[2rem]">
               {data?.data?.map((product) => (
                 <div key={product._id}>
