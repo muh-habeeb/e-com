@@ -6,7 +6,6 @@ export const addFavoritesToLocalStorage = (product) => {
     favorites.push(product);
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
-  console.log(product);
   
 };
 //remove from localstorage

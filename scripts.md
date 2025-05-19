@@ -33,24 +33,22 @@ These scripts are defined in the `package.json` file:
 
 #### 1. `npm run backend`
 
-* Runs the backend server using **nodemon**.
-* Watches for file changes in the `backend/` directory.
-* Entry file: `backend/index.js`
+- Runs the backend server using **nodemon**.
+- Watches for file changes in the `backend/` directory.
+- Entry file: `backend/index.js`
 
 #### 2. `npm run frontend`
 
-* Runs the frontend development server.
-* Uses `--prefix frontend` to run commands inside the `frontend` directory.
-* Assumes there is a `dev` script inside `frontend/package.json` (e.g., `vite`, `next`, or `react-scripts`).
+- Runs the frontend development server.
+- Uses `--prefix frontend` to run commands inside the `frontend` directory.
+- Assumes there is a `dev` script inside `frontend/package.json` (e.g., `vite`, `next`, or `react-scripts`).
 
 #### 3. `npm run dev`
 
-* Runs **both frontend and backend** concurrently using the [`concurrently`](https://www.npmjs.com/package/concurrently) package.
-* Ideal for local development.
+- Runs **both frontend and backend** concurrently using the [`concurrently`](https://www.npmjs.com/package/concurrently) package.
+- Ideal for local development.
 
 ---
-
-
 
 ## 🏁 Run the App
 
@@ -67,7 +65,7 @@ npm run backend   # Runs backend only
 npm run frontend  # Runs frontend only
 ```
 
-
 Happy coding! 🎉
 
-
+RNY8K-B3HWC-3QG33-WDP8M-R6YWY
+RNY8K-B3HWC-3QG33-WDP8M-R6YWY
