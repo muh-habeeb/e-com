@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
+import HeartIcon from "./HeartIcon";
 
 const SmallProduct = ({ product }) => {
   return (
     <div className="w-[20rem] m-3 bg-white dark:bg-gray-900 rounded-xl shadow hover:shadow-lg transition-all p-4">
-      <Link to={`/product/${product._id}`}>
-        <div className="relative">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="rounded-lg w-full h-48 object-cover"
-          />
+      <div className="relative">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="rounded-lg w-full h-48 object-cover"
+        />
+        <HeartIcon product={product} />
+        <Link to={`/product/${product._id}`}>
           <div className="mt-4 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
               {product.name}
@@ -18,8 +20,8 @@ const SmallProduct = ({ product }) => {
               ₹{product.price}
             </span>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };

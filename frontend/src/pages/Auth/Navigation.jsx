@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
-import FavoriteCount from "../products/FavoriteCount";
+import FavoriteCount from "../Products/FavoriteCount";
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -104,9 +104,8 @@ const Navigation = () => {
           <FaHeart size={24} className=" mr-2 mt-[3rem]" title="favorite" />
           <span className="nav-item-name hidden  mt-[3rem] uppercase transition-opacity duration-500 ">
             favorite
-
           </span>
-          <FavoriteCount/>
+          <FavoriteCount />
         </Link>
       </div>
       <div className="relative flex  text-white focus:outline-none  w-full ">
