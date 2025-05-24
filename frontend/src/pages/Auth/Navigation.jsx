@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
+import FavoriteCount from "../products/FavoriteCount";
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -103,7 +104,9 @@ const Navigation = () => {
           <FaHeart size={24} className=" mr-2 mt-[3rem]" title="favorite" />
           <span className="nav-item-name hidden  mt-[3rem] uppercase transition-opacity duration-500 ">
             favorite
+
           </span>
+          <FavoriteCount/>
         </Link>
       </div>
       <div className="relative flex  text-white focus:outline-none  w-full ">
@@ -133,7 +136,7 @@ const Navigation = () => {
             <ul
               className={`dashboard-ul absolute ${
                 userInfo.isAdmin ? " -top-80" : "-top-24"
-              } outline-none border-none flex flex-col items-center justify-center -ml-[50px] bg-white text-gray-600 border rounded z-50`}
+              } outline-none border-none flex flex-col items-center justify-center -ml-[50px] bg-white text-gray-600 w-[135px] border rounded z-50`}
             >
               <span className="mask absolute bg-black top-0 left-0 h-[100%] w-[100%] pointer-events-none "></span>
               {/*  if the user is admin show all the possible places he can go */}
