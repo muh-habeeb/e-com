@@ -1,3 +1,5 @@
+//  CREATE PRODUCT
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Auth/navigation.css";
@@ -91,7 +93,7 @@ const ProductList = () => {
         toast.success(`${result?.data?.data?.name} is created`);
         console.log(result?.data?.MESSAGE);
         //navigate to all product
-        // navigate("/admin/allproductslist");
+        navigate("/admin/allproductslist");
       }
     } catch (error) {
       toast.error("Product Creation Failed!.Try Again.");

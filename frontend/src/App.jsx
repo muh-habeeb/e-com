@@ -9,7 +9,7 @@ const App = () => {
       <ToastContainer />
       <Navigation />
       <main
-        className="overflow-auto bg-slate-900 min-h-[100vh] max-h-full min-w-[100vw] w-[100%] "
+        className=" text-white overflow-auto bg-slate-900 min-h-[100vh] max-h-full min-w-[100vw] w-[100%] "
         style={{ transitionDuration: 3000, transitionProperty: "all" }}
       >
         

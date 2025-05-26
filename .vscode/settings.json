@@ -6,6 +6,7 @@
         "Controllerss",
         "orderlist",
         "productlist",
+        "usenavigate",
         "userlist"
     ],
     "svg.preview.background": "black"

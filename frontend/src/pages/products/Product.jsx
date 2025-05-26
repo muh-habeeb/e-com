@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import HeartIcon from "./HeartIcon";
-
+// product card
 const Product = ({ product }) => {
   return (
     <div className="w-[30rem] ml-[2rem] p-3 relative">

@@ -16,6 +16,7 @@ import {
 const HeartIcon = ({ product }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites) || [];
+  // TODO:add logged or not functionality
   const isFavorite = favorites.some((p) => p._id === product._id);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const HeartIcon = ({ product }) => {
       {isFavorite ? (
         <FaHeart className="text-pink-500" size={20} />
       ) : (
-        <FaRegHeart className="text-white" size={20}/>
+        <FaRegHeart className="text-white" size={20} />
       )}{" "}
     </div>
   );
