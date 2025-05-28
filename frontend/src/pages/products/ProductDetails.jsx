@@ -43,17 +43,26 @@ const ProductDetails = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      let r=await createReview({
-        product,
+      
+      let result=await createReview({
+        productId,
         rating,
         comment,
       }).unwrap();
-      console.log(r);
+      console.log(result);
       
       refetch();
-      toast.success("Review Created Successfully");
+      if(result.MESSAGE==="REVIEW_ADDED"){
+        toast.success("Review Created Successfully");
+        navigate('/')
+      }else if(result.MESSAGE==="ALREADY_REVIEWED_BY_THE USER_ONCE"){
+        toast.warn("You Are Already posted th Review!")
+        navigate('/')
+      }
     } catch (error) {
       toast.error(error?.data?.message || error.error);
+      console.log(error);
+      
     }
   };
   return (

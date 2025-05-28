@@ -65,7 +65,7 @@ const ProductCarousel = () => {
                     <br />
                     <br />
                     <br />
-                    <p className="w-[25rem] mt-[20px]">
+                    <p className="w-[25rem] mt-[25px]">
                       {description.substring(0, 170)}...
                     </p>
                   </div>

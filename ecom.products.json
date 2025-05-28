@@ -1,0 +1,136 @@
+[{
+  "_id": {
+    "$oid": "68373b301b2e0a31656f50da"
+  },
+  "name": "IPHONE 14 ",
+  "image": "/uploads/image-1748450241935.jpg",
+  "brand": "apple",
+  "quantity": 10,
+  "category": {
+    "$oid": "68373a7d1b2e0a31656f50a3"
+  },
+  "description": "iphone 14 with pink and blue background",
+  "rating": 4,
+  "numReviews": 1,
+  "price": 800000,
+  "countInStock": 22,
+  "reviews": [
+    {
+      "name": "admin",
+      "rating": 4,
+      "comment": "super product",
+      "user": {
+        "$oid": "68369a394596499a1458958c"
+      },
+      "_id": {
+        "$oid": "683740ff518f904c1f2ebb0d"
+      },
+      "createdAt": {
+        "$date": "2025-05-28T16:59:43.634Z"
+      },
+      "updatedAt": {
+        "$date": "2025-05-28T16:59:43.634Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-05-28T16:34:56.571Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-28T16:59:43.634Z"
+  },
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "68373b651b2e0a31656f50df"
+  },
+  "name": "nike air t shirt ",
+  "image": "/uploads/image-1748450103814.jpg",
+  "brand": "nike air",
+  "quantity": 4,
+  "category": {
+    "$oid": "68373a821b2e0a31656f50ad"
+  },
+  "description": "nike air t shirt ",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 400,
+  "countInStock": 34,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2025-05-28T16:35:49.443Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-28T16:35:49.443Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68373ba71b2e0a31656f50e4"
+  },
+  "name": "sony camera",
+  "image": "/uploads/image-1748450158904.jpg",
+  "brand": "sony",
+  "quantity": 12,
+  "category": {
+    "$oid": "68373ad71b2e0a31656f50d5"
+  },
+  "description": "sony black mini 60px camera",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 50000,
+  "countInStock": 12,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2025-05-28T16:36:55.211Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-28T16:36:55.211Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68373c421b2e0a31656f50f3"
+  },
+  "name": "mac book",
+  "image": "/uploads/image-1748450335176.jpg",
+  "brand": "apple",
+  "quantity": 12,
+  "category": {
+    "$oid": "68373ab51b2e0a31656f50bc"
+  },
+  "description": "\r\nLorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus dicta nulla, maiores ipsam nam ratione dolores provident delectus, aut dolore esse praesentium eos consectetur quam totam nostrum repellendus, at magnam. Quibusdam sequi corporis, voluptatem repudiandae architecto consectetur praesentium quis cum, non odio deleniti sed rerum possimus illum. Et commodi dolor a necessitatibus tempora, autem neque maxime ducimus! Id tenetur praesentium nam modi ratione quasi eaque, ducimus, vitae repellendus minus fugit nihil temporibus suscipit iste, ea qui. Dolor neque adipisci laboriosam voluptates culpa nihil necessitatibus animi dolores ex, est porro molestias minus facere ratione quisquam provident quaerat consectetur vitae sed asperiores.",
+  "rating": 4,
+  "numReviews": 1,
+  "price": 120000,
+  "countInStock": 17,
+  "reviews": [
+    {
+      "name": "admin",
+      "rating": 4,
+      "comment": "nice laptop",
+      "user": {
+        "$oid": "68369a394596499a1458958c"
+      },
+      "_id": {
+        "$oid": "68374118518f904c1f2ebb19"
+      },
+      "createdAt": {
+        "$date": "2025-05-28T17:00:08.628Z"
+      },
+      "updatedAt": {
+        "$date": "2025-05-28T17:00:08.628Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-05-28T16:39:30.306Z"
+  },
+  "updatedAt": {
+    "$date": "2025-05-28T17:00:08.628Z"
+  },
+  "__v": 1
+}]
