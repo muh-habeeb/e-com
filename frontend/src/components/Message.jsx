@@ -4,7 +4,7 @@
 // - variant: determines message style (success, error, danger)
 // - children: message content
 
-export const Message = ({...}) => {
+export const Message = ({variant,children}) => {
   const getVariant = () => {
     switch (variant) {
       case "success":
