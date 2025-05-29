@@ -1,3 +1,11 @@
+// Navigation Component
+// Main navigation bar with responsive design
+// Features:
+// - User dropdown menu
+// - Responsive sidebar
+// - Authentication status handling
+// - Favorite products count
+
 import {
   AiOutlineHome,
   AiOutlineShopping,

@@ -1,3 +1,11 @@
+// Product Card Component
+// Displays individual product information
+// Features:
+// - Product image
+// - Heart icon for favorites
+// - Price display
+// - Link to product details
+
 import { Link } from "react-router";
 import HeartIcon from "./HeartIcon";
 // product card

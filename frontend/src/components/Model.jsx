@@ -1,3 +1,10 @@
+// Modal Component
+// Reusable modal dialog with backdrop
+// Props:
+// - isOpen: controls modal visibility
+// - onClose: close handler function
+// - children: modal content
+
 import { FaTimes } from "react-icons/fa";
 import {} from "react-icons/io";
 const Model = ({ isOpen, onClose, children }) => {

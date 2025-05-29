@@ -1,4 +1,10 @@
-export const Message = ({ variant, children }) => {
+// Message Component
+// Displays alert messages with different variants (success, error, etc.)
+// Props:
+// - variant: determines message style (success, error, danger)
+// - children: message content
+
+export const Message = ({...}) => {
   const getVariant = () => {
     switch (variant) {
       case "success":

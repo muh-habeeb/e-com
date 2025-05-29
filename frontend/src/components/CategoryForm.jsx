@@ -1,5 +1,14 @@
 
 
+// CategoryForm Component
+// This component is used for creating and updating categories
+// Props:
+// - value: current category name
+// - setaValue: function to update category name
+// - handleSubmit: form submission handler
+// - buttonText: custom submit button text (defaults to "Submit")
+// - handleDelete: optional delete handler
+
 export const CategoryForm = ({
   value,
   setaValue,

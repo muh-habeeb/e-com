@@ -1,23 +1,41 @@
+// This file is the entry point of the React application
+// Imports for React and ReactDOM
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
+// Imports for routing
 import { Route, RouterProvider, createRoutesFromElements } from "react-router";
 import { createBrowserRouter } from "react-router";
+
+// Redux store provider
 import { Provider } from "react-redux";
+
+// Main app and styles
 import App from "./App";
 import "./index.css";
+
+// Component imports
 import ErrorPage from "./components/ErrorPage.jsx";
 import store from "./redux/store.js";
+
+// Auth related components
 import Login from "./pages/Auth/Login.jsx";
 import Logout from "./pages/Auth/LogOut.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+
+// User components
 import Profile from "./pages/Users/Profile.jsx";
+
+// Admin components
 import AdminRoute from "./pages/Admin/AdminRoute.jsx";
 import UserList from "./pages/Admin/UserList.jsx";
 import CategoryList from "./pages/Admin/CategoryList.jsx";
 import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
+
+// Product related components
 import Home from "./Home.jsx";
 import Favorites from "./pages/Products/Favorites.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";

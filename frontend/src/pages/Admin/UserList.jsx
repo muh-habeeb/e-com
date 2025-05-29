@@ -1,3 +1,6 @@
+// This component is imported by:
+// - main.jsx (line 32)
+
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";

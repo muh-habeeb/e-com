@@ -1,3 +1,9 @@
+// ErrorPage Component
+// Displays a 404 error page with navigation
+// Imports:
+// - useNavigate: For programmatic navigation
+// - Navigation: Main navigation component
+
 import { useNavigate } from "react-router-dom";
 import Navigation from "../pages/Auth/Navigation";
 const ErrorPage = () => {
@@ -11,7 +17,7 @@ const ErrorPage = () => {
     <div className="">
       <Navigation/>
       <div className=" bg-slate-800 flex items-center justify-center h-screen w-screen text-center flex-col gap-5">
-        <p className="text-[150px] text-white tracking-[1px] animate-bounce animat">
+        <p className="text-[150px] text-white tracking-[1px] animate-bounce ">
           {/* 4️⃣👁️4️⃣ */}Ⅳ ⨷ Ⅳ
         </p>
         <p className="text-[30px] text-white capitalize tracking-[3px]">

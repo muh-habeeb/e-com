@@ -1,3 +1,11 @@
+// Login Component
+// Handles user authentication
+// Features:
+// - Form validation
+// - Redux integration for state management
+// - Redirect after successful login
+// - Toast notifications for feedback
+
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";

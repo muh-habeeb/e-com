@@ -1,3 +1,11 @@
+// ProductCarousel Component
+// Displays featured products in a sliding carousel
+// Features:
+// - Auto-playing slides
+// - Responsive design
+// - Product details display
+// - Loading and error handling
+
 import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
 import { Message } from "../../components/Message";
 import Slider from "react-slick";

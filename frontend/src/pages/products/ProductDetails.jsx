@@ -40,10 +40,12 @@ const ProductDetails = () => {
   const addToCartHandler = () => {};
   const [createReview, { isLoading: loadingProductReview }] =
     useCreateReviewMutation();
+    console.log(product);
+    
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      
+    
       let result=await createReview({
         productId,
         rating,
@@ -133,9 +135,13 @@ const ProductDetails = () => {
                   </h1>
                 </div>
               </div>
+
+
+
+
               <div className="flex justify-between flex-wrap">
                 <Ratings
-                  value={product?.data?.ratings}
+                  value={product?.data?.rating}
                   text={`${product?.data?.numReviews}Reviews`}
                 />
                 {product?.data?.countInStock > 0 && (

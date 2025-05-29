@@ -1,9 +1,23 @@
+// Home page component that displays products and header
+
+// Routing and navigation
 import { Link, useParams } from "react-router-dom";
+
+// Component imports
 import Loader from "./components/Loader";
-import { useGetProductsQuery } from "./redux/api/productApiSlice";
 import Header from "./components/Header.jsx";
 import { Message } from "./components/Message.jsx";
 import Product from "./pages/products/Product.jsx";
+
+// Redux query hook
+import { useGetProductsQuery } from "./redux/api/productApiSlice";
+
+// Home component features:
+// - Displays header when not in search mode
+// - Shows loading state while fetching products
+// - Handles error states
+// - Displays grid of products
+// - Includes Shop link in header
 const Home = () => {
   const { keyword } = useParams();
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });

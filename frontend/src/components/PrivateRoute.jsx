@@ -1,3 +1,8 @@
+// PrivateRoute Component
+// Protects routes that require authentication
+// Redirects to login if user is not authenticated
+// Used by: Profile and other protected routes
+
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 //  this is a private rout

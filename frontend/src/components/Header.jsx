@@ -1,3 +1,11 @@
+// Header Component
+// Displays top products in a grid layout and carousel
+// Imports:
+// - ProductCarousel: Carousel component for featured products
+// - SmallProduct: Compact product display component
+// - useGetTopProductsQuery: Redux query hook for fetching top products
+// - Loader: Loading spinner component
+
 import ProductCarousel from "../pages/products/ProductCarousel";
 import SmallProduct from "../pages/products/SmallProduct";
 import { useGetTopProductsQuery } from "../redux/api/productApiSlice";
