@@ -60,6 +60,7 @@ const Ratings = ({ value , text, color }) => {
 // Sets default color prop to yellow-500
 Ratings.defaultProps = {
   color: "yellow-500",
+  text: "hello"
 };
 
 // Exports the component

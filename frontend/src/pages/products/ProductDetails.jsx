@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -135,14 +135,15 @@ const ProductDetails = () => {
                   </h1>
                 </div>
               </div>
-
+ 
 
 
 
               <div className="flex justify-between flex-wrap">
                 <Ratings
                   value={product?.data?.rating}
-                  text={`${product?.data?.numReviews}Reviews`}
+                  text={`${product?.data?.numReviews} Reviews`}
+                  
                 />
                 {product?.data?.countInStock > 0 && (
                   <div className="">

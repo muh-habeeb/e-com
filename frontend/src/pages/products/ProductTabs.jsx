@@ -23,6 +23,7 @@ const ProductTabs = ({
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
+  
 
 //   const submitHandler = async(e) => {
 //     e.preventDefault();
@@ -120,13 +121,16 @@ const ProductTabs = ({
               <p className=" capitalize">
                 please{" "}
                 <Link to="/login" className="underline">
-                  Sign In
+                  {"Sign In"}
                 </Link>{" "}
-                to Write a review
+                {"to Write a review"}
               </p>
             )}
           </div>
         )}
+      </section>
+      <section>
+        {activeTab===2&&(<div className="">{product?.data?.reviews.length===0&&(<p>{"No reviews available"}</p>)}</div>)}
       </section>
     </div>
   );
