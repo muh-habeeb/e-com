@@ -36,8 +36,8 @@ import ProductUpdate from "./pages/Admin/ProductUpdate.jsx";
 import AllProducts from "./pages/Admin/AllProducts.jsx";
 
 // Product related components
-import Home from "./Home.jsx";
-import Favorites from "./pages/Products/Favorites.jsx";
+import Home from "./pages/Home.jsx";
+import Favorites from "./pages/products/Favorites.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";
 //  define routes
 

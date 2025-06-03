@@ -4,13 +4,13 @@
 import { Link, useParams } from "react-router-dom";
 
 // Component imports
-import Loader from "./components/Loader";
-import Header from "./components/Header.jsx";
-import { Message } from "./components/Message.jsx";
-import Product from "./pages/products/Product.jsx";
+import Loader from "../components/Loader.jsx";
+import Header from "../components/Header.jsx";
+import { Message } from "../components/Message.jsx";
+import Product from "./products/Product.jsx";
 
 // Redux query hook
-import { useGetProductsQuery } from "./redux/api/productApiSlice";
+import { useGetProductsQuery } from "../redux/api/productApiSlice.js";
 
 // Home component features:
 // - Displays header when not in search mode
