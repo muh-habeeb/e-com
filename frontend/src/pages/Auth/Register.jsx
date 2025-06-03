@@ -54,8 +54,13 @@ const Register = () => {
       toast.warn("Provide password");
       return;
     }
+    if (!confirmPassword) {
+      toast.warn("Provide password");
+      return;
+    }
     if (confirmPassword !== password) {
       toast.error("Password do not match!");
+      return;
     }
 
     try {

@@ -4,7 +4,7 @@
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 // Component definition that accepts value, text, and color as props
-const Ratings = ({ value , text, color }) => {
+const Ratings = ({ value , text, color ,data}) => {
   // Ensures the rating value stays between 0 and 5
   const rating = Math.min(Math.max(value, 0), 5);
   
@@ -17,42 +17,48 @@ const Ratings = ({ value , text, color }) => {
 
   return (
     // Container div with flexbox layout
-    <div className="flex items-center">
-      {/* Renders full stars based on rating */}
-      {[...Array(fullStar)].map((_, index) => (
-        <FaStar 
-          key={`full-${index}`} 
-          className={`text-${color}`} 
-          style={{ marginLeft: '0.25rem' }}
-        />
-      ))}
-
-      {/* Renders a half star if needed */}
-      {halfStar === 1 && (
-        <FaStarHalfAlt 
-          className={`text-${color}`} 
-          style={{ marginLeft: '0.25rem' }}
-        />
-      )}
-
-      {/* Renders remaining empty stars */}
-      {[...Array(emptyStar)].map((_, index) => (
-        <FaRegStar 
-          key={`empty-${index}`} 
-          className={`text-${color}`} 
-          style={{ marginLeft: '0.25rem' }}
-        />
-      ))}
+    <div> 
+      <div className="flex items-center justify-start select-all">
+        {/* Renders full stars based on rating */}
+        {[...Array(fullStar)].map((_, index) => (
+          <FaStar
+            key={`full-${index}`}
+            className={`text-${color}`}
+            style={{ marginLeft: '0.25rem' }}
+          />
+        ))}
+        {/* Renders a half star if needed */}
+        {halfStar === 1 && (
+          <FaStarHalfAlt
+            className={`text-${color}`}
+            style={{ marginLeft: '0.25rem' }}
+          />
+        )}
+        {/* Renders remaining empty stars */}
+        {[...Array(emptyStar)].map((_, index) => (
+          <FaRegStar
+            key={`empty-${index}`}
+            className={`text-${color}`}
+            style={{ marginLeft: '0.25rem' }}
+          />
+        ))}
       
-      {/* Renders optional text next to stars if provided */}
-      {text && (
-        <span 
-          className={`rating-text text-${color}`}
-          style={{ marginLeft: '0.5rem' }}
-        >
-          {text}
-        </span>
-      )}
+        {/* Renders optional text next to stars if provided */}
+        {text && (
+          <span
+            className={`rating-text text-${color}`}
+            style={{ marginLeft: '0.5rem' }}
+          >
+            {text}
+          </span>
+        )}
+        </div>
+        {
+          data&&(
+          <div className="mt-2 capitalize text-gray-200">{data}</div>
+          )
+        }
+      
     </div>
   );
 };
@@ -60,7 +66,6 @@ const Ratings = ({ value , text, color }) => {
 // Sets default color prop to yellow-500
 Ratings.defaultProps = {
   color: "yellow-500",
-  text: "hello"
 };
 
 // Exports the component

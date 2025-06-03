@@ -74,7 +74,7 @@ const ProductCarousel = () => {
                     <br />
                     <br />
                     <p className="w-[25rem] mt-[25px]">
-                      {description.substring(0, 170)}...
+                      {description.substring(0, 170)}
                     </p>
                   </div>
                   <div className="flex justify-between  w-[20rem] p-3 text-white">

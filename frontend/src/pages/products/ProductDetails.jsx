@@ -40,31 +40,27 @@ const ProductDetails = () => {
   const addToCartHandler = () => {};
   const [createReview, { isLoading: loadingProductReview }] =
     useCreateReviewMutation();
-    console.log(product);
-    
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-    
-      let result=await createReview({
+      let result = await createReview({
         productId,
         rating,
         comment,
       }).unwrap();
-      console.log(result);
-      
       refetch();
-      if(result.MESSAGE==="REVIEW_ADDED"){
+
+      if (result.MESSAGE === "REVIEW_ADDED") {
         toast.success("Review Created Successfully");
-        navigate('/')
-      }else if(result.MESSAGE==="ALREADY_REVIEWED_BY_THE USER_ONCE"){
-        toast.warn("You Are Already posted th Review!")
-        navigate('/')
+        // navigate("/");
+      } else if (result.MESSAGE === "ALREADY_REVIEWED_BY_THE USER_ONCE") {
+        toast.warn("You Are Already posted th Review!");
+        // navigate("/");
       }
     } catch (error) {
-      toast.error(error?.data?.message || error.error);
+      toast.error(error?.data || error.error);
       console.log(error);
-      
     }
   };
   return (
@@ -87,14 +83,14 @@ const ProductDetails = () => {
         </Message>
       ) : (
         <>
-          <div className="flex flex-wrap select-none relative items-center  mt-[2rem] ml-[10rem] ">
+          <div className="flex flex-wrap select-none relative items-center  mt-[2rem] ml-[10rem] capitalize ">
             <div>
               <img
                 src={product?.data?.image}
                 alt={product?.data?.name}
                 className="w-full xl:w-[50rem] lg:w-[45rem] md:w-[30rem] object-contain sm:w-[20rem] mr-[2rem] h-[500px]"
               />
-              <HeartIcon product={product} />
+              <HeartIcon product={product?.data} />
             </div>
             <div className="flex flex-col justify-between">
               <h2 className="text-2xl font-semibold text-white">
@@ -103,30 +99,30 @@ const ProductDetails = () => {
               <p className="my-4 xl:w-[35rem] lg:w-[35rem] md:w-[30rem] text-[#b0b0b0] text-xl font-semibold">
                 {product?.data?.description}
               </p>
-              <p className="text-white text-5xl my-4 font extrabold">
+              <p className="text-white text-5xl my-4 font extrabold ">
                 ₹ {product?.data?.price}
               </p>
               <div className="flex items-center justify-between w-[20rem] text-white">
                 <div className="one">
                   <h1 className="flex items-center mb-6">
                     <FaStore className="mr-2 text-white" />
-                    Brand:{product?.data?.brand}
+                    Brand: {product?.data?.brand}
                   </h1>
                   <h1 className="flex items-center mb-6">
                     <FaClock className="mr-2 text-white" />
-                    Added:{moment(product.createdAt).fromNow()}
+                    Added: {moment(product?.data?.createdAt).fromNow()}
                   </h1>
                   <h1 className="flex items-center mb-6">
                     <FaStore className="mr-2 text-white" />
-                    Reviews:{product?.data?.numReviews}
+                    Reviews: {product?.data?.numReviews}
                   </h1>
                 </div>
                 <div className="two">
                   <h1 className="flex  items-center mb-6">
-                    <FaStar className="mr-2 text-white " /> Ratings:{rating}
+                    <FaStar className="mr-2 text-white " /> Ratings: {rating}
                   </h1>
                   <h1 className="flex  items-center mb-6">
-                    <FaShoppingCart className="mr-2 text-white " /> Quantify:
+                    <FaShoppingCart className="mr-2 text-white " /> Quantity:{" "}
                     {product?.data?.quantity}
                   </h1>
                   <h1 className="flex  items-center mb-6">
@@ -135,15 +131,11 @@ const ProductDetails = () => {
                   </h1>
                 </div>
               </div>
- 
-
-
 
               <div className="flex justify-between flex-wrap">
                 <Ratings
                   value={product?.data?.rating}
                   text={`${product?.data?.numReviews} Reviews`}
-                  
                 />
                 {product?.data?.countInStock > 0 && (
                   <div className="">

@@ -3,7 +3,7 @@
     "$oid": "68373b301b2e0a31656f50da"
   },
   "name": "IPHONE 14 ",
-  "image": "/uploads/image-1748450241935.jpg",
+  "image": "/uploads/image-1748965481263.jpg",
   "brand": "apple",
   "quantity": 10,
   "category": {
@@ -11,7 +11,7 @@
   },
   "description": "iphone 14 with pink and blue background",
   "rating": 4,
-  "numReviews": 1,
+  "numReviews": 2,
   "price": 800000,
   "countInStock": 22,
   "reviews": [
@@ -31,22 +31,39 @@
       "updatedAt": {
         "$date": "2025-05-28T16:59:43.634Z"
       }
+    },
+    {
+      "name": "poli mood",
+      "rating": 4,
+      "comment": "super product i like it very well\nnicenice\nnice\nnicenicenicenice\n\nnicenice\nv\n\nnice\n",
+      "user": {
+        "$oid": "683f23654ec006e8739e7733"
+      },
+      "_id": {
+        "$oid": "683f238a4ec006e8739e7741"
+      },
+      "createdAt": {
+        "$date": "2025-06-03T16:32:10.028Z"
+      },
+      "updatedAt": {
+        "$date": "2025-06-03T16:32:10.028Z"
+      }
     }
   ],
   "createdAt": {
     "$date": "2025-05-28T16:34:56.571Z"
   },
   "updatedAt": {
-    "$date": "2025-05-28T16:59:43.634Z"
+    "$date": "2025-06-03T16:32:10.029Z"
   },
-  "__v": 3
+  "__v": 4
 },
 {
   "_id": {
     "$oid": "68373b651b2e0a31656f50df"
   },
   "name": "nike air t shirt ",
-  "image": "/uploads/image-1748450103814.jpg",
+  "image": "/uploads/image-1748965469507.jpg",
   "brand": "nike air",
   "quantity": 4,
   "category": {
@@ -62,7 +79,7 @@
     "$date": "2025-05-28T16:35:49.443Z"
   },
   "updatedAt": {
-    "$date": "2025-05-28T16:35:49.443Z"
+    "$date": "2025-06-03T15:44:30.983Z"
   },
   "__v": 0
 },
@@ -71,7 +88,7 @@
     "$oid": "68373ba71b2e0a31656f50e4"
   },
   "name": "sony camera",
-  "image": "/uploads/image-1748450158904.jpg",
+  "image": "/uploads/image-1748965460912.jpg",
   "brand": "sony",
   "quantity": 12,
   "category": {
@@ -87,7 +104,7 @@
     "$date": "2025-05-28T16:36:55.211Z"
   },
   "updatedAt": {
-    "$date": "2025-05-28T16:36:55.211Z"
+    "$date": "2025-06-03T15:44:22.648Z"
   },
   "__v": 0
 },
@@ -96,7 +113,7 @@
     "$oid": "68373c421b2e0a31656f50f3"
   },
   "name": "mac book",
-  "image": "/uploads/image-1748450335176.jpg",
+  "image": "/uploads/image-1748965453583.jpg",
   "brand": "apple",
   "quantity": 12,
   "category": {
@@ -130,7 +147,7 @@
     "$date": "2025-05-28T16:39:30.306Z"
   },
   "updatedAt": {
-    "$date": "2025-05-28T17:00:08.628Z"
+    "$date": "2025-06-03T15:44:15.452Z"
   },
   "__v": 1
 }]
