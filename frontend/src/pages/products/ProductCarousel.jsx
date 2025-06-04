@@ -44,7 +44,8 @@ const ProductCarousel = () => {
       ) : (
         <Slider
           {...settings}
-          className="xl:w-[50rem] lg:w-[50rem] md:w-[40rem] lg:ml-[5rem] xl:ml-[0rem]  md:ml-[5rem]  sm:w-[40rem] sm:hidden border-none outline-none"
+          className="xl:w-[50rem] bg-gray-800 rounded-lg p-4
+           lg:w-[50rem] md:w-[40rem] lg:ml-[5rem] xl:ml-[0rem]  md:ml-[5rem]  sm:w-[40rem] sm:hidden border-none outline-none"
         >
           {products?.data.map(
             ({

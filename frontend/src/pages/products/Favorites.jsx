@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Favorites = () => {
   const navigate = useNavigate();
   const favorites = useSelector(selectFavoriteProduct);
-  console.log(favorites);
   
   // const clearALlProduct = () => {
   //   //ask confirmation

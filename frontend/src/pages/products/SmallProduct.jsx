@@ -3,7 +3,7 @@ import HeartIcon from "./HeartIcon";
 
 const SmallProduct = ({ product }) => {
   return (
-    <div className="w-[20rem] m-3 bg-white dark:bg-gray-900 rounded-xl shadow hover:shadow-lg transition-all p-4">
+    <div className="w-[20rem] m-3 bg-white dark:bg-gray-900 rounded-xl shadow hover:shadow-[0_0.5px_5px_#b0b0b0] hover:duration-500 transition-all  p-4 capitalize">
       <div className="relative">
         <img
           src={product.image}

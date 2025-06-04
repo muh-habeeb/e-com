@@ -39,12 +39,14 @@ import AllProducts from "./pages/Admin/AllProducts.jsx";
 import Home from "./pages/Home.jsx";
 import Favorites from "./pages/products/Favorites.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";
+
+// cart rrlated components
+import Cart from "./pages/Cart.jsx";
 //  define routes
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-      {""}
       {/* for error redetection */}
       {/* <Route path="*" element={<ErrorPage />} /> */}
       <Route path="/login" element={<Login />} />
@@ -53,6 +55,7 @@ const router = createBrowserRouter(
       <Route pah="" index={true} element={<Home />} /> {/* main HOME page*/}
       <Route path="/favorite" element={<Favorites />} />
       <Route path="/product/:id" element={<ProductDetails />} />
+      <Route path="/cart" element={<Cart />} />
       {/* private */}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
@@ -70,7 +73,7 @@ const router = createBrowserRouter(
 );
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    {" "}
+    {""}
     {/* redux thing*/}
     <StrictMode>
       <RouterProvider router={router} /> {/* router dom thing*/}

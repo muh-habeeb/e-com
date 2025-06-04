@@ -4,7 +4,7 @@
 // - variant: determines message style (success, error, danger)
 // - children: message content
 
-export const Message = ({variant,children}) => {
+export const Message = ({ variant, children }) => {
   const getVariant = () => {
     switch (variant) {
       case "success":
@@ -12,6 +12,8 @@ export const Message = ({variant,children}) => {
       case "error":
       case "danger":
         return "bg-red-100 text-red-800";
+      case "warning":
+        return "bg-yellow-200 text-red-800";
       default:
         "bg-blue-100 text-blue-800";
     }

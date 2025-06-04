@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -19,9 +19,11 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTabs from "./ProductTabs";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 const ProductDetails = () => {
   const { id: productId } = useParams(); // destructure the id from parameter
   const navigate = useNavigate(); // initialize usenavigate
+  const dispatch = useDispatch(); // initialize usenavigate
 
   const [qty, setQty] = useState(1); //set default quantity
   const [rating, setRating] = useState(0);
@@ -37,10 +39,9 @@ const ProductDetails = () => {
     refetch;
   }, [refetch]);
   const { userInfo } = useSelector((state) => state.auth);
-  const addToCartHandler = () => {};
   const [createReview, { isLoading: loadingProductReview }] =
     useCreateReviewMutation();
-
+  //submit handler
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -62,6 +63,12 @@ const ProductDetails = () => {
       toast.error(error?.data || error.error);
       console.log(error);
     }
+  };
+
+  //add to cart handler
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product.data, qty }));
+    navigate("/cart");
   };
   return (
     <>
