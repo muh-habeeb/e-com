@@ -369,6 +369,33 @@ const fetchNewProducts = asyncHandler(async (req, res) => {
     });
   }
 });
+
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gt: radio[0], $lt: radio[1] }; //whats this means
+
+    const products = await Product.find(args);
+
+    return res.status(201).json({
+      code: 200,
+      request: "success",
+      message: "fltered products",
+      MESSAGE: "TFILTERED_PRODUCTS",
+      data: products,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      request: "success",
+      message: error.message,
+      MESSAGE: "internal server error",
+    });
+  }
+});
+
 export {
   addProduct,
   updateProductDetails,
@@ -379,4 +406,5 @@ export {
   addProductReview,
   fetchTopProducts,
   fetchNewProducts,
+  filterProducts,
 };

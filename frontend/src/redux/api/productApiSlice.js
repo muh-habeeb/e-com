@@ -50,7 +50,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCT_URL}/${productId}`,
         method: "PUT",
         body: formData,
-       
       }),
     }),
 
@@ -91,6 +90,14 @@ export const productApiSlice = apiSlice.injectEndpoints({
       query: () => `${PRODUCT_URL}/new`,
       keepUnusedDataFor: 5,
     }),
+
+    getFilteredProducts: builder.query({
+      query: ({ checked, radio }) => ({
+        url: `${PRODUCT_URL}/filtered-products`,
+        body: { checked, radio },
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -106,4 +113,6 @@ export const {
   useGetTopProductsQuery, //top
   useGetNewProductsQuery, //new
   useUploadProductImageMutation, //image upload
+
+  useGetFilteredProductsQuery,
 } = productApiSlice;
