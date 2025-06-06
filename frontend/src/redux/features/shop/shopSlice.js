@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+
 const initialState = {
-  categories: [],
-  products: [],
-  checked: [],
   radio: [],
+  checked: [],
+  products: [],
+  categories: [],
   brandCheckBox: [],
   checkedBrands: [],
 };
@@ -14,6 +16,7 @@ const shopSlice = createSlice({
   reducers: {
     setCategories: (state, action) => {
       state.categories = action.payload;
+      
     },
     setProducts: (state, action) => {
       state.products = action.payload;
@@ -25,7 +28,7 @@ const shopSlice = createSlice({
       state.radio = action.payload;
     },
     setSelectedBrand: (state, action) => {
-      state.selectedBrand = action.payload; // checkde
+      state.selectedBrand = action.payload; 
     },
   },
 });

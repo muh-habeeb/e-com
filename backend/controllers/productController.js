@@ -375,16 +375,29 @@ const filterProducts = asyncHandler(async (req, res) => {
     const { checked, radio } = req.body;
 
     let args = {};
-    if (checked.length > 0) args.category = checked;
-    if (radio.length) args.price = { $gt: radio[0], $lt: radio[1] }; //whats this means
+    if (checked.length > 0) {
+      args.category = checked;
+    }
+    if (radio.length) {
+      args.price = { $gt: radio[0], $lt: radio[1] }; //whats this means
+    }
 
     const products = await Product.find(args);
+    // if no product found
+    if (!products) {
+      return res.status(201).json({
+        code: 200,
+        request: "success",
+        message: "no product found in the given range products",
+        MESSAGE: "NO_PRODUCTS",
+      });
+    }
 
     return res.status(201).json({
       code: 200,
       request: "success",
       message: "fltered products",
-      MESSAGE: "TFILTERED_PRODUCTS",
+      MESSAGE: "FILTERED_PRODUCTS",
       data: products,
     });
   } catch (error) {
