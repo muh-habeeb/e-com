@@ -4,16 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Auth/navigation.css";
 import {
-  // useAllProductQuery, //all
   useCrateProductMutation, //create
-  // useGetProductsQuery, //get product 6
-  // useGetProductByIdQuery, //get by id
-  // useGetProductDetailsQuery, //get product details
-  // useUpdateProductMutation, //update
-  // useDeleteProductMutation, //delete
-  // useCreateReviewMutation, //review
-  // useGetTopProductsQuery, //top
-  // useGetNewProductsQuery, //new
   useUploadProductImageMutation, //image upload
 } from "../../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../../redux/api/categoryApiSlice";
