@@ -9,6 +9,7 @@ import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import uploadRouts from "./routes/uploadRoutes.js";
+import orderRoute from "./routes/orderRoute.js";
 dotenv.config();
 const port = process.env.PORT || 9999;
 //connect datable
@@ -25,6 +26,7 @@ app.use("/api/users", userRoutes); //importing from routes for post method
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRouts);
+app.use("/api/orders", orderRoute);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
