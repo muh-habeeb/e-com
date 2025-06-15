@@ -10,6 +10,7 @@ import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import uploadRouts from "./routes/uploadRoutes.js";
 import orderRoute from "./routes/orderRoute.js";
+import { log } from "console";
 dotenv.config();
 const port = process.env.PORT || 9999;
 //connect datable
@@ -28,10 +29,9 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRouts);
 app.use("/api/orders", orderRoute);
 
-app.get("api/config.paypal",(req,res)=>{
-    res.send({clentId:process.env.PAYPAL_CLIENT_ID})
-})
-
+app.get("/api/config/paypal", (req, res) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+});
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));

@@ -31,7 +31,7 @@ function calcPrice(orderItems) {
 
 const createOrder = asyncHandler(async (req, res) => {
   try {
-    const { orderItems, shippingAddress, paymentMethode } = req.body;
+    const { orderItems, shippingAddress, paymentMethod } = req.body;
 
     if (orderItems && orderItems.length === 0) {
       return res.status(400).json({
@@ -42,7 +42,7 @@ const createOrder = asyncHandler(async (req, res) => {
       });
     }
 
-    itemFromDB = await Order.find({
+    const itemFromDB = await Product.find({
       _id: { $in: orderItems.map((x) => x._id) },
     });
 
@@ -50,18 +50,16 @@ const createOrder = asyncHandler(async (req, res) => {
       const matchingItemFromDB = itemFromDB.find(
         (itemFromDB) => itemFromDB._id.toString() === itemFromClient._id
       );
+
       if (!matchingItemFromDB) {
-        return res.status(404).json({
-          request: "success",
-          message: "product not found",
-          MESSAGE: "NO_PRODUCT",
-        });
+        throw new Error("Product not found");
       }
+
       return {
         ...itemFromClient,
         product: itemFromClient._id,
         price: matchingItemFromDB.price,
-        _id: undefined,
+        _id: undefined, //passing id in product
       };
     });
 
@@ -72,7 +70,7 @@ const createOrder = asyncHandler(async (req, res) => {
       orderItems: dbOrderItems,
       user: req.user._id,
       shippingAddress,
-      paymentMethode,
+      paymentMethod,
       itemsPrice,
       taxPrice,
       shippingPrice,
@@ -80,9 +78,11 @@ const createOrder = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
-    res.status(201).json({
+    return res.status(201).json({
       request: "success",
-      createOrder,
+      MESSAGE: "ORDER_CREATED",
+      message: "order created ",
+      createdOrder,
     });
   } catch (error) {
     return res.status(500).json({
@@ -190,9 +190,8 @@ const calculateTotalSalesBYDate = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      request: "success",
+      request: "fail", // <-- corrected to 'fail'
       message: "Internal server error",
-      error: error.message,
       error: error.message,
     });
   }
@@ -206,9 +205,9 @@ const findOrderById = asyncHandler(async (req, res) => {
     if (order) {
       return res.status(200).json({
         request: "success",
-        message: "total sales",
-        MESSAGE: "TOTAL_SALES",
-        salesBydate,
+        message: "order found",
+        MESSAGE: "ORDER_FOUND",
+        order,
       });
     } else {
       return res.status(404).json({
@@ -220,12 +219,13 @@ const findOrderById = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({
-      request: "success",
+      request: "fail",
       message: "Internal server error",
       error: error.message,
     });
   }
 });
+
 const markOrderAsPaid = asyncHandler(async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -262,11 +262,16 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
 const markOrderAsDelivered = asyncHandler(async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
+   
+    
     if (order) {
+      console.log("ok");
+      
       order.isDelivered = true;
       order.deliveredAt = Date.now();
-     
-      const updatedOrder = await Order.save();
+      console.log("okk");
+
+      const updatedOrder = await order.save();
       return res.status(201).json({
         request: "success",
         updatedOrder,

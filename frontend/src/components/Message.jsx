@@ -19,7 +19,7 @@ export const Message = ({ variant, children }) => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen ">
+    <div className="flex justify-center items-center  ">
       <div className={`p-4 rounded ${getVariant()}`}>{children}</div>
     </div>
   );

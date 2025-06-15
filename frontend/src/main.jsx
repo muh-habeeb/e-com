@@ -10,6 +10,8 @@ import { createBrowserRouter } from "react-router";
 // Redux store provider
 import { Provider } from "react-redux";
 
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 // Main app and styles
 import App from "./App";
 import "./index.css";
@@ -46,14 +48,13 @@ import Cart from "./pages/Cart.jsx";
 // cart related components
 import Shop from "./pages/Shop.jsx";
 import Shipping from "./pages/Orders/Shipping.jsx";
-import Order from "./pages/Orders/Order.jsx"
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Order from "./pages/Orders/Order.jsx";
 import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
 //  define routes
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} >
+    <Route path="/" element={<App />}>
       {/* for error redetection */}
       {/* <Route path="*" element={<ErrorPage />} /> */}
       <Route path="/login" element={<Login />} />
@@ -65,12 +66,13 @@ const router = createBrowserRouter(
       <Route path="/cart" element={<Cart />} />
       {/*cxart page */}
       <Route path="/shop" element={<Shop />} /> {/*shop page */}
-      <Route path="/shipping" element={<Shipping />} /> {/*shipping page */}
-      <Route path="/placeorder" element={<PlaceOrder />} /> {/*shipping page */}
-      <Route path="/order/:id" element={<Order />} /> {/*order page */}
-      {/* private */}
+      {/* private  forregistered users*/}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/shipping" element={<Shipping />} /> {/*shipping page */}
+        <Route path="/placeorder" element={<PlaceOrder />} />{" "}
+        {/*shipping page */}
+        <Route path="/order/:id" element={<Order />} /> {/*order page */}
       </Route>
       {/* admin route */}
       <Route path="/admin" element={<AdminRoute />}>

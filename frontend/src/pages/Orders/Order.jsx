@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {Message} from "../../components/Message";
+import { Message } from "../../components/Message";
 import Loader from "../../components/Loader";
+import moment from "moment";
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
@@ -15,48 +16,65 @@ import {
 const Order = () => {
   const { id: orderId } = useParams();
 
+  const useOnlineChecker = () => {
+    const checkOnline = useCallback(() => {
+      if (navigator.onLine) {
+        toast("✅ Online");
+      } else {
+        toast("❌ Offline");
+      }
+    }, []);
+
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        checkOnline();
+      }, 10000); // 10 seconds
+
+      // Clean up the interval when the component unmounts
+      return () => clearInterval(intervalId);
+    }, [checkOnline]);
+  };
+  //   useOnlineChecker();
   const {
-    data: order,
+    data: { order } = {},
     refetch,
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
-  
+
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] =
-  useDeliverOrderMutation();
+    useDeliverOrderMutation();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
-  
+
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-  
   const {
-      data: paypal,
-      isLoading: loadingPayPal,
-      error: errorPayPal,
-    } = useGetPaypalClientIdQuery();
-    
-    useEffect(() => {
-        if (!errorPayPal && !loadingPayPal && paypal.clientId) {
-            const loadingPayPalScript = async () => {
-                paypalDispatch({
-                    type: "resetOptions",
-                    value: {
-                        "client-id": paypal.clientId,
-                        currency: "USD",
-                    },
-                });
-                paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-            };
-            
-            if (order && !order.isPaid) {
-                if (!window.paypal) {
-                    loadingPayPalScript();
-                }
-            }
+    data: paypal,
+    isLoading: loadingPayPal,
+    error: errorPayPal,
+  } = useGetPaypalClientIdQuery();
+
+  useEffect(() => {
+    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+      const loadingPayPalScript = async () => {
+        paypalDispatch({
+          type: "resetOptions",
+          value: {
+            "client-id": paypal?.clientId,
+            currency: "INR",
+          },
+        });
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      };
+
+      if (order && !order.isPaid) {
+        if (!window.paypal) {
+          loadingPayPalScript();
         }
-    }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
-    
+      }
+    }
+  }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
+
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -91,13 +109,16 @@ const Order = () => {
   return isLoading ? (
     <Loader />
   ) : error ? (
-    <Messsage variant="danger">{error.data.message}</Messsage>
+    <Message variant="danger">
+      {error.error || "somthin not right"}
+      {console.log(error)}
+    </Message>
   ) : (
     <div className="container flex flex-col ml-[10rem] md:flex-row">
       <div className="md:w-2/3 pr-4">
         <div className="border gray-300 mt-5 pb-4 mb-5">
           {order.orderItems.length === 0 ? (
-            <Messsage>Order is empty</Messsage>
+            <Message>Order is empty</Message>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-[80%]">
@@ -164,17 +185,18 @@ const Order = () => {
 
           <p className="mb-4">
             <strong className="text-pink-500">Method:</strong>{" "}
-            {order.paymentMethode}
+            {order.paymentMethod}
           </p>
-
           {order.isPaid ? (
-            <Messsage variant="success">Paid on {order.paidAt}</Messsage>
+            <Message variant="success">
+              Paid on {moment(order.paidAt).format(`lll`)}
+            </Message>
           ) : (
-            <Messsage variant="danger">Not paid</Messsage>
+            <Message variant="danger">Not paid</Message>
           )}
         </div>
 
-        <h2 className="text-xl font-bold mb-2 mt-[3rem]">Order Summary</h2>
+        <h2 className="text-xl font-bold mb-2 mt-[0rem]">Order Summary</h2>
         <div className="flex justify-between mb-2">
           <span>Items</span>
           <span>$ {order.itemsPrice}</span>
@@ -191,7 +213,9 @@ const Order = () => {
           <span>Total</span>
           <span>$ {order.totalPrice}</span>
         </div>
-
+        {/* {console.log(Date.now().toLocaleString("en-IN", {
+              style: "clo",
+            }))} */}
         {!order.isPaid && (
           <div>
             {loadingPay && <Loader />}{" "}
