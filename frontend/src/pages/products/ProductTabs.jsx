@@ -151,10 +151,10 @@ const ProductTabs = ({
                        */}
                     </div>
                     <div>
-                      <p className="my-4">
+                      <div className="my-4">
                         {/* passing the product data to the rating component to get the  stars and comment */}
                         <Ratings value={review.rating} data={review.comment} />{" "}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 ))}

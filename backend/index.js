@@ -28,6 +28,11 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRouts);
 app.use("/api/orders", orderRoute);
 
+app.get("api/config.paypal",(req,res)=>{
+    res.send({clentId:process.env.PAYPAL_CLIENT_ID})
+})
+
+
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
 app.listen(port, () => console.log(`Server running on PORT ${port}`));

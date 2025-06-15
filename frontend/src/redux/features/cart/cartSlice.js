@@ -4,12 +4,12 @@ import { updateCart } from "../../../utils/cart";
 // need explantion
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [], shippinAddress: {}, paymentMethode: "PayPal" };
-
-const cartSlice = createSlice({
-  name: "cart",
-  initialState,
-  reducers: {
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
+  
+  const cartSlice = createSlice({
+    name: "cart",
+    initialState,
+    reducers: {
     addToCart: (state, action) => {
       const { user, rating, numReviews, reviews, ...item } = action.payload;
       const existItem = state.cartItems.find((x) => x._id === item._id);
@@ -30,15 +30,15 @@ const cartSlice = createSlice({
     },
 
     saveShippingAddress: (state, action) => {
-      state.shippinAddress = action.payload;
+      state.shippingAddress = action.payload;
       localStorage.setItem("cart", JSON.stringify(state));
     },
     savePaymentMethod: (state, action) => {
-      state.paymentMethode = action.payload;
+      state.paymentMethod = action.payload;
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    clearCartItem: (state) => {
+    clearCartItems: (state) => {
       state.cartItems = []; //set to empty
       localStorage.setItem("cart", JSON.stringify(state));
     },
@@ -54,7 +54,7 @@ export const {
   removeFromCart,
   savePaymentMethod,
   saveShippingAddress,
-  clearCartItem,
+  clearCartItems,
   resetCart,
 } = cartSlice.actions;
 
