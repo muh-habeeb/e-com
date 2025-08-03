@@ -50,6 +50,7 @@ import Shop from "./pages/Shop.jsx";
 import Shipping from "./pages/Orders/Shipping.jsx";
 import Order from "./pages/Orders/Order.jsx";
 import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
+import UserOrder from "./pages/Users/UserOrder.jsx";
 //  define routes
 
 const router = createBrowserRouter(
@@ -63,14 +64,15 @@ const router = createBrowserRouter(
       <Route pah="" index={true} element={<Home />} /> {/* main HOME page*/}
       <Route path="/favorite" element={<Favorites />} />
       <Route path="/product/:id" element={<ProductDetails />} />
+      {/*cart page */}
       <Route path="/cart" element={<Cart />} />
-      {/*cxart page */}
       <Route path="/shop" element={<Shop />} /> {/*shop page */}
-      {/* private  forregistered users*/}
+      <Route path="/user-orders" element={<UserOrder />} /> {/*shop page */}
+      {/* private  for registered users*/}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/shipping" element={<Shipping />} /> {/*shipping page */}
-        <Route path="/placeorder" element={<PlaceOrder />} />{" "}
+        <Route path="/placeorder" element={<PlaceOrder />} />
         {/*shipping page */}
         <Route path="/order/:id" element={<Order />} /> {/*order page */}
       </Route>

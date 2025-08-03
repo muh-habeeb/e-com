@@ -269,7 +269,6 @@ const markOrderAsDelivered = asyncHandler(async (req, res) => {
       
       order.isDelivered = true;
       order.deliveredAt = Date.now();
-      console.log("okk");
 
       const updatedOrder = await order.save();
       return res.status(201).json({

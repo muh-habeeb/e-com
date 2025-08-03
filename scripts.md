@@ -22,11 +22,13 @@ project-root/
 These scripts are defined in the `package.json` file:
 
 ```json
-"scripts": {
-  "backend": "nodemon backend/index.js",
-  "frontend": "npm run dev --prefix frontend",
-  "dev": "concurrently \"npm run backend\" \"npm run frontend\""
-}
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "nodemon backend/index.js",
+    "frontend": "npm run dev --prefix frontend",
+    "prepare": "node prepareUploadsFolder.js",
+    "dev": "npm run prepare && concurrently \"npm run backend\" \"npm run frontend\""
+  },
 ```
 
 ### 📌 Explanation:
@@ -66,6 +68,3 @@ npm run frontend  # Runs frontend only
 ```
 
 Happy coding! 🎉
-
-RNY8K-B3HWC-3QG33-WDP8M-R6YWY
-RNY8K-B3HWC-3QG33-WDP8M-R6YWY

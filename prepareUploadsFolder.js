@@ -17,7 +17,3 @@ if (!fs.existsSync(uploadPath)) {
   console.log("uploads folder already exists");
 }
 
-function n(n) {
-  let a = (Math.round(n * 100) / 100).toFixed(2);
-  console.log(a);
-}
