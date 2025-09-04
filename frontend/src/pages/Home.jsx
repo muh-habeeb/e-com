@@ -11,7 +11,7 @@ import Product from "./products/Product.jsx";
 
 // Redux query hook
 import { useGetProductsQuery } from "../redux/api/productApiSlice.js";
-
+import AdminMenu from "./Admin/components/AdminMenu.jsx";
 // Home component features:
 // - Displays header when not in search mode
 // - Shows loading state while fetching products
@@ -21,7 +21,6 @@ import { useGetProductsQuery } from "../redux/api/productApiSlice.js";
 const Home = () => {
   const { keyword } = useParams();
   const { data, isLoading, isError } = useGetProductsQuery({ keyword });
-
   if (isLoading) {
     return <Loader />;
   }
@@ -40,6 +39,11 @@ const Home = () => {
         </Message>
       ) : (
         <>
+        {/* {userInfo.isAdmin && (
+          <>
+          <AdminMenu/>
+        </>
+        )} */}
           <div className="flex justify-between items-center ">
             <h1 className="ml-[20rem] mt-[10rem] text-[3rem] text-white select-none">
               Special Products
