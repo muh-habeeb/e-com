@@ -4,7 +4,7 @@ import { updateCart } from "../../../utils/cart";
 // need explantion
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
+  : { cartItems: [], shippingAddress: {}, paymentMethod: null };
   
   const cartSlice = createSlice({
     name: "cart",
@@ -25,7 +25,7 @@ const initialState = localStorage.getItem("cart")
     },
 
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload); //whats ahapening here
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload); //whats happening here
       return updateCart(state);
     },
 

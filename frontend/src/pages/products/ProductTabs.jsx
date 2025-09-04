@@ -25,13 +25,12 @@ const ProductTabs = ({
     setActiveTab(tabNumber);
   };
 
-  // const deleteReview=(id)=>{
-  // }
+  
   return (
-    <div className="flex flex-col md:flex-row text-white duration-300 transition-all ">
+    <div className="flex md:flex-row text-white duration-300 transition-all ">
       <section className="mr-[5rem]">
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg capitalize w-[15rem]${
+          className={`flex-1 p-4 cursor-pointer text-lg capitalize w-[15rem] hover:text-pink-500 *:${
             activeTab === 1 ? "font-bold" : ""
           }`}
           onClick={() => handleTabClick(1)}
@@ -39,7 +38,7 @@ const ProductTabs = ({
           Write your review
         </div>
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg capitalize ${
+          className={`flex-1 p-4 cursor-pointer text-lg capitalize  hover:text-pink-500 ${
             activeTab === 2 ? "font-bold" : ""
           }`}
           onClick={() => handleTabClick(2)}
@@ -47,7 +46,7 @@ const ProductTabs = ({
           All Reviews
         </div>
         <div
-          className={`flex-1 p-4 cursor-pointer text-lg capitalize ${
+          className={`flex-1 p-4 cursor-pointer text-lg capitalize  hover:text-pink-500${
             activeTab === 3 ? "font-bold" : ""
           }`}
           onClick={() => handleTabClick(3)}

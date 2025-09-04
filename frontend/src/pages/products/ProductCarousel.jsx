@@ -26,7 +26,7 @@ const ProductCarousel = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 300,
+    speed: 900,
     slideToShow: 1,
     slideToScroll: 1,
     arrows: true,
@@ -67,14 +67,14 @@ const ProductCarousel = () => {
                   alt={productName}
                   className="w-full rounded-lg object-cover h-[31.5rem]"
                 />
-                <div className="flex justify-between w-[20rem] p-3 text-white">
+                <div className="flex justify-between w-[20rem] p-3 text-white sm:hidden md:hidden   lg:flex xl:flex"  >
                   <div className="one justify-between w-full">
                     <h2 className="text-2xl capitalize">{productName}</h2>
                     <h3 className="text-xl">₹{price}</h3>
                     <br />
                     <br />
                     <br />
-                    <p className="w-[25rem] mt-[25px]">
+                    <p className="w-[40rem] mt-[25px] capitalize ">
                       {description.substring(0, 170)}
                     </p>
                   </div>
@@ -93,7 +93,7 @@ const ProductCarousel = () => {
                         Reviews: {numReviews}
                       </h2>
                     </div>
-                    <div className="two flex items-center flex-col">
+                    <div className="two flex items-center flex-col sm:hidden md:hidden">
                       <h1 className="flex item-center mb-6 w-[10rem]">
                         <FaStar className="mr-2 text-white mt-1" /> Ratings:
                         {Math.round(rating)}

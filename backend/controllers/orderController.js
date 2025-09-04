@@ -30,68 +30,72 @@ function calcPrice(orderItems) {
 }
 
 const createOrder = asyncHandler(async (req, res) => {
-  try {
-    const { orderItems, shippingAddress, paymentMethod } = req.body;
+  const { orderItems, shippingAddress, paymentMethod } = req.body;
 
-    if (orderItems && orderItems.length === 0) {
-      return res.status(400).json({
-        request: "success",
-        message: "invalid data provided",
-        error: "orderItems is required",
-        MESSAGE: "INVALID_DATA",
-      });
-    }
-
-    const itemFromDB = await Product.find({
-      _id: { $in: orderItems.map((x) => x._id) },
-    });
-
-    const dbOrderItems = orderItems.map((itemFromClient) => {
-      const matchingItemFromDB = itemFromDB.find(
-        (itemFromDB) => itemFromDB._id.toString() === itemFromClient._id
-      );
-
-      if (!matchingItemFromDB) {
-        throw new Error("Product not found");
-      }
-
-      return {
-        ...itemFromClient,
-        product: itemFromClient._id,
-        price: matchingItemFromDB.price,
-        _id: undefined, //passing id in product
-      };
-    });
-
-    const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
-      calcPrice(orderItems);
-
-    const order = new Order({
-      orderItems: dbOrderItems,
-      user: req.user._id,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-    });
-
-    const createdOrder = await order.save();
-    return res.status(201).json({
-      request: "success",
-      MESSAGE: "ORDER_CREATED",
-      message: "order created ",
-      createdOrder,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      request: "success",
-      message: "Internal server error",
-      error: error.message,
+  // 🚫 Validate order items
+  if (!orderItems || orderItems.length === 0) {
+    return res.status(400).json({
+      request: "fail",
+      message: "No order items provided",
+      error: "ORDER_ITEMS_REQUIRED",
     });
   }
+
+  // 📦 Fetch product details from DB
+  const productsInDB = await Product.find({
+    _id: { $in: orderItems.map((item) => item._id) },
+  });
+
+  if (productsInDB.length !== orderItems.length) {
+    return res.status(404).json({
+      request: "fail",
+      message: "Some products were not found in the database",
+      error: "PRODUCTS_NOT_FOUND",
+    });
+  }
+
+  // 🔁 Match client order items with DB data
+  const formattedOrderItems = orderItems.map((clientItem) => {
+    const dbItem = productsInDB.find(
+      (p) => p._id.toString() === clientItem._id
+    );
+
+    return {
+      name: dbItem.name,
+      qty: clientItem.qty,
+      image: dbItem.image,
+      price: dbItem.price, // trust server price
+      product: dbItem._id,
+    };
+  });
+
+  // 💰 Calculate pricing
+  const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
+    calcPrice(formattedOrderItems);
+
+  // 📝 Create order
+  const order = new Order({
+    orderItems: formattedOrderItems,
+    user: req.user._id,
+    shippingAddress,
+    paymentMethod,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+    isPaid: false,
+  });
+
+  const createdOrder = await order.save();
+
+  return res.status(201).json({
+    request: "success",
+    MESSAGE: "ORDER_CREATED",
+    message: "Order created successfully",
+    createdOrder,
+  });
 });
+
 const getAllOrders = asyncHandler(async (req, res) => {
   try {
     const orders = await Order.find({}).populate("user", "id username");
@@ -110,6 +114,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const getUserOrder = asyncHandler(async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id });
@@ -128,6 +133,7 @@ const getUserOrder = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const total_order_count = asyncHandler(async (req, res) => {
   try {
     const orders = await Order.countDocuments();
@@ -147,6 +153,7 @@ const total_order_count = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const calculateTotalSales = asyncHandler(async (req, res) => {
   try {
     const orders = await Order.find();
@@ -165,6 +172,7 @@ const calculateTotalSales = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const calculateTotalSalesBYDate = asyncHandler(async (req, res) => {
   try {
     const salesBydate = await Order.aggregate([
@@ -196,6 +204,7 @@ const calculateTotalSalesBYDate = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const findOrderById = asyncHandler(async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate(
@@ -228,17 +237,18 @@ const findOrderById = asyncHandler(async (req, res) => {
 
 const markOrderAsPaid = asyncHandler(async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(escape(req.params.id));
     if (order) {
+      console.log(req.body)
       order.isPaid = true;
-      order.padAt = Date.now();
+      order.paidAt = Date.now(); // typo fixed: "padAt" → "paidAt"
       order.paymentResult = {
-        id: req.body.id,
-        status: req.body.status,
-        update_time: req.body.update_time,
-        email: req.body.payer.email,
+        id: req.body.razorpay_payment_id, // Razorpay field
+        status: "completed", // you can mark manually
+        update_time: Date.now(), // since Razorpay doesn't send
+        email: req.user ? req.user.email : "guest", // if logged-in user
       };
-      const updatedOrder = await Order.save();
+      const updatedOrder = await order.save();
       return res.status(201).json({
         request: "success",
         updatedOrder,
@@ -248,7 +258,7 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
         request: "success",
         message: "order not found",
         MESSAGE: "ORDER_NOT_FOUND",
-        error: "Order Not Found",
+        error: "Order not Found",
       });
     }
   } catch (error) {
@@ -259,14 +269,14 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const markOrderAsDelivered = asyncHandler(async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
-   
-    
+
     if (order) {
       console.log("ok");
-      
+
       order.isDelivered = true;
       order.deliveredAt = Date.now();
 

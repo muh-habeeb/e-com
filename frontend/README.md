@@ -13,19 +13,3 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 
-
-``` js
-//for checking user is still logged or not
- const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-const expirationTime = localStorage.getItem("expirationTime");
-
-if (userInfo && expirationTime) {
-  if (new Date().getTime() > expirationTime) {
-    // If session has expired, log the user out
-    dispatch(logout());
-  } else {
-    // If session is still valid, proceed with the user info
-    dispatch(setCredentials(userInfo));
-  }
-}
-```

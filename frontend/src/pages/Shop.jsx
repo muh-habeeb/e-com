@@ -1,6 +1,7 @@
+
+// IMport necessary modules and components
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useGetFilteredProductsQuery } from "../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../redux/api/categoryApiSlice";
 import {
@@ -11,66 +12,113 @@ import {
 import Loader from "../components/Loader";
 import { useSelector } from "react-redux";
 import ProductCard from "./products/ProductCard";
+
+//main function
 const Shop = () => {
+  //create dispatch
   const dispatch = useDispatch();
+  //get state from redux store
   const { categories, products, checked, radio } = useSelector(
     (state) => state.shop
   );
-
+  //fetch categories
   const categoriesQuery = useFetchCategoriesQuery();
+  //price filter state
   const [priceValue, setPriceFilter] = useState("");
-
-  const filteredProductsquery = useGetFilteredProductsQuery({
+  //fetch filtered products based on categories and price range
+  const filteredProductsQuery = useGetFilteredProductsQuery({
     checked,
     radio,
   });
-
+  //update categories in redux store when fetched
   useEffect(() => {
+    //if not loading, set categories
     if (!categoriesQuery.isLoading) {
+      //set categories in redux store
       dispatch(setCategories(categoriesQuery.data));
     }
-  }, [categoriesQuery.data, dispatch]);
-
+  }, [categoriesQuery.data, categoriesQuery.isLoading, dispatch]);
+  //update products in redux store when fetched
+  //also filter products based on price filter value
   useEffect(() => {
+    //if no category is selected or price filter is applied
     if (!checked.length || radio.length) {
-      if (!filteredProductsquery.isLoading) {
+      //if not loading, filter products
+      if (!filteredProductsQuery.isLoading) {
         //filter products based on both categories and price filter
 
-        const filteredProducts = filteredProductsquery.data?.data?.filter(
+        const filteredProducts = filteredProductsQuery.data?.data?.filter(
           (product) => {
             //if the product price include the entered price filter value
             return (
+              //check if priceValue is not empty
               product.price.toString().includes(priceValue) ||
+              //or if priceValue is empty, include all products
               product.price === parseInt(priceValue, 10)
+              //parseInt to convert string to number
             );
           }
         );
+        //set filtered products in redux store
         dispatch(setProducts(filteredProducts));
       }
     }
-  }, [checked, radio, filteredProductsquery.data, dispatch, priceValue]);
 
+  },
+    //run this effect when checked, radio, filteredProductsQuery.data, dispatch, priceValue, filteredProductsQuery.isLoading changes
+    [checked, radio, filteredProductsQuery.data, dispatch, priceValue, filteredProductsQuery.isLoading]);
+  //
+  //handle category checkbox change
+  const handleCheck = (value, id) => {
+    //update checked categories in redux store
+    const updatedCheck = value
+      //if checked, add to array, else remove from array
+      ? [...checked, id]
+      //remove id from array
+      : checked.filter((c) => c !== id);
+    //set updated checked categories in redux store
+    dispatch(setChecked(updatedCheck));
+
+    // filter products based on updated categories
+    const productsByCategory =
+      //
+      updatedCheck.length > 0
+        // if categories are selected, filter products
+        ? filteredProductsQuery.data?.data?.filter((product) =>
+          // check if product category is in updated checked categories
+          updatedCheck.includes(product.category?._id || product.category)
+          // product.category?._id for populated category, product.category for non-populated
+        )
+        // else show all products
+        : filteredProductsQuery.data?.data; // if no category selected, show all
+    //set filtered products in redux store
+    dispatch(setProducts(productsByCategory));
+  };
+
+  // filter by brand inside selected categories
   const handleBrandClick = (brand) => {
-    const productsByBrand = filteredProductsquery.data?.data?.filter(
+    const baseProducts =
+      checked.length > 0
+        ? filteredProductsQuery.data?.data?.filter((product) =>
+          checked.includes(product.category?._id || product.category)
+        )
+        : filteredProductsQuery.data?.data;
+
+    const productsByBrand = baseProducts?.filter(
       (product) => product.brand === brand
     );
+
     dispatch(setProducts(productsByBrand));
   };
 
-  const handleCheck = (value, id) => {
-    const updatedCheck = value
-      ? [...checked, id]
-      : checked.filter((c) => c !== id);
-
-    dispatch(setChecked(updatedCheck));
-  };
-
-  //get add allbrands options to unique
+  //get add all brands options to unique
 
   const uniqueBrand = [
+    //get all unique brands from filtered products
     ...Array.from(
       new Set(
-        filteredProductsquery.data?.data
+        filteredProductsQuery.data?.data
+
           ?.map((product) => product.brand)
           .filter((brand) => brand !== undefined)
       )
@@ -92,7 +140,7 @@ const Shop = () => {
             <div className="p-5 w-[15rem]">
               {categories?.data?.map((c) => (
                 <div className="mb-2" key={c._id}>
-                  <div className="fle items-center mr-4">
+                  <div className="flex items-center mr-4">
                     <input
                       type="checkbox"
                       id={c._id}
@@ -120,7 +168,7 @@ const Shop = () => {
                     type="radio"
                     name="brand"
                     id={brand}
-                    onChange={(e) => handleBrandClick(brand)}
+                    onChange={() => handleBrandClick(brand)}
                   />
                   <label
                     htmlFor={brand}

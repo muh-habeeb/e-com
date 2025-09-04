@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import {Message} from "../../components/Message";
+import { Message } from "../../components/Message";
 import ProgressSteps from "../../components/ProgressSteps";
 import Loader from "../../components/Loader";
 import { useCreateOrderMutation } from "../../redux/api/orderApiSlice";
@@ -36,7 +36,7 @@ const PlaceOrder = () => {
       }).unwrap();
       dispatch(clearCartItems());
       navigate(`/order/${res?.createdOrder?._id}`);
-      
+
     } catch (error) {
       toast.error(error);
     }
@@ -46,14 +46,14 @@ const PlaceOrder = () => {
     <>
       <ProgressSteps step1 step2 step3 />
 
-      <div className="container ml-20 pt-8">
+      <div className="container ml-20 pt-8  flex  flex-col items-center justify-center capitalize"  >
         {cart.cartItems.length === 0 ? (
           <Message>Your cart is empty</Message>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto ">
             <table className="w-full border-collapse">
               <thead>
-                
+
                 <tr>
                   <td className="px-1 py-2 text-left align-top">Image</td>
                   <td className="px-1 py-2 text-left">Product</td>
@@ -80,7 +80,7 @@ const PlaceOrder = () => {
                     <td className="p-2">{item.qty}</td>
                     <td className="p-2">{item.price.toFixed(2)}</td>
                     <td className="p-2">
-                      $ {(item.qty * item.price).toFixed(2)}
+                      ₹ {(item.qty * item.price).toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -90,42 +90,42 @@ const PlaceOrder = () => {
         )}
 
         <div className="mt-8">
-          <h2 className="text-2xl font-semibold mb-5">Order Summary</h2>
-          <div className="flex justify-between flex-wrap p-8 bg-[#181818]">
-            <ul className="text-lg">
+          <h2 className="text-2xl font-semibold mb-5 ">Order Summary</h2>
+          <div className="flex justify-between items-start  flex-wrap p-8 bg-[#181818]">
+            <ul className="text-lg capitalize">
               <li>
-                <span className="font-semibold mb-4">Items:</span> $
+                <span className="font-semibold mb-4">Items:</span> ₹
                 {cart.itemsPrice}
               </li>
               <li>
-                <span className="font-semibold mb-4">Shipping:</span> $
+                <span className="font-semibold mb-4">Shipping:</span> ₹
                 {cart.shippingPrice}
               </li>
               <li>
-                <span className="font-semibold mb-4">Tax:</span> $
+                <span className="font-semibold mb-4">Tax:</span> ₹
                 {cart.taxPrice}
               </li>
               <li>
-                <span className="font-semibold mb-4">Total:</span> $
+                <span className="font-semibold mb-4">Total:</span> ₹
                 {cart.totalPrice}
               </li>
             </ul>
 
             {error && <Message variant="danger">{error.data.message}</Message>}
 
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Shipping</h2>
-              <p>
-                <strong>Address:</strong> {cart.shippingAddress.address},{" "}
-                {cart.shippingAddress.city} {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
-              </p>
-            </div>
 
             <div>
               <h2 className="text-2xl font-semibold mb-4">Payment Method</h2>
               <strong>Method:</strong> {cart.paymentMethod}
             </div>
+          </div>
+          <div className="mt-4 p-8 bg-[#181818] flex-wrap flex max-w-[40rem]">
+            <h2 className="text-2xl font-semibold mb-4">Shipping</h2>
+            <p>
+              <strong>Address:</strong> {cart.shippingAddress.address},
+              {cart.shippingAddress.city} {cart.shippingAddress.postalCode},
+              {cart.shippingAddress.country}
+            </p>
           </div>
 
           <button

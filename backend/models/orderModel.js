@@ -34,7 +34,7 @@ const orderSchema = mongoose.Schema(
 
     paymentResult: {
       id: { type: String },
-      status: { type: String },
+      status: { type: String, default: "pending" },
       update_time: { type: String },
       email_address: { type: String },
     },

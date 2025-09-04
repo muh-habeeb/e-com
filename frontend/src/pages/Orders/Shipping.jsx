@@ -6,12 +6,13 @@ import {
   savePaymentMethod,
 } from "../../redux/features/cart/cartSlice";
 import ProgressSteps from "../../components/ProgressSteps";
+import { toast } from "react-toastify";
 
 const Shipping = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
-    
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+
+  const [paymentMethod, setPaymentMethod] = useState("RazorPay");
   const [address, setAddress] = useState(shippingAddress?.address || "");
   const [city, setCity] = useState(shippingAddress?.city || "");
   const [postalCode, setPostalCode] = useState(
@@ -24,6 +25,13 @@ const Shipping = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if(!paymentMethod){
+      toast.error("Payment method is required");
+      return
+    }else if(!address || !city || !postalCode || !country){
+      toast.error("All fields are required");
+      return
+    }
 
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     dispatch(savePaymentMethod(paymentMethod));
@@ -38,7 +46,7 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto">
       <ProgressSteps step1 step2 />
       <div className="mt-[10rem] flex justify-around items-center flex-wrap">
         <form onSubmit={submitHandler} className="w-[40rem]">
@@ -90,17 +98,18 @@ const Shipping = () => {
           <div className="mb-4">
             <label className="block text-gray-400">Select Method</label>
             <div className="mt-2">
-              <label className="inline-flex items-center">
+                
+              <label className="inline-flex items-center cursor-pointer">
                 <input
                   type="radio"
-                  className="bg-transparent text-white form-radio text-pink-500"
+                  className="bg-transparent form-radio text-pink-500"
                   name="paymentMethod"
-                  value="PayPal"
-                  checked={paymentMethod === "PayPal"}
+                  value="RazorPay"
+                  checked={paymentMethod === "RazorPay"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
+                <span className="ml-2">RazorPay</span>
 
-                <span className="ml-2">PayPal or Credit Card</span>
               </label>
             </div>
           </div>

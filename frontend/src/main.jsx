@@ -10,7 +10,6 @@ import { createBrowserRouter } from "react-router";
 // Redux store provider
 import { Provider } from "react-redux";
 
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 // Main app and styles
 import App from "./App";
@@ -92,9 +91,7 @@ createRoot(document.getElementById("root")).render(
     {""}
     {/* redux thing*/}
     <StrictMode>
-      <PayPalScriptProvider>
         <RouterProvider router={router} /> {/* router dom thing*/}
-      </PayPalScriptProvider>
     </StrictMode>
   </Provider>
 );

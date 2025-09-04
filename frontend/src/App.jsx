@@ -22,7 +22,7 @@ const App = () => {
       <Navigation />
       {/* {console.clear()} */}
       <main
-        className=" text-white  bg-slate-900 min-h-[100vh] max-h-full min-w-[100vw] w-[100%] "
+        className=" dark:bg-gray-900 min-h-screen  text-white"
         style={{ transitionDuration: 3000, transitionProperty: "all" }}
       >
         

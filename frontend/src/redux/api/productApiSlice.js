@@ -114,5 +114,5 @@ export const {
   useGetNewProductsQuery, //new
   useUploadProductImageMutation, //image upload
 
-  useGetFilteredProductsQuery,
+  useGetFilteredProductsQuery, //filtered products
 } = productApiSlice;

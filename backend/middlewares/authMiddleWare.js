@@ -22,7 +22,7 @@ const authenticated = asyncHandler(async (req, res, next) => {
   } else {
     //no token is found show this error
     res.status(401);
-    throw new Error("Not authorized ,no token ");
+    throw new Error("Not authorized,no token, please login again.");
   }
 });
 

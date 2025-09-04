@@ -73,12 +73,14 @@ const ProductDetails = () => {
   return (
     <>
       <div>
-        <Link
-          to="/"
-          className="text-white select-none font-semibold hover:underline ml-[10rem] cursor-pointer"
+        {/* // Go Back link */}
+        <button
+          onClick={() => navigate(-1)}
+          className="text-white select-none font-semibold ml-[10rem]  cursor-pointer bg-zinc-800 py-1 px-2 rounded-lg  hover:duration-200 "
         >
           {"Go Back"}
-        </Link>
+        </button>
+
       </div>
       {isLoading ? (
         <Loader />

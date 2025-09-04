@@ -1,42 +1,21 @@
-import { useCallback, useEffect } from "react";
+
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Message } from "../../components/Message";
-import Loader from "../../components/Loader";
-import moment from "moment";
 import {
-  useDeliverOrderMutation,
   useGetOrderDetailsQuery,
-  useGetPaypalClientIdQuery,
   usePayOrderMutation,
+  useDeliverOrderMutation,
+  useCreateRazorpayOrderMutation,
 } from "../../redux/api/orderApiSlice";
+import Loader from "../../components/Loader";
+import { Message } from "../../components/Message";
 
 const Order = () => {
   const { id: orderId } = useParams();
 
-  const useOnlineChecker = () => {
-    const checkOnline = useCallback(() => {
-      if (navigator.onLine) {
-        toast("✅ Online");
-      } else {
-        toast("❌ Offline");
-      }
-    }, []);
-
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        checkOnline();
-      }, 10000); // 10 seconds
-
-      // Clean up the interval when the component unmounts
-      return () => clearInterval(intervalId);
-    }, [checkOnline]);
-  };
-  //   useOnlineChecker();
   const {
-    data: { order } = {},
+    data: order,
     refetch,
     isLoading,
     error,
@@ -45,208 +24,167 @@ const Order = () => {
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
-  const { userInfo } = useSelector((state) => state.auth);
 
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-  const {
-    data: paypal,
-    isLoading: loadingPayPal,
-    error: errorPayPal,
-  } = useGetPaypalClientIdQuery();
+  const [createRazorpayOrder] = useCreateRazorpayOrderMutation();
 
-  useEffect(() => {
-    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
-      const loadingPayPalScript = async () => {
-        paypalDispatch({
-          type: "resetOptions",
-          value: {
-            "client-id": paypal?.clientId,
-            currency: "INR",
-          },
-        });
-        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+  // console.log(order)
+  // ✅ Handle Razorpay payment
+  const handleRazorpayPayment = async () => {
+    try {
+      // 1. Create order on backend
+      const razorpayOrder = await createRazorpayOrder({
+        amount: order?.order?.totalPrice, // backend converts to paisa
+      }).unwrap();
+      // 2. Configure checkout
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // from .env (frontend)
+        amount: razorpayOrder.amount,
+        currency: "INR",
+        name: "E-com",
+        description: "Order Payment",
+        order_id: razorpayOrder.id,
+        handler: async function (response) {
+          try {
+            // 3. Notify backend about successful payment
+            const payres = await payOrder({
+              orderId,
+              details: response, // contains payment_id, order_id, signature
+            }).unwrap();
+
+            refetch();
+            console.log(payres);
+            toast.success("Payment Successful!");
+          } catch (err) {
+            toast.error(err?.data?.message || err.message);
+          }
+        },
+        prefill: {
+          name: order?.order?.user?.name,
+          email: order?.order?.user?.email,
+        },
+        theme: {
+          color: "#F472B6",
+        },
       };
 
-      if (order && !order.isPaid) {
-        if (!window.paypal) {
-          loadingPayPalScript();
-        }
-      }
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      toast.error(err?.data?.message || err.message);
+      // console.log(err);
+
     }
-  }, [errorPayPal, loadingPayPal, order, paypal, paypalDispatch]);
-
-  function onApprove(data, actions) {
-    return actions.order.capture().then(async function (details) {
-      try {
-        await payOrder({ orderId, details });
-        refetch();
-        toast.success("Order is paid");
-      } catch (error) {
-        toast.error(error?.data?.message || error.message);
-      }
-    });
-  }
-
-  function createOrder(data, actions) {
-    return actions.order
-      .create({
-        purchase_units: [{ amount: { value: order.totalPrice } }],
-      })
-      .then((orderID) => {
-        return orderID;
-      });
-  }
-
-  function onError(err) {
-    toast.error(err.message);
-  }
-
-  const deliverHandler = async () => {
-    await deliverOrder(orderId);
-    refetch();
   };
+  // ✅ Mark order as delivered
+  const deliverHandler = async () => {
+    try {
+      await deliverOrder(orderId).unwrap();
+      refetch();
+      toast.success("Order Delivered!");
+    } catch (err) {
+      toast.error(err?.data?.message || err.message);
+    }
+  };
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
 
-  return isLoading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant="danger">
-      {error.error || "somthin not right"}
-      {console.log(error)}
-    </Message>
-  ) : (
-    <div className="container flex flex-col ml-[10rem] md:flex-row">
-      <div className="md:w-2/3 pr-4">
-        <div className="border gray-300 mt-5 pb-4 mb-5">
-          {order.orderItems.length === 0 ? (
-            <Message>Order is empty</Message>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-[80%]">
-                <thead className="border-b-2">
-                  <tr>
-                    <th className="p-2">Image</th>
-                    <th className="p-2">Product</th>
-                    <th className="p-2 text-center">Quantity</th>
-                    <th className="p-2">Unit Price</th>
-                    <th className="p-2">Total</th>
-                  </tr>
-                </thead>
+  if (isLoading) return <Loader />;
+  if (error) return <Message variant="danger">{error?.data?.message}</Message>;
 
-                <tbody>
-                  {order.orderItems.map((item, index) => (
-                    <tr key={index}>
-                      <td className="p-2">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-16 h-16 object-cover"
-                        />
-                      </td>
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Order Id: {order?.order?._id}</h1>
 
-                      <td className="p-2">
-                        <Link to={`/product/${item.product}`}>{item.name}</Link>
-                      </td>
-
-                      <td className="p-2 text-center">{item.qty}</td>
-                      <td className="p-2 text-center">{item.price}</td>
-                      <td className="p-2 text-center">
-                        $ {(item.qty * item.price).toFixed(2)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+      {/* Shipping */}
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">Shipping</h2>
+        <p>
+          <strong>Name:</strong> {order?.order?.user?.username}
+        </p>
+        <p>
+          <strong>Email:</strong> {order?.order?.user?.email}
+        </p>
+        <p>
+          <strong>Address:</strong> {order?.order?.shippingAddress?.address},{" "}
+          {order?.order?.shippingAddress?.city},{" "}
+          {order?.order?.shippingAddress?.postalCode},{" "}
+          {order?.order?.shippingAddress?.country}
+        </p>
+        {order?.order?.isDelivered ? (
+          <Message variant="success">Delivered</Message>
+        ) : (
+          <Message variant="danger">Not Delivered</Message>
+        )}
       </div>
 
-      <div className="md:w-1/3">
-        <div className="mt-5 border-gray-300 pb-4 mb-4">
-          <h2 className="text-xl font-bold mb-2">Shipping</h2>
-          <p className="mb-4 mt-4">
-            <strong className="text-pink-500">Order:</strong> {order._id}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-pink-500">Name:</strong>{" "}
-            {order.user.username}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-pink-500">Email:</strong> {order.user.email}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-pink-500">Address:</strong>{" "}
-            {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-            {order.shippingAddress.postalCode}, {order.shippingAddress.country}
-          </p>
-
-          <p className="mb-4">
-            <strong className="text-pink-500">Method:</strong>{" "}
-            {order.paymentMethod}
-          </p>
-          {order.isPaid ? (
-            <Message variant="success">
-              Paid on {moment(order.paidAt).format(`lll`)}
-            </Message>
-          ) : (
-            <Message variant="danger">Not paid</Message>
-          )}
-        </div>
-
-        <h2 className="text-xl font-bold mb-2 mt-[0rem]">Order Summary</h2>
-        <div className="flex justify-between mb-2">
-          <span>Items</span>
-          <span>$ {order.itemsPrice}</span>
-        </div>
-        <div className="flex justify-between mb-2">
-          <span>Shipping</span>
-          <span>$ {order.shippingPrice}</span>
-        </div>
-        <div className="flex justify-between mb-2">
-          <span>Tax</span>
-          <span>$ {order.taxPrice}</span>
-        </div>
-        <div className="flex justify-between mb-2">
-          <span>Total</span>
-          <span>$ {order.totalPrice}</span>
-        </div>
-        {/* {console.log(Date.now().toLocaleString("en-IN", {
-              style: "clo",
-            }))} */}
-        {!order.isPaid && (
-          <div>
-            {loadingPay && <Loader />}{" "}
-            {isPending ? (
-              <Loader />
-            ) : (
-              <div>
-                <div>
-                  <PayPalButtons
-                    createOrder={createOrder}
-                    onApprove={onApprove}
-                    onError={onError}
-                  ></PayPalButtons>
-                </div>
-              </div>
-            )}
-          </div>
+      {/* Payment */}
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">Payment Method</h2>
+        <p>
+          <strong>Method:</strong> {order?.order?.paymentMethod}
+        </p>
+        {order?.order?.isPaid ? (
+          <Message variant="success">Paid</Message>
+        ) : (
+          <Message variant="danger">Not Paid</Message>
         )}
+      </div>
 
-        {loadingDeliver && <Loader />}
-        {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+      {/* Order Items */}
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold">Order Items</h2>
+        {order?.order?.orderItems.map((item) => (
+          <div
+            key={item.product}
+            className="flex justify-between border-b py-2"
+          >
+            <div>
+              <Link to={`/product/${item.product}`}>{item.name}</Link>
+            </div>
+            <div>
+              {item.qty} x ₹{item.price} = ₹{item.qty * item.price}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Order Summary */}
+      <div className="border p-4 rounded shadow">
+        <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
+        <p>Items: ₹{order?.order?.itemsPrice}</p>
+        <p>Shipping: ₹{order?.order?.shippingPrice}</p>
+        <p>Tax: ₹{order?.order?.taxPrice}</p>
+        <p>Total: ₹{order?.order?.totalPrice}</p>
+
+        {/* Razorpay Button */}
+        {!order?.order?.isPaid && (
           <div>
+            {loadingPay && <Loader />}
             <button
               type="button"
-              className="bg-pink-500 text-white w-full py-2"
-              onClick={deliverHandler}
+              onClick={handleRazorpayPayment}
+              className="bg-pink-500 text-white w-full py-2 mt-3 rounded"
             >
-              Mark As Delivered
+              Pay with Razorpay
             </button>
           </div>
         )}
+
+        {/* Deliver Button for Admin */}
+        {order?.order?.isPaid && !order?.order?.isDelivered && order?.order?.isAdmin && (
+          <button
+            type="button"
+            onClick={deliverHandler}
+            className="bg-green-600 text-white w-full py-2 mt-3 rounded"
+          >
+            Mark as Delivered
+          </button>
+        )}
+        {loadingDeliver && <Loader />}
       </div>
     </div>
   );

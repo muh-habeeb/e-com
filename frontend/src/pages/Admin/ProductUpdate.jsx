@@ -326,19 +326,19 @@ const ProductUpdate = () => {
 
         {/*  Buttons */}
         <div className="flex gap-4">
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="w-full py-3 rounded bold bg-emerald-600 hover:bg-emerald-500 duration-300 text-white font-bold tracking-[1.4px]"
-          >
-            {"Update Product"}
-          </button>
+         
           <button
             onClick={handleDelete}
             type="submit"
             className="w-full py-3 rounded bold bg-pink-600 hover:bg-pink-500 duration-300 text-white font-bold tracking-[1.4px]"
           >
             {"Delete Product"}
+          </button> <button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full py-3 rounded bold bg-emerald-600 hover:bg-emerald-500 duration-300 text-white font-bold tracking-[1.4px]"
+          >
+            {"Update Product"}
           </button>
         </div>
       </form>
