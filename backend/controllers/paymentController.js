@@ -17,17 +17,12 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
   if (!amount) {
     return res.status(400).json({ message: "Amount is required" });
   }
-
-  if (amount > 500000) {
-    return res.status(400).json({
-      message: "Amount exceeds Razorpay limit of ₹5,00,000",
-    });
-  }
+  amount = Number(amount) * 100; // convert to paisa
 
   const options = {
     amount: amount,
     currency: "INR",
-    receipt: `receipt_order_${Date.now()}`,
+    receipt: `receipt_order_${Date.now().toLocaleString()}`,
   };
 console.log(amount)
   try {
