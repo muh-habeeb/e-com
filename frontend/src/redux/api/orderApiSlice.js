@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { ORDERS_URL, RAZORPAY_URL } from "../constants";
+import { ORDERS_URL, RAZORPAY_URL, RAZORPAY_VERIFY_URL } from "../constants";
 
 export const orderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,6 +16,13 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         url: RAZORPAY_URL, // or use RAZORPAY_URL
         method: "POST",
         body: data,
+      }),
+    }),
+    verifyRazorpayOrder: builder.mutation({
+      query: (paymentData) => ({
+        url: RAZORPAY_VERIFY_URL, // backend verify route
+        method: "POST",
+        body: paymentData,
       }),
     }),
 
@@ -75,7 +82,7 @@ export const {
   useCreateOrderMutation,
   useGetOrderDetailsQuery,
   usePayOrderMutation,
-
+  useVerifyRazorpayOrderMutation,
   useGetMyOrdersQuery,
   useCreateRazorpayOrderMutation,
   useDeliverOrderMutation,

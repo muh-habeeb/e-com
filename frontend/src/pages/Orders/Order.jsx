@@ -7,13 +7,15 @@ import {
   usePayOrderMutation,
   useDeliverOrderMutation,
   useCreateRazorpayOrderMutation,
+  useVerifyRazorpayOrderMutation,
 } from "../../redux/api/orderApiSlice";
 import Loader from "../../components/Loader";
 import { Message } from "../../components/Message";
+import { useSelector } from "react-redux";
 
 const Order = () => {
   const { id: orderId } = useParams();
-
+  const { userInfo } = useSelector((state) => state.auth);
   const {
     data: order,
     refetch,
@@ -21,14 +23,14 @@ const Order = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
-  const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+  const [payOrder] = usePayOrderMutation();
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
 
-  const [createRazorpayOrder] = useCreateRazorpayOrderMutation();
+  const [createRazorpayOrder, { isLoading: loadingRazorpay }] = useCreateRazorpayOrderMutation();
+  const [verifyRazorpayOrder] = useVerifyRazorpayOrderMutation();
+  console.log(order?.order);
 
-  // console.log(order)
-  // ✅ Handle Razorpay payment
   const handleRazorpayPayment = async () => {
     try {
       // 1. Create order on backend
@@ -46,14 +48,19 @@ const Order = () => {
         handler: async function (response) {
           try {
             // 3. Notify backend about successful payment
-            const payres = await payOrder({
-              orderId,
-              details: response, // contains payment_id, order_id, signature
-            }).unwrap();
+            const result = await verifyRazorpayOrder(response);
+            if (result.data.success) {
+              await payOrder({
+                orderId,
+                details: response, // contains payment_id, order_id, signature
+              }).unwrap();
 
-            refetch();
-            console.log(payres);
-            toast.success("Payment Successful!");
+              refetch();
+              toast.success("Payment Successful!");
+            } else {
+              return toast.error("Payment verification failed");
+            }
+
           } catch (err) {
             toast.error(err?.data?.message || err.message);
           }
@@ -71,8 +78,6 @@ const Order = () => {
       rzp.open();
     } catch (err) {
       toast.error(err?.data?.message || err.message);
-      // console.log(err);
-
     }
   };
   // ✅ Mark order as delivered
@@ -155,7 +160,7 @@ const Order = () => {
       {/* Order Summary */}
       <div className="border p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
-        <p>Items: ₹{order?.order?.itemsPrice}</p>
+        <p>Item Price: ₹{order?.order?.itemsPrice}</p>
         <p>Shipping: ₹{order?.order?.shippingPrice}</p>
         <p>Tax: ₹{order?.order?.taxPrice}</p>
         <p>Total: ₹{order?.order?.totalPrice}</p>
@@ -163,19 +168,20 @@ const Order = () => {
         {/* Razorpay Button */}
         {!order?.order?.isPaid && (
           <div>
-            {loadingPay && <Loader />}
             <button
               type="button"
               onClick={handleRazorpayPayment}
-              className="bg-pink-500 text-white w-full py-2 mt-3 rounded"
+              disabled={loadingRazorpay}
+              className={`bg-pink-500 text-white w-full py-2 mt-3 rounded flex items-center justify-center ${loadingRazorpay ? "opacity-70 cursor-not-allowed" : ""
+                }`}
             >
-              Pay with Razorpay
+              {loadingRazorpay ? <Loader /> : "Pay with Razorpay"}
             </button>
+
           </div>
         )}
-
         {/* Deliver Button for Admin */}
-        {order?.order?.isPaid && !order?.order?.isDelivered && order?.order?.isAdmin && (
+        {order?.order?.isPaid && !order?.order?.isDelivered && userInfo?.isAdmin && (
           <button
             type="button"
             onClick={deliverHandler}

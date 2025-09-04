@@ -9,3 +9,4 @@ export const UPLOAD_URL = "/api/upload"; //
 export const ORDERS_URL = "/api/orders";
 
 export const RAZORPAY_URL = "/api/payment/razorpay-order";
+export const RAZORPAY_VERIFY_URL = "/api/payment/razorpay-verify";

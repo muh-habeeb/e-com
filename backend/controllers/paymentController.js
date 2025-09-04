@@ -2,6 +2,8 @@ import Razorpay from "razorpay";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import dotenv from "dotenv";
 dotenv.config();
+import crypto from "crypto";
+
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID, // use env, not hardcode
@@ -24,24 +26,23 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
     currency: "INR",
     receipt: `receipt_order_${Date.now().toLocaleString()}`,
   };
-console.log(amount)
   try {
     const order = await razorpay.orders.create(options);
     return res.status(201).json(order);
   } catch (error) {
     console.error("Razorpay error:", error);
-    console.log(error);
     return res.status(500).json({
       message: error.description || "Razorpay error",
       error,
     });
   }
 });
+
+
 const verifyRazorpayPayment = async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       req.body;
-    console.log("from verifuaction", req.body);
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -49,9 +50,14 @@ const verifyRazorpayPayment = async (req, res) => {
       .digest("hex");
 
     if (expectedSignature === razorpay_signature) {
-      res.json({ success: true, message: "Payment verified successfully" });
+      return res.json({
+        success: true,
+        message: "Payment verified successfully",
+      });
     } else {
-      res.status(400).json({ success: false, message: "Invalid signature" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid signature" });
     }
   } catch (err) {
     console.error(err);

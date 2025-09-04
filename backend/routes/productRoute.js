@@ -4,7 +4,7 @@ const router = express.Router();
 import {
   authenticated,
   authorizedAdmin,
-} from "../middlewares/authMiddleWare.js";
+} from "../middlewares/authMiddleware.js";
 
 import {
   addProduct,

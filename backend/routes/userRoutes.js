@@ -13,7 +13,7 @@ import {
 import {
   authenticated,
   authorizedAdmin,
-} from "../middlewares/authMiddleWare.js";
+} from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
