@@ -29,7 +29,6 @@ const Order = () => {
 
   const [createRazorpayOrder, { isLoading: loadingRazorpay }] = useCreateRazorpayOrderMutation();
   const [verifyRazorpayOrder] = useVerifyRazorpayOrderMutation();
-  console.log(order?.order);
 
   const handleRazorpayPayment = async () => {
     try {
@@ -160,7 +159,7 @@ const Order = () => {
       {/* Order Summary */}
       <div className="border p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
-        <p>Item Price: ₹{order?.order?.itemsPrice}</p>
+        <p>Items Price: ₹{order?.order?.itemsPrice}</p>
         <p>Shipping: ₹{order?.order?.shippingPrice}</p>
         <p>Tax: ₹{order?.order?.taxPrice}</p>
         <p>Total: ₹{order?.order?.totalPrice}</p>

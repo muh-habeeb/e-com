@@ -94,7 +94,7 @@ const PlaceOrder = () => {
           <div className="flex justify-between items-start  flex-wrap p-8 bg-[#181818]">
             <ul className="text-lg capitalize">
               <li>
-                <span className="font-semibold mb-4">Items:</span> ₹
+                <span className="font-semibold mb-4">Items Price:</span> ₹
                 {cart.itemsPrice}
               </li>
               <li>

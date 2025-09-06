@@ -26,8 +26,11 @@ const App = () => {
         style={{ transitionDuration: 3000, transitionProperty: "all" }}
       >
         
-        <Outlet />
+        
+        <Outlet >
+        </Outlet>
       </main>
+          <AdminMenu />
     </div>
   );
 };

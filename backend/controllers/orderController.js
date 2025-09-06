@@ -5,15 +5,16 @@ import Order from "../models/orderModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import mongoose from "mongoose";
 
-//utiliy function
+//utility function
 
 function calcPrice(orderItems) {
   const itemsPrice = orderItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
+  
   const shippingPrice = itemsPrice > 1000 ? 0 : 10;
-  const taxRate = 0.15;
+  const taxRate = process.env.Tax_Percent ? parseFloat(process.env.Tax_Percent) : 0.15;
   const taxPrice = (itemsPrice * taxRate).toFixed(2);
   const totalPrice = (
     itemsPrice +
@@ -31,7 +32,7 @@ function calcPrice(orderItems) {
 
 const createOrder = asyncHandler(async (req, res) => {
   const { orderItems, shippingAddress, paymentMethod } = req.body;
-
+console.log(paymentMethod)
   // 🚫 Validate order items
   if (!orderItems || orderItems.length === 0) {
     return res.status(400).json({
@@ -43,6 +44,7 @@ const createOrder = asyncHandler(async (req, res) => {
 
   // 📦 Fetch product details from DB
   const productsInDB = await Product.find({
+    // find each in orderItems
     _id: { $in: orderItems.map((item) => item._id) },
   });
 

@@ -72,11 +72,11 @@ const addProduct = asyncHandler(async (req, res) => {
 //update product
 const updateProductDetails = asyncHandler(async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(escape(req.params.id))) {
       return res.status(400).json({
         error: "Invalid product ID format",
         MESSAGE: "INVALID_ID",
-        message: "invalid id",
+        message: "invalid product id",
       });
     }
 
@@ -143,7 +143,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
     }
 
     const product = await Product.findByIdAndUpdate(
-      req.params.id,
+      escape(req.params.id),
       { ...req.fields },
       { new: true }
     );
