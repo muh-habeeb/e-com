@@ -126,10 +126,10 @@ npm run frontend
 [ApexCharts Docs]("https://apexcharts.com/docs/")
 
 > [!IMPORTANT]
-> THIS PROJECT IS LICENSED
+> THIS PROJECT IS LICENSED<br>
 > USING OR MODIFYING WITHOUT EXPLICIT APPROVE IS PROHIBITED AS PER LAW
 
 > [!NOTE]
-> CONTACT
-> WAPH: [91 965 680 5212]("https:/wa.me/919656805212")
+> CONTACT<br/>
+> WAPH: [91 965 680 5212]("https:/wa.me/919656805212")<br/>
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
