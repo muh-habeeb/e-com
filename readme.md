@@ -73,7 +73,7 @@ This project is ideal for:
 project-root/
 ├── backend/ # Express.js backend
 │ └── index.js
-├── frontend/ # React/Vite ,package.jsonfrontend
+├── frontend/ # React/Vite ,package.json 
 ├── logs/ #  payment logs
 │ └── payments.log
 ├── package.json # Root package.json (scripts included)
