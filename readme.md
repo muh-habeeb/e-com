@@ -129,7 +129,7 @@ npm run frontend
 > THIS PROJECT IS LICENSED
 > USING OR MODIFYING WITHOUT EXPLICIT APPROVE IS PROHIBITED AS PER LAW
 
-> [!INFO]
+> [!NOTE]
 > CONTACT
 > WAPH: [91 965 680 5212]("https:/wa.me/919656805212")
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
