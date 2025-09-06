@@ -183,7 +183,7 @@ const calculateTotalSales = asyncHandler(async (req, res) => {
 
 const calculateTotalSalesBYDate = asyncHandler(async (req, res) => {
   try {
-    const salesBydate = await Order.aggregate([
+    const salesByDate = await Order.aggregate([
       {
         $match: {
           isPaid: true,
@@ -202,7 +202,7 @@ const calculateTotalSalesBYDate = asyncHandler(async (req, res) => {
       request: "success",
       message: "total sales",
       MESSAGE: "TOTAL_SALES",
-      salesBydate,
+      salesByDate,
     });
   } catch (error) {
     return res.status(500).json({
