@@ -11,17 +11,17 @@ The app is structured for scalability and developer productivity, with a clear s
 
 Key features include:
 
-- 🖥 **Frontend** – Built with React/Vite/Next.js for a fast and responsive UI.  
-- ⚙️ **Backend** – Powered by Express.js with a modular setup.  
-- 🛢 **Database Ready** – MongoDB-compatible structure, with sample JSON files provided for testing and seeding data.  
-- 💳 **Payments & Logs** – Razorpay integration with transaction logs (`logs/payments.log`) for tracking.  
-- 📊 **Charts & Dashboard** – Interactive charts showing sales trends, users, and orders.  
+- 🖥 **Frontend** – Built with React/Vite/Next.js for a fast and responsive UI.
+- ⚙️ **Backend** – Powered by Express.js with a modular setup.
+- 🛢 **Database Ready** – MongoDB-compatible structure, with sample JSON files provided for testing and seeding data.
+- 💳 **Payments & Logs** – Razorpay integration with transaction logs (`logs/payments.log`) for tracking.
+- 📊 **Charts & Dashboard** – Interactive charts showing sales trends, users, and orders.
 - 🔄 **Dev Workflow** – Run backend and frontend together or separately using simple npm scripts.
 
 This project is ideal for:
 
-- Learning how to integrate frontend and backend seamlessly.  
-- Testing features with pre-made sample data.  
+- Learning how to integrate frontend and backend seamlessly.
+- Testing features with pre-made sample data.
 - Extending into a production-ready fullstack application.
 
 ---
@@ -29,40 +29,46 @@ This project is ideal for:
 ## 🛠 Tech Stack & Key Features
 
 ### ⚙️ Backend (API & Server)
-- **Node.js** – JavaScript runtime  
-- **Express.js** – Backend framework for REST APIs  
-- **MongoDB + Mongoose** – Database & ODM for users, orders, and products  
-- **Nodemon** – Auto-restart backend during development  
+
+- **Node.js** – JavaScript runtime
+- **Express.js** – Backend framework for REST APIs
+- **MongoDB + Mongoose** – Database & ODM for users, orders, and products
+- **Nodemon** – Auto-restart backend during development
 
 ### 🖥 Frontend (UI/Client)
-- **React / Vite / Next.js** – Modern frontend framework  
-- **Tailwind CSS** – Utility-first CSS framework for fast styling  
-- **Axios / RTK Query** – For API requests & state management  
+
+- **React / Vite / Next.js** – Modern frontend framework
+- **Tailwind CSS** – Utility-first CSS framework for fast styling
+- **Axios / RTK Query** – For API requests & state management
 
 ### 💳 Payments & Transactions
-- **Razorpay** – Integrated payment gateway for secure transactions  
-- **Payment Logs** – All payment activity is tracked in `logs/payments.log`  
+
+- **Razorpay** – Integrated payment gateway for secure transactions
+- **Payment Logs** – All payment activity is tracked in `logs/payments.log`
 
 ### 🔐 Authentication & Security
-- **JWT (JSON Web Tokens)** – For secure user authentication  
-- **Bcrypt.js** – For password hashing  
-- **dotenv** – Environment variable management  
+
+- **JWT (JSON Web Tokens)** – For secure user authentication
+- **Bcrypt.js** – For password hashing
+- **dotenv** – Environment variable management
 
 ### 🛒 E-commerce Features
-- Cart & Orders – Add to cart, checkout, and place orders  
-- Payment Status Tracking – Paid / Unpaid orders  
-- Delivery Tracking – Delivered / Not Delivered orders  
+
+- Cart & Orders – Add to cart, checkout, and place orders
+- Payment Status Tracking – Paid / Unpaid orders
+- Delivery Tracking – Delivered / Not Delivered orders
 
 ### 📊 Charts & Dashboard
-- **ApexCharts / ** – Interactive visualizations for sales, users, and orders  
-- Sales trends displayed per day or month  
-- Customers and orders visualized with bar, line, or grouped charts  
-- Fully responsive and dynamic charts based on real-time data from API  
 
+- **ApexCharts / ** – Interactive visualizations for sales, users, and orders
+- Sales trends displayed per day or month
+- Customers and orders visualized with bar, line, or grouped charts
+- Fully responsive and dynamic charts based on real-time data from API
 
 ---
 
 ## 🏗 Project Structure
+
 ```
 project-root/
 ├── backend/ # Express.js backend
@@ -72,6 +78,7 @@ project-root/
 │ └── payments.log
 ├── package.json # Root package.json (scripts included)
 ```
+
 ---
 
 ## 📦 Development Scripts
@@ -82,26 +89,34 @@ npm run frontend     # Runs frontend inside frontend/
 npm run dev          # Runs both backend & frontend concurrently
 npm run prepare      # Prepares required folders (like uploads)
 ```
+
 > Running the App
-Run both servers together:
+> Run both servers together:
+
 ```bash
 npm run dev
 ```
 
->Run backend only:
+> Run backend only:
+
 ```bash
 npm run backend
 ```
->Run frontend only:
+
+> Run frontend only:
+
 ```bash
 npm run frontend
 ```
->[!IMPORTANT]\
->hii
 
+> [!INFO]\
+> some json file are given in the root directory for testing purpose
+> hope you like it
 
 ---
+
 ### 🔗 Useful Links
+
 [Razorpay Documentation]("https://razorpay.com/docs/")
 
 [React Documentation]("https://react.dev/")
@@ -109,3 +124,12 @@ npm run frontend
 [MongoDB Documentation]("https://www.mongodb.com/docs/")
 
 [ApexCharts Docs]("https://apexcharts.com/docs/")
+
+> [!IMPORTANT]
+> THIS PROJECT IS LICENSED
+> USING OR MODIFYING WITHOUT EXPLICIT APPROVE IS PROHIBITED AS PER LAW
+
+> [!INFO]
+> CONTACT
+> WAPH: [91 965 680 5212]("https:/wa.me/919656805212")
+> MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
