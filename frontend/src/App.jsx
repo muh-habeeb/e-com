@@ -18,19 +18,16 @@ import AdminMenu from "./pages/Admin/components/AdminMenu";
 const App = () => {
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer autoClose={2500} toastStyle={{ backgroundColor: "black", color: "white" }} />
       <Navigation />
-      {/* {console.clear()} */}
       <main
         className=" dark:bg-gray-900 min-h-screen  text-white"
         style={{ transitionDuration: 3000, transitionProperty: "all" }}
       >
-        
-        
-        <Outlet >
-        </Outlet>
+
+        <Outlet />
+      <AdminMenu /> 
       </main>
-          <AdminMenu />
     </div>
   );
 };

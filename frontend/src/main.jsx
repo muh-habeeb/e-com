@@ -51,6 +51,7 @@ import Order from "./pages/Orders/Order.jsx";
 import PlaceOrder from "./pages/Orders/PlaceOrder.jsx";
 import UserOrder from "./pages/Users/UserOrder.jsx";
 import OrderList from "./pages/Admin/OrderList.jsx";
+import DashBoard from "./pages/Admin/DashBoard.jsx";
 //  define routes
 
 const router = createBrowserRouter(
@@ -84,6 +85,7 @@ const router = createBrowserRouter(
         <Route path="allproductslist" element={<AllProducts />} />
         <Route path="product/update/:_id" element={<ProductUpdate />} />
         <Route path="orderlist" element={<OrderList />} />
+        <Route path="dashboard" element={<DashBoard />} />
       </Route>
     </Route>
   )

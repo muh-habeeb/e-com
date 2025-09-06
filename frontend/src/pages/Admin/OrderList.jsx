@@ -21,8 +21,8 @@ const OrderList = () => {
                     ) : (
                         <div className="w-full min-h-screen px-6 py-10 capitalize">
                             <div className="overflow-x-auto shadow-lg rounded-2xl ml-[3rem]">
-                                <table className="table-auto w-full text-sm text-gray-700">
-                                    <thead className="bg-gray-100 text-gray-900 text-sm uppercase tracking-wide">
+                                <table className="table-auto w-full text-sm text-zinc-800">
+                                    <thead className="bg-gray-100 text-zinc-800 text-sm uppercase tracking-wide">
                                         <tr>
                                             <th className="px-4 py-3 text-center">Items</th>
                                             <th className="px-4 py-3 text-center">Order ID</th>
@@ -41,7 +41,7 @@ const OrderList = () => {
                                             .map((order)=> (
                                                 <tr
                                                     key={order._id}
-                                                    className="border-b hover:bg-gray-50 transition"
+                                                    className="border-b hover:bg-gray-50 transition  "
                                                 >
                                                     {/* Items */}
                                                     <td className="px-4 py-3">
@@ -58,27 +58,27 @@ const OrderList = () => {
                                                     </td>
 
                                                     {/* Order ID */}
-                                                    <td className="px-4 py-3 text-center font-mono text-xs text-gray-600">
+                                                    <td className="px-4 py-3 text-center font-mono text-xs  text-cyan-700">
                                                         {order._id}
                                                     </td>
 
                                                     {/* User */}
-                                                    <td className="px-4 py-3 text-center">
+                                                    <td className="px-4 py-3 text-center  text-cyan-700">
                                                         {order.user?.username || "N/A"}
                                                     </td>
 
                                                     {/* Date */}
-                                                    <td className="px-4 py-3 text-center">
+                                                    <td className="px-4 py-3 text-center  text-cyan-700">
                                                         {new Date(order.createdAt).toLocaleDateString()}
                                                     </td>
 
                                                     {/* Total */}
-                                                    <td className="px-4 py-3 text-center font-semibold">
+                                                    <td className="px-4 py-3 text-center  font-semibold text-cyan-700">
                                                         ₹{order.totalPrice.toLocaleString()}
                                                     </td>
 
                                                     {/* Paid */}
-                                                    <td className="px-4 py-3 text-center">
+                                                    <td className="px-4 py-3 text-center text-cyan-700">
                                                         {!order.isPaid ? (
                                                             <span className="inline-block px-3 py-1 text-xs rounded-full bg-red-100 text-red-600 font-medium">
                                                                 Not Paid
