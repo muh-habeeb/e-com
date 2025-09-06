@@ -117,19 +117,19 @@ npm run frontend
 
 ### 🔗 Useful Links
 
-[Razorpay Documentation]("https://razorpay.com/docs/")
+[Razorpay Documentation](https://razorpay.com/docs/)
 
-[React Documentation]("https://react.dev/")
+[React Documentation](https://react.dev/)
 
-[MongoDB Documentation]("https://www.mongodb.com/docs/")
+[MongoDB Documentation](https://www.mongodb.com/docs/)
 
-[ApexCharts Docs]("https://apexcharts.com/docs/")
+[ApexCharts Docs](https://apexcharts.com/docs/)
 
 > [!IMPORTANT]
-> THIS PROJECT IS LICENSED<br>
+> THIS PROJECT IS [LICENSED](https://github.com/muh-habeeb/huxn_ecom/blob/main/LICENCE)<br>
 > USING OR MODIFYING WITHOUT EXPLICIT APPROVE IS PROHIBITED AS PER LAW
 
 > [!NOTE]
 > CONTACT<br/>
-> WAPH: [91 965 680 5212]("https:/wa.me/919656805212")<br/>
+> WAPH: [91 965 680 5212](https:/wa.me/919656805212)<br/>
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
