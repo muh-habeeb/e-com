@@ -12,9 +12,11 @@ function calcPrice(orderItems) {
     (acc, item) => acc + item.price * item.qty,
     0
   );
-  
+
   const shippingPrice = itemsPrice > 1000 ? 0 : 10;
-  const taxRate = process.env.Tax_Percent ? parseFloat(process.env.Tax_Percent) : 0.15;
+  const taxRate = process.env.Tax_Percent
+    ? parseFloat(process.env.Tax_Percent)
+    : 0.15;
   const taxPrice = (itemsPrice * taxRate).toFixed(2);
   const totalPrice = (
     itemsPrice +
@@ -32,7 +34,7 @@ function calcPrice(orderItems) {
 
 const createOrder = asyncHandler(async (req, res) => {
   const { orderItems, shippingAddress, paymentMethod } = req.body;
-console.log(paymentMethod)
+  console.log(paymentMethod);
   // 🚫 Validate order items
   if (!orderItems || orderItems.length === 0) {
     return res.status(400).json({
@@ -100,7 +102,9 @@ console.log(paymentMethod)
 
 const getAllOrders = asyncHandler(async (req, res) => {
   try {
-    const orders = await Order.find({}).populate("user", "id username");
+    const orders = await Order.find({})
+      .populate("user", "id username")
+      .sort({ createdAt: -1 });
     return res.status(200).json({
       request: "success",
       message: "all orders",
@@ -118,9 +122,10 @@ const getAllOrders = asyncHandler(async (req, res) => {
 });
 
 const getUserOrder = asyncHandler(async (req, res) => {
-  console.log(req.user._id);
   try {
-    const orders = await Order.find({ user: req.user._id });
+    const orders = await Order.find({ user: req.user._id }).sort({
+      createdAt: -1,
+    });
     return res.status(200).json({
       request: "success",
       message: "all orders by user",
@@ -129,7 +134,7 @@ const getUserOrder = asyncHandler(async (req, res) => {
       orders,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({
       request: "success",
       message: "Internal server error",
@@ -242,6 +247,7 @@ const markOrderAsPaid = asyncHandler(async (req, res) => {
   try {
     const order = await Order.findById(escape(req.params.id));
     if (order) {
+      //Razorpay signature verification is done in frontend order page
       order.isPaid = true;
       order.paidAt = Date.now(); // typo fixed: "padAt" → "paidAt"
       order.paymentResult = {
@@ -277,7 +283,6 @@ const markOrderAsDelivered = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {
-
       order.isDelivered = true;
       order.deliveredAt = Date.now();
 

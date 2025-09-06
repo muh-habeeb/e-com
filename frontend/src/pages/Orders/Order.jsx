@@ -155,7 +155,6 @@ const Order = () => {
           </div>
         ))}
       </div>
-
       {/* Order Summary */}
       <div className="border p-4 rounded shadow">
         <h2 className="text-xl font-semibold mb-2">Order Summary</h2>
@@ -163,9 +162,8 @@ const Order = () => {
         <p>Shipping: ₹{order?.order?.shippingPrice}</p>
         <p>Tax: ₹{order?.order?.taxPrice}</p>
         <p>Total: ₹{order?.order?.totalPrice}</p>
-
         {/* Razorpay Button */}
-        {!order?.order?.isPaid && (
+        {order?.order.user._id === userInfo.id && !order?.order?.isPaid ? (
           <div>
             <button
               type="button"
@@ -176,9 +174,8 @@ const Order = () => {
             >
               {loadingRazorpay ? <Loader /> : "Pay with Razorpay"}
             </button>
-
           </div>
-        )}
+        ) : (<></>)}
         {/* Deliver Button for Admin */}
         {userInfo && userInfo?.isAdmin && order?.order?.isPaid && !order?.order?.isDelivered && (
           <button

@@ -28,6 +28,7 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRouts);
 app.use("/api/orders", orderRoute);
+app.use("/api/payments", paymentRoutes);
 // +++++++++++++++++++++++++++++++++++
 
 import paymentRoutes from "./routes/paymentRoutes.js";

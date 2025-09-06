@@ -46,11 +46,9 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
-
     getOrders: builder.query({
-      query: () => ({
-        url: ORDERS_URL,
-      }),
+      query: () => ORDERS_URL,
+      providesTags: ["Order"], // provide tags here
     }),
 
     deliverOrder: builder.mutation({
@@ -58,8 +56,8 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         url: `${ORDERS_URL}/${orderId}/deliver`,
         method: "PUT",
       }),
+      invalidatesTags: ["Order"], //  invalidate after mutation
     }),
-
     getTotalOrders: builder.query({
       query: () => `${ORDERS_URL}/total-orders`,
     }),

@@ -4,7 +4,7 @@ const logMessage = (req, res, next) => {
   const method = req.method;
   const url = req.originalUrl;
   const body = Object.keys(req.body || {}).length ? JSON.stringify(req.body) : "No Body";
-  const user = req.user?._id || "Guest";
+  const user = req?.user?._id || "no user";
 
   console.log(`
 ===============================

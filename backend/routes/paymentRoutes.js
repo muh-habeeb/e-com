@@ -3,10 +3,19 @@ import {
   createRazorpayOrder,
   verifyRazorpayPayment,
 } from "../controllers/paymentController.js";
-import { authenticated } from "../middlewares/authMiddleware.js";
+import { authenticated, authorizedAdmin } from "../middlewares/authMiddleware.js";
+import { paymentLogger } from "../middlewares/paymentLogger.js";
+import { exportPayments } from "../controllers/paymentController.js";
 
 const router = express.Router();
 
 router.post("/razorpay-order", authenticated, createRazorpayOrder);
-router.post("/razorpay-verify", authenticated, verifyRazorpayPayment);
+router.post(
+  "/razorpay-verify",
+  authenticated,
+  paymentLogger,
+  verifyRazorpayPayment,
+);
+// Only admins can view/export payments
+router.get("/", authenticated, authorizedAdmin, exportPayments);
 export default router;
