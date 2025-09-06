@@ -66,7 +66,6 @@ const router = createBrowserRouter(
       {/*cart page */}
       <Route path="/cart" element={<Cart />} />
       <Route path="/shop" element={<Shop />} /> {/*shop page */}
-      <Route path="/user-orders" element={<UserOrder />} /> {/*shop page */}
       {/* private  for registered users*/}
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
@@ -74,6 +73,7 @@ const router = createBrowserRouter(
         <Route path="/placeorder" element={<PlaceOrder />} />
         {/*shipping page */}
         <Route path="/order/:id" element={<Order />} /> {/*order page */}
+        <Route path="/my-orders" element={<UserOrder />} /> {/*shop page */}
       </Route>
       {/* admin route */}
       <Route path="/admin" element={<AdminRoute />}>
@@ -91,7 +91,7 @@ createRoot(document.getElementById("root")).render(
     {""}
     {/* redux thing*/}
     <StrictMode>
-        <RouterProvider router={router} /> {/* router dom thing*/}
+      <RouterProvider router={router} /> {/* router dom thing*/}
     </StrictMode>
   </Provider>
 );

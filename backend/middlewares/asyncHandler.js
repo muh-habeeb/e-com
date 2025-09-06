@@ -3,7 +3,7 @@ const asyncHandler = (fn) => (req, res, next) => {
     res
       .status(500)
       .json({
-        msg: "from handler something with the req not good",
+        msg: "from handler function something with the req not good",
         message: error.message,
       });
   });

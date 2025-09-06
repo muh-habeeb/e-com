@@ -118,16 +118,18 @@ const getAllOrders = asyncHandler(async (req, res) => {
 });
 
 const getUserOrder = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
   try {
     const orders = await Order.find({ user: req.user._id });
     return res.status(200).json({
       request: "success",
-      message: "all orders bu user",
+      message: "all orders by user",
       MESSAGE: "ALL_ORDERS_BY_USER",
       length: orders.length,
       orders,
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       request: "success",
       message: "Internal server error",
@@ -144,7 +146,6 @@ const total_order_count = asyncHandler(async (req, res) => {
       request: "success",
       message: "total orders",
       MESSAGE: "TOTAL_ORDERS",
-
       orders,
     });
   } catch (error) {

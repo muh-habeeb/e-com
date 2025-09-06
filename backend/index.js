@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
+app.use(logMessage); // custom logger middleware
 /// routes
 app.use("/api/users", userRoutes); //importing from routes for post method
 app.use("/api/category", categoryRoutes);
@@ -31,6 +31,7 @@ app.use("/api/orders", orderRoute);
 // +++++++++++++++++++++++++++++++++++
 
 import paymentRoutes from "./routes/paymentRoutes.js";
+import logMessage from "./log.js";
 app.use("/api/payment", paymentRoutes);
 
 // +++++++++++++++++++++++++++++++++++

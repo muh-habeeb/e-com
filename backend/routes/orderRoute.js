@@ -22,10 +22,16 @@ router
   .post(authenticated, createOrder)
   .get(authenticated, authorizedAdmin, getAllOrders);
 
-router.route("/mine").get(authenticated, getUserOrder);
-router.route("/total-orders").get(total_order_count);
-router.route("/total-sales").get(calculateTotalSales);
-router.route("/total-sales-by-date").get(calculateTotalSalesBYDate);
+router.route("/my-orders").get(authenticated, getUserOrder);
+router
+  .route("/total-orders")
+  .get(authenticated, authorizedAdmin, total_order_count);
+router
+  .route("/total-sales")
+  .get(authenticated, authorizedAdmin, calculateTotalSales);
+router
+  .route("/total-sales-by-date")
+  .get(authenticated, authorizedAdmin, calculateTotalSalesBYDate);
 router.route("/:id").get(authenticated, findOrderById);
 router.route("/:id/pay").put(authenticated, markOrderAsPaid);
 router

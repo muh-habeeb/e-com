@@ -100,7 +100,7 @@ const Order = () => {
   if (error) return <Message variant="danger">{error?.data?.message}</Message>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4  capitalize">
       <h1 className="text-2xl font-bold mb-4">Order Id: {order?.order?._id}</h1>
 
       {/* Shipping */}
@@ -180,7 +180,7 @@ const Order = () => {
           </div>
         )}
         {/* Deliver Button for Admin */}
-        {order?.order?.isPaid && !order?.order?.isDelivered && userInfo?.isAdmin && (
+        {userInfo && userInfo?.isAdmin && order?.order?.isPaid && !order?.order?.isDelivered && (
           <button
             type="button"
             onClick={deliverHandler}

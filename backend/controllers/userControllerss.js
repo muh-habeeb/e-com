@@ -59,6 +59,14 @@ const createUser = asyncHandler(async (req, res) => {
 //login controller
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body; //get the data from body
+  if (!email || !password) {
+    return res.status(400).json({
+      request: "success",
+      message: "All fields  are required!!",
+      MESSAGE: "INVALID_DATA",
+      code: 400,
+    });
+  }
   const existsUser = await User.findOne({ email }); //check in the database for the user and get full data
   if (existsUser) {
     const isPasswordValid = await bcrypt.compare(password, existsUser.password); //verify the password with database existing password
@@ -108,13 +116,11 @@ const logOutCurrentUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(0),
   });
-  res
-    .status(200)
-    .json({
-      request: "success",
-      message: "User Logged Out Successfully ",
-      MESSAGE: "LOGGED_OUTED",
-    });
+  res.status(200).json({
+    request: "success",
+    message: "User Logged Out Successfully ",
+    MESSAGE: "LOGGED_OUTED",
+  });
 });
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -216,7 +222,8 @@ const deleteUserById = asyncHandler(async (req, res) => {
       const { _id: id, username } = user;
       //check is the id is admin or not
       if (user.isAdmin) {
-        res.status(403).json( { //send forbidden 
+        res.status(403).json({
+          //send forbidden
           request: "success",
           message: "cannot delete admin user",
           MESSAGE: "CANNOT_DELETE_ADMIN",
