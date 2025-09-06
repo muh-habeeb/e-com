@@ -109,7 +109,7 @@ npm run backend
 npm run frontend
 ```
 
-> [!INFO]\
+> [!NOTE]\
 > some json file are given in the root directory for testing purpose
 > hope you like it
 
