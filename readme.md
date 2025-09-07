@@ -3,7 +3,7 @@
 **A fullstack MERN e-commerce app with Razorpay payments, authentication, and order management.**
 
 ---
-
+## Live Demo : [Click here](https://)
 ## 📖 About the Project
 
 This is a **MERN-style fullstack application** combining a Node.js/Express backend with a modern frontend (React/Vite/Next.js).  
@@ -133,3 +133,9 @@ npm run frontend
 > CONTACT<br/>
 > WAPH: [91 965 680 5212](https:/wa.me/919656805212)<br/>
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
+
+
+# Screen Shots
+
+## home
+[](./images/home.jpg)
