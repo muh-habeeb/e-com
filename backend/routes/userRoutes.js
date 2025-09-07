@@ -10,10 +10,7 @@ import {
   getUserById,
   updateUserById,
 } from "../controllers/userControllerss.js";
-import {
-  authenticated,
-  authorizedAdmin,
-} from "../middlewares/authMiddleware.js";
+import {  authenticated,  authorizedAdmin} from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
