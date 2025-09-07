@@ -24,7 +24,7 @@ export default defineConfig({
     },
   },
   build: {
-    chunkSizeWarningLimit: 1000, // Increase chunk size warning limit (in KB)
+    chunkSizeWarningLimit: 2000, // Increase chunk size warning limit (in KB)
     rollupOptions: {
       output: {
         manualChunks(id) {
