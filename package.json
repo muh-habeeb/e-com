@@ -5,15 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+     "test": "echo \"Error: no test specified\" && exit 1",
+
     "//--- DEVELOPMENT SCRIPTS (for local use) ---": "",
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "//--- PRODUCTION BUILD SCRIPTS (for Netlify) ---": "",
+
+    "//--- PRODUCTION BUILD SCRIPTS (for Render) ---": "",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "build:backend": "shx mkdir -p netlify/functions && shx cp -r backend/* netlify/functions/ && shx mv netlify/functions/index.js netlify/functions/api.js && shx cp ./package.json netlify/functions/package.json",
-    "build": "npm run build:frontend && npm run build:backend"
+    "build:backend": "echo 'Backend build is not necessary for Render. Make sure to specify the backend entry in Render dashboard.'",
+    "build": "npm run build:frontend",
+    "start": "node backend/index.js"
   },
   "keywords": [],
   "author": "",
