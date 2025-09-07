@@ -5,16 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
 
-    "//--- DEVELOPMENT SCRIPTS (for local use) ---": "",
+    "--- DEVELOPMENT SCRIPTS ---": "",
+
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
 
-    "//--- PRODUCTION BUILD SCRIPTS (for Render) ---": "",
-    "build:frontend": "cd frontend && npm install && npm run build",
-    "build:backend": "echo 'Backend build is not necessary for Render. Make sure to specify the backend entry in Render dashboard.'",
+    "--- PRODUCTION BUILD SCRIPTS ---": "",
+
+    "build_frontend": "cd frontend && npm install && npm run build",
     "build": "npm run build:frontend",
     "start": "node backend/index.js"
   },
@@ -38,7 +39,6 @@
     "razorpay": "^2.9.6",
     "safer-buffer": "^2.1.2",
     "tailwindcss": "^4.1.5",
-    "winston": "^3.17.0",
-    "shx": "^0.4.0"
+    "winston": "^3.17.0"
   }
 }
