@@ -148,6 +148,9 @@ npm run frontend
 ## cart
 ![cart](./images/cart.jpg)
 
+## product page 
+![cart](./images/review_page.png)
+
 ## profile
 ![profile](./images/profile.jpg)
 
