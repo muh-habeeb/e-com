@@ -37,12 +37,12 @@ app.use("/api/payment", paymentRoutes);
 
 // +++++++++++++++++++++++++++++++++++
 
-const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
+const currentDir = path.resolve();
+app.use("/uploads", express.static(path.join(currentDir + "/uploads")));
 app.listen(port, () => console.log(`Server running on PORT ${port}`));
 
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(currentDir, "../frontend/dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  res.sendFile(path.join(currentDir, "../frontend/dist/index.html"));
 });
