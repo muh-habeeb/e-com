@@ -5,4 +5,4 @@
 # Ignore env files
 .env
 .env.local
-/uploads
+# /uploads  for deploy 
