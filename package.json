@@ -9,7 +9,8 @@
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
     "prepare": "node prepareUploadsFolder.js",
-    "dev": "npm run prepare && concurrently \"npm run backend\" \"npm run frontend\""
+    "dev": "npm run prepare && concurrently \"npm run backend\" \"npm run frontend\"",
+     "build": "cd frontend && npm run build"
   },
   "keywords": [],
   "author": "",

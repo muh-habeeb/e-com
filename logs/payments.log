@@ -14,3 +14,19 @@
 📡 Status:  200
 ⏱️ Duration: 5ms
 ==============================
+
+==============================
+📅 Time:    2025-09-07 21:53:25
+🚀 Level:   info
+
+🌐 URL:     /api/payment/razorpay-verify
+🚀 Method:  POST
+👤 User:    68bc4f9338a1cca156a91108
+📦 Body:    {
+  "razorpay_payment_id": "pay_REmBVJewPmz9cr",
+  "razorpay_order_id": "order_REmBRmSn6E1nTz",
+  "razorpay_signature": "a3b208c20a95399917666aa25d60a9c259ae9c586e8ee87a221b3490d089c8f9"
+}
+📡 Status:  200
+⏱️ Duration: 14ms
+==============================
