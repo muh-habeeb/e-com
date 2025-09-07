@@ -6,11 +6,14 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "//--- DEVELOPMENT SCRIPTS (for local use) ---": "",
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
-    "prepare": "node prepareUploadsFolder.js",
-    "dev": "npm run prepare && concurrently \"npm run backend\" \"npm run frontend\"",
-     "build": "cd frontend && npm run build"
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "//--- PRODUCTION BUILD SCRIPTS (for Netlify) ---": "",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:backend": "shx mkdir -p netlify/functions && shx cp backend/index.js netlify/functions/api.js && shx cp backend/package.json netlify/functions/package.json",
+    "build": "npm run build:frontend && npm run build:backend"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,15 @@
+[build]
+  # This is the main build command from your package.json
+  command = "npm run build"
+  
+  # The output folder of your frontend build
+  publish = "frontend/dist"  # Or "frontend/build" depending on your framework
+
+  # The directory where the backend function was placed
+  functions = "netlify/functions"
+
+# This rewrite rule directs all API traffic to your serverless function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
