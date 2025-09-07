@@ -24,7 +24,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
-import FavoriteCount from "../Products/FavoriteCount";
+import FavoriteCount from "../products/FavoriteCount";
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const {cartItems} = useSelector((state) => state.cart);
