@@ -16,7 +16,8 @@
     "--- PRODUCTION BUILD SCRIPTS ---": "",
 
     "build_frontend": "cd frontend && npm install && npm run build",
-    "build": "npm run build_frontend",
+    "build_backend": "npm install",
+    "build": "npm run build_frontend && npm run build_backend",
     "start": "node backend/index.js"
   },
   "keywords": [],
