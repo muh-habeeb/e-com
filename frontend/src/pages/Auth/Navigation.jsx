@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Navigation Component
 // Main navigation bar with responsive design
 // Features:
