@@ -6,17 +6,17 @@ export default {
     extend: {
       backgroundImage: {
         sprinkle:
-          "url('./src/assets/images for bg/engin-akyurt-Hlkuojv_P6I-unsplash.jpg')",
+          "url('./src/assets/images_for_bg/engin-akyurt-Hlkuojv_P6I-unsplash.jpg')",
         gradientCircle:
-          "url('./src/assets/images for bg/steve-johnson-pyQ_WaTof0U-unsplash.jpg')",
+          "url('./src/assets/images_for_bg/steve-johnson-pyQ_WaTof0U-unsplash.jpg')",
         gradientTexture:
-          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./src/assets/images for bg/milad-fakurian-E8Ufcyxz514-unsplash.jpg')",
+          "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('./src/assets/images_for_bg/milad-fakurian-E8Ufcyxz514-unsplash.jpg')",
         stoke1:
-          "linear-gradient(rgba(0,0,0,0.3)),url('./src/assets/images for bg/svg/stok.svg')",
+          "linear-gradient(rgba(0,0,0,0.3)),url('./src/assets/images_for_bg/svg/stok.svg')",
         stoke2:
-          "linear-gradient(rgba(0,0,0,0.5)),url('./src/assets/images for bg/svg/stok2.svg')",
-        stoke3: "url('./src/assets/images for bg/svg/mob.svg')",
-        error404: "url(./src/assets/images/404_1.svg)",
+          "linear-gradient(rgba(0,0,0,0.5)),url('./src/assets/images_for_bg/svg/stok2.svg')",
+        stoke3: "url('./src/assets/images_for_bg/svg/mob.svg')",
+        error404: "url(./src/assets/images_404_1_svg)",
       },
     },
 
