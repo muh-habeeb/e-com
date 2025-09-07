@@ -12,7 +12,7 @@
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "//--- PRODUCTION BUILD SCRIPTS (for Netlify) ---": "",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "build:backend": "shx mkdir -p netlify/functions && shx cp backend/index.js netlify/functions/api.js && shx cp backend/package.json netlify/functions/package.json",
+    "build:backend": "shx mkdir -p netlify/functions && shx cp backend/index.js netlify/functions/api.js && shx cp ./package.json netlify/functions/package.json",
     "build": "npm run build:frontend && npm run build:backend"
   },
   "keywords": [],
