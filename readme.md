@@ -113,6 +113,8 @@ npm run frontend
 > some json file are given in the root directory for testing purpose
 > hope you like it
 
+> [!NOTE]\
+>to login as admin update the database 
 ---
 
 ### 🔗 Useful Links
@@ -138,4 +140,29 @@ npm run frontend
 # Screen Shots
 
 ## home
-[](./images/home.jpg)
+![home](./images/home.jpg)
+
+## shop
+![shop](./images/shop.jpg)
+
+## cart
+![cart](./images/cart.jpg)
+
+## profile
+![profile](./images/profile.jpg)
+
+## order View
+![home](./images/orderview.jpg)
+
+# Admin
+
+## dashboard
+![dash](./images/admin/dash.png)
+## all orders
+![dash](./images/admin/order.png)
+## all users
+![dash](./images/admin/users.png)
+## all products
+![dash](./images/admin/all.png)
+## add  products
+![dash](./images/admin/add.png)
