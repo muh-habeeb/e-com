@@ -6,7 +6,7 @@ import { dirname } from "path";
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+let __dirname = dirname(__filename);
 
 const uploadPath = path.join(__dirname, "uploads");
 
