@@ -142,15 +142,368 @@
   "shippingPrice": 10,
   "totalPrice": 470,
   "isPaid": true,
-  "isDelivered": false,
+  "isDelivered": true,
   "createdAt": {
     "$date": "2025-09-06T16:00:34.724Z"
   },
   "updatedAt": {
-    "$date": "2025-09-06T16:01:04.763Z"
+    "$date": "2025-09-06T21:37:00.794Z"
   },
   "__v": 0,
   "paidAt": {
     "$date": "2025-09-06T16:01:04.762Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-09-06T21:37:00.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bd1000a4975214a3597001"
+  },
+  "user": {
+    "$oid": "68bc5463b4975214a35968d3"
+  },
+  "orderItems": [
+    {
+      "name": "iPhone 14",
+      "qty": 1,
+      "image": "/uploads/img1.jpg",
+      "price": 60000,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50da"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "Delhi",
+    "city": "Delhi",
+    "postalCode": "110001",
+    "country": "IN"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_RE1111",
+    "status": "completed"
+  },
+  "itemsPrice": 60000,
+  "taxPrice": 9000,
+  "shippingPrice": 0,
+  "totalPrice": 69000,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-07-15T11:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-16T09:00:00.000Z"
+  },
+  "paidAt": {
+    "$date": "2025-07-15T11:35:00.000Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-07-16T09:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bd1000a4975214a3597002"
+  },
+  "user": {
+    "$oid": "68bc5463b4975214a35968d3"
+  },
+  "orderItems": [
+    {
+      "name": "Nike Air Shoes",
+      "qty": 2,
+      "image": "/uploads/img2.jpg",
+      "price": 3500,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50db"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "Mumbai",
+    "city": "Mumbai",
+    "postalCode": "400001",
+    "country": "IN"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_RE2222",
+    "status": "completed"
+  },
+  "itemsPrice": 7000,
+  "taxPrice": 1050,
+  "shippingPrice": 100,
+  "totalPrice": 8150,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-07-18T15:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-06T21:36:41.991Z"
+  },
+  "paidAt": {
+    "$date": "2025-07-18T15:05:00.000Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-09-06T21:36:41.983Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bd1000a4975214a3597003"
+  },
+  "user": {
+    "$oid": "68bc5463b4975214a35968d3"
+  },
+  "orderItems": [
+    {
+      "name": "Sony WH-1000XM5 Headphones",
+      "qty": 1,
+      "image": "/uploads/img3.jpg",
+      "price": 30000,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50dc"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "Chennai",
+    "city": "Chennai",
+    "postalCode": "600001",
+    "country": "IN"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_RE3333",
+    "status": "completed"
+  },
+  "itemsPrice": 30000,
+  "taxPrice": 4500,
+  "shippingPrice": 0,
+  "totalPrice": 34500,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-08-01T09:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-02T08:40:00.000Z"
+  },
+  "paidAt": {
+    "$date": "2025-08-01T09:15:00.000Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-08-02T08:40:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bd1000a4975214a3597004"
+  },
+  "user": {
+    "$oid": "68bc5463b4975214a35968d3"
+  },
+  "orderItems": [
+    {
+      "name": "HP Pavilion 15",
+      "qty": 1,
+      "image": "/uploads/img4.jpg",
+      "price": 75000,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50dd"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "Bangalore",
+    "city": "Bangalore",
+    "postalCode": "560001",
+    "country": "IN"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_RE4444",
+    "status": "completed"
+  },
+  "itemsPrice": 75000,
+  "taxPrice": 11250,
+  "shippingPrice": 200,
+  "totalPrice": 86450,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-08-05T14:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-06T21:36:48.799Z"
+  },
+  "paidAt": {
+    "$date": "2025-08-05T14:05:00.000Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-09-06T21:36:48.798Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bd1000a4975214a3597005"
+  },
+  "user": {
+    "$oid": "68bc5463b4975214a35968d3"
+  },
+  "orderItems": [
+    {
+      "name": "Logitech MX Master 3 Mouse",
+      "qty": 1,
+      "image": "/uploads/img5.jpg",
+      "price": 8000,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50de"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "Hyderabad",
+    "city": "Hyderabad",
+    "postalCode": "500001",
+    "country": "IN"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_RE5555",
+    "status": "completed"
+  },
+  "itemsPrice": 8000,
+  "taxPrice": 1200,
+  "shippingPrice": 50,
+  "totalPrice": 9250,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-08-10T20:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-11T09:30:00.000Z"
+  },
+  "paidAt": {
+    "$date": "2025-08-10T20:05:00.000Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-08-11T09:30:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68bdb13eaaa851fe68ef0840"
+  },
+  "user": {
+    "$oid": "68bc4f9338a1cca156a91108"
+  },
+  "orderItems": [
+    {
+      "name": "nike air t shirt ",
+      "qty": 1,
+      "image": "/uploads/image-1754496489722.jpg",
+      "price": 400,
+      "product": {
+        "$oid": "68373b651b2e0a31656f50df"
+      },
+      "_id": {
+        "$oid": "68bdb13eaaa851fe68ef0841"
+      }
+    },
+    {
+      "name": "IPHONE 14 ",
+      "qty": 1,
+      "image": "/uploads/image-1754496495853.jpg",
+      "price": 60000,
+      "product": {
+        "$oid": "68373b301b2e0a31656f50da"
+      },
+      "_id": {
+        "$oid": "68bdb13eaaa851fe68ef0842"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "yit",
+    "city": "uu",
+    "postalCode": "uu",
+    "country": "uu"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "status": "pending"
+  },
+  "itemsPrice": 60400,
+  "taxPrice": 9060,
+  "shippingPrice": 0,
+  "totalPrice": 69460,
+  "isPaid": false,
+  "isDelivered": false,
+  "createdAt": {
+    "$date": "2025-09-07T16:22:22.378Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-07T16:22:22.378Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68bdb16aaaa851fe68ef084e"
+  },
+  "user": {
+    "$oid": "68bc4f9338a1cca156a91108"
+  },
+  "orderItems": [
+    {
+      "name": "nike air t shirt ",
+      "qty": 1,
+      "image": "/uploads/image-1754496489722.jpg",
+      "price": 400,
+      "product": {
+        "$oid": "68373b651b2e0a31656f50df"
+      },
+      "_id": {
+        "$oid": "68bdb16aaaa851fe68ef084f"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "address": "yit",
+    "city": "uu",
+    "postalCode": "uu",
+    "country": "uu"
+  },
+  "paymentMethod": "RazorPay",
+  "paymentResult": {
+    "id": "pay_REmBVJewPmz9cr",
+    "status": "completed",
+    "update_time": "1757262205340"
+  },
+  "itemsPrice": 400,
+  "taxPrice": 60,
+  "shippingPrice": 10,
+  "totalPrice": 470,
+  "isPaid": true,
+  "isDelivered": true,
+  "createdAt": {
+    "$date": "2025-09-07T16:23:06.073Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-07T16:23:27.805Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2025-09-07T16:23:25.340Z"
+  },
+  "deliveredAt": {
+    "$date": "2025-09-07T16:23:27.804Z"
   }
 }]
