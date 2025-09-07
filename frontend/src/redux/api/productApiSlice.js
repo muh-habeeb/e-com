@@ -1,6 +1,5 @@
 import { apiSlice } from "./apiSlice";
 import { PRODUCT_URL, UPLOAD_URL } from "../constants";
-import { Query } from "mongoose";
 
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
