@@ -1,12 +1,11 @@
 // prepareUploadsFolder.js
 import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import path from "path"; // <-- Added this import
+import { fileURLToPath } from "url"; // <-- Added this import
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
-let __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename); // <-- Changed 'dirname' to 'path.dirname'
 
 const uploadPath = path.join(__dirname, "uploads");
 
@@ -16,4 +15,3 @@ if (!fs.existsSync(uploadPath)) {
 } else {
   console.log("uploads folder already exists");
 }
-
