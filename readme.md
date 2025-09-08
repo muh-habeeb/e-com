@@ -3,7 +3,7 @@
 **A fullstack MERN e-commerce app with Razorpay payments, authentication, and order management.**
 
 ---
-## Live Demo : [Click here](https://)
+## Live Demo : [Click here](https://e-com-pqll.onrender.com/)
 ## 📖 About the Project
 
 This is a **MERN-style fullstack application** combining a Node.js/Express backend with a modern frontend (React/Vite/Next.js).  
