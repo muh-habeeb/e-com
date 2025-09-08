@@ -3,7 +3,10 @@ import {
   createRazorpayOrder,
   verifyRazorpayPayment,
 } from "../controllers/paymentController.js";
-import { authenticated, authorizedAdmin } from "../middlewares/authMiddleware.js";
+import {
+  authenticated,
+  authorizedAdmin,
+} from "../middlewares/authMiddleWare.js";
 import { paymentLogger } from "../middlewares/paymentLogger.js";
 import { exportPayments } from "../controllers/paymentController.js";
 
