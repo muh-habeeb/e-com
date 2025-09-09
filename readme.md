@@ -39,7 +39,7 @@ This project is ideal for:
 
 - **React / Vite / Next.js** – Modern frontend framework
 - **Tailwind CSS** – Utility-first CSS framework for fast styling
-- **Axios / RTK Query** – For API requests & state management
+- **Redux / RTK Query** – For API requests & state management
 
 ### 💳 Payments & Transactions
 
