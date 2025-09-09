@@ -109,7 +109,10 @@ RAZORPAY_KEY_ID=rzp_test_key
 RAZORPAY_KEY_SECRET=RAZORPAY_SECRET
 
 ```
-
+## frontend >.env
+```bash
+VITE_RAZORPAY_KEY_ID=RazorPay__key
+```
 ```bash
 npm run dev
 ```
