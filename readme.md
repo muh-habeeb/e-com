@@ -92,6 +92,23 @@ npm run prepare      # Prepares required folders (like uploads)
 
 > Running the App
 > Run both servers together:
+## Set up your .env files in both front end and root 
+root .env
+```bash
+MONGO_URI=your_mongo_db_url
+PORT=9999
+JWT_SECRET=Your_JWT-Secert
+
+node_ENV='development'
+
+# openssl rand -base64 64
+Tax_Percent=0.15
+
+
+RAZORPAY_KEY_ID=rzp_test_key
+RAZORPAY_KEY_SECRET=RAZORPAY_SECRET
+
+```
 
 ```bash
 npm run dev
