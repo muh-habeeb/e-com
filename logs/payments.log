@@ -30,3 +30,51 @@
 📡 Status:  200
 ⏱️ Duration: 14ms
 ==============================
+
+==============================
+📅 Time:    2025-09-24 11:29:07
+🚀 Level:   info
+
+🌐 URL:     /api/payment/razorpay-verify
+🚀 Method:  POST
+👤 User:    68b812fc532c7ad00f7dd2b0
+📦 Body:    {
+  "razorpay_payment_id": "pay_RLKd4jGpNIpHIB",
+  "razorpay_order_id": "order_RLKcUUH9pIN7kH",
+  "razorpay_signature": "accd4c80a9ac12fb6beebd3958aaa5439ce1a9a074157090c8652bc38ecd3304"
+}
+📡 Status:  200
+⏱️ Duration: 30ms
+==============================
+
+==============================
+📅 Time:    2025-09-24 11:50:32
+🚀 Level:   info
+
+🌐 URL:     /api/payment/razorpay-verify
+🚀 Method:  POST
+👤 User:    68b812fc532c7ad00f7dd2b0
+📦 Body:    {
+  "razorpay_payment_id": "pay_RLKzfewJ9L6I1q",
+  "razorpay_order_id": "order_RLKzV2PvYHbFxL",
+  "razorpay_signature": "f2115738797a0305361e093d2a4a8da7cbf4958d332419878b3b28741c558a86"
+}
+📡 Status:  200
+⏱️ Duration: 21ms
+==============================
+
+==============================
+📅 Time:    2025-09-24 11:51:45
+🚀 Level:   info
+
+🌐 URL:     /api/payment/razorpay-verify
+🚀 Method:  POST
+👤 User:    68b812fc532c7ad00f7dd2b0
+📦 Body:    {
+  "razorpay_payment_id": "pay_RLL0zzBtlq6Bm0",
+  "razorpay_order_id": "order_RLL0aCK0csupJU",
+  "razorpay_signature": "6b64cb9a5f471c627fc6ca15c4de5c388f7f3abfa3f734e8ca7d7b5604b0e225"
+}
+📡 Status:  200
+⏱️ Duration: 4ms
+==============================

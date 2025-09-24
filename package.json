@@ -6,15 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-
     "--- DEVELOPMENT SCRIPTS ---": "",
-
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-
     "--- PRODUCTION BUILD SCRIPTS ---": "",
-
     "build_frontend": "cd frontend && npm install && npm run build",
     "build_backend": "npm install ",
     "build": "npm run build_frontend && npm run build_backend",
@@ -39,6 +35,7 @@
     "nodemon": "^3.1.10",
     "razorpay": "^2.9.6",
     "safer-buffer": "^2.1.2",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.1.5",
     "winston": "^3.17.0"
   }
