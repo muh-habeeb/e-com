@@ -28,7 +28,7 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
 
   try {
     const order = await razorpay.orders.create(options);
-
+    amount = amount / 100
     // ✅ Save payment init
     await Payment.create({
       razorpayOrderId: order.id,
