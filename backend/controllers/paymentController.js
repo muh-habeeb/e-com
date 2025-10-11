@@ -18,9 +18,8 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
   if (!amount) {
     return res.status(400).json({ message: "Amount is required" });
   }
-  console.log(amount);
   amount = Math.round(Number(amount) * 100);
-console.log(amount);
+// console.log(amount);
 
   const options = {
     amount,
