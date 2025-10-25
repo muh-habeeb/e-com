@@ -18,7 +18,7 @@ import AdminMenu from "./pages/Admin/components/AdminMenu";
 const App = () => {
   return (
     <div>
-      <ToastContainer autoClose={2500} toastStyle={{ backgroundColor: "black", color: "white" }} />
+      <ToastContainer autoClose={2000} toastStyle={{ backgroundColor: "black", color: "white" }} />
       <Navigation />
       <main
         className=" dark:bg-gray-900 min-h-screen  text-white"

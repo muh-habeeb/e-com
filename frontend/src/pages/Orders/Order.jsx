@@ -48,6 +48,8 @@ const Order = () => {
           try {
             // 3. Notify backend about successful payment
             const result = await verifyRazorpayOrder(response);
+            
+            
             if (result.data.success) {
               await payOrder({
                 orderId,
@@ -76,6 +78,8 @@ const Order = () => {
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (err) {
+      console.log(err);
+      
       toast.error(err?.data?.message || err.message);
     }
   };

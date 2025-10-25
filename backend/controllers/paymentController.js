@@ -18,10 +18,8 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
   if (!amount) {
     return res.status(400).json({ message: "Amount is required" });
   }
-  console.log("amout 1:",amount);
-  
-  amount = Number(amount) * 100;
-  console.log("amout 2:",amount);
+  amount = Math.round(Number(amount) * 100);
+// console.log(amount);
 
   const options = {
     amount,
@@ -31,7 +29,7 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
 
   try {
     const order = await razorpay.orders.create(options);
-
+    amount = amount / 100
     // ✅ Save payment init
     await Payment.create({
       razorpayOrderId: order.id,
