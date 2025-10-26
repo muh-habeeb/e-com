@@ -6,7 +6,7 @@ import crypto from "crypto";
 import Payment from "../models/paymentModel.js";
 const rKey=process.env.RAZORPAY_KEY_ID;
 const rSecret=process.env.RAZORPAY_KEY_SECRET;
-if(!rKey&&!rSecret||!rSecret||!rKey){
+if(!rKey &&!rSecret||!rSecret||!rKey){
   console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
   console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
   console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -16,13 +16,12 @@ if(!rKey&&!rSecret||!rSecret||!rKey){
       process.exit(1);
 
 }
-else{
 
   const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID, // use env, not hardcode
     key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
-}
+
   
   // @desc    Create Razorpay order
   // @route   POST /api/payment/razorpay-order
