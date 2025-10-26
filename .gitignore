@@ -6,8 +6,8 @@
 .env
 .env.local
 # Ignore all files in uploads folder but keep the folder structure
-/uploads/*
+# /uploads/*
 # Keep the uploads folder itself
-!/uploads/.gitkeep
+# !/uploads/.gitkeep
 
 .idea
