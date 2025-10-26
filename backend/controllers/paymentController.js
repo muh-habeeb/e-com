@@ -4,14 +4,29 @@ import dotenv from "dotenv";
 dotenv.config();
 import crypto from "crypto";
 import Payment from "../models/paymentModel.js";
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID, // use env, not hardcode
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+const rKey=process.env.RAZORPAY_KEY_ID;
+const rSecret=process.env.RAZORPAY_KEY_SECRET;
+if(!rKey&&!rSecret||!rSecret||!rKey){
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+  console.log("++++++++  RAZORPAY KEYS ARE NOT SET IN ENV  ++++++++++")
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      process.exit(1);
 
-// @desc    Create Razorpay order
-// @route   POST /api/payment/razorpay-order
-// @access  Private
+}
+else{
+
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID, // use env, not hardcode
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+}
+  
+  // @desc    Create Razorpay order
+  // @route   POST /api/payment/razorpay-order
+  // @access  Private
 
 const createRazorpayOrder = asyncHandler(async (req, res) => {
   let { amount } = req.body;
@@ -38,8 +53,7 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
       status: "initiated",
       razorpayRawData: order,
     });
-
-    return res.status(201).json(order);
+        return res.status(201).json(order);
   } catch (error) {
     console.error("Razorpay error:", error);
     return res.status(500).json({
@@ -55,14 +69,14 @@ const createRazorpayOrder = asyncHandler(async (req, res) => {
 const verifyRazorpayPayment = async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-      req.body;
-
+    req.body;
+    
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-      .update(body.toString())
-      .digest("hex");
-
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(body.toString())
+    .digest("hex");
+    
     if (expectedSignature === razorpay_signature) {
       // ✅ Update DB record
       await Payment.findOneAndUpdate(

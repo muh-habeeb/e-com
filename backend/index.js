@@ -10,6 +10,8 @@ import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import uploadRouts from "./routes/uploadRoutes.js";
 import orderRoute from "./routes/orderRoute.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+import logMessage from "./log.js";
 
 dotenv.config();
 const port = process.env.PORT || 9999;
@@ -21,19 +23,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(logMessage); // custom logger middleware
+// app.use(logMessage); // custom logger middleware
 /// routes
 app.use("/api/users", userRoutes); //importing from routes for post method
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRouts);
 app.use("/api/orders", orderRoute);
+app.use("/api/payment", paymentRoutes);
 app.use("/api/payments", paymentRoutes);
 // +++++++++++++++++++++++++++++++++++
 
-import paymentRoutes from "./routes/paymentRoutes.js";
-import logMessage from "./log.js";
-app.use("/api/payment", paymentRoutes);
 
 // +++++++++++++++++++++++++++++++++++
 
