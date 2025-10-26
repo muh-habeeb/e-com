@@ -108,6 +108,10 @@ Tax_Percent=0.15
 RAZORPAY_KEY_ID=rzp_test_key
 RAZORPAY_KEY_SECRET=RAZORPAY_SECRET
 
+on frontend folder
+.env
+VITE_RAZORPAY_KEY_ID=your_raz_key_id
+
 ```
 ## frontend >.env
 ```bash
