@@ -5,7 +5,9 @@
 # Ignore env files
 .env
 .env.local
-# /uploads  for deploy 
-/uploads
+# Ignore all files in uploads folder but keep the folder structure
+/uploads/*
+# Keep the uploads folder itself
+!/uploads/.gitkeep
 
 .idea
