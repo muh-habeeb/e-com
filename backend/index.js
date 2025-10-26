@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
+import { fileURLToPath } from 'url';
 //utils
 
 import connectDB from "./config/db.js";
@@ -13,9 +14,16 @@ import orderRoute from "./routes/orderRoute.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import logMessage from "./log.js";
 
+// Get the directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const currentDir = path.dirname(__filename);
+
+// Load environment variables from the parent directory (project root)
+// dotenv.config({ path: path.join(currentDir, '../.env') });
 dotenv.config();
+
 const port = process.env.PORT || 9999;
-//connect datable
+//connect database
 connectDB();
 
 //middlewares and instance
