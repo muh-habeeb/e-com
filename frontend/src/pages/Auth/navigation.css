@@ -46,6 +46,9 @@ label {
   transition: all 0.3s;
 }
 
+.login{
+  background-image: url("../../assets/images_for_bg/bg.jpg");
+}
 /* 
 .dashboard-ul{
   list-style: none;

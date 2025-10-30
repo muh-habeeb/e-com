@@ -3,7 +3,9 @@
 **A fullstack MERN e-commerce app with Razorpay payments, authentication, and order management.**
 
 ---
+
 ## Live Demo : [Click here](https://e-com-pqll.onrender.com/)
+
 ## 📖 About the Project
 
 This is a **MERN-style fullstack application** combining a Node.js/Express backend with a modern frontend (React/Vite/Next.js).  
@@ -73,7 +75,7 @@ This project is ideal for:
 project-root/
 ├── backend/ # Express.js backend
 │ └── index.js
-├── frontend/ # React/Vite ,package.json 
+├── frontend/ # React/Vite ,package.json
 ├── logs/ #  payment logs
 │ └── payments.log
 ├── package.json # Root package.json (scripts included)
@@ -92,8 +94,11 @@ npm run prepare      # Prepares required folders (like uploads)
 
 > Running the App
 > Run both servers together:
-## Set up your .env files in both front end and root 
+
+## Set up your .env files in both front end and root
+
 root .env
+
 ```bash
 MONGO_URI=your_mongo_db_url
 PORT=9999
@@ -113,10 +118,14 @@ on frontend folder
 VITE_RAZORPAY_KEY_ID=your_raz_key_id
 
 ```
+
 ## frontend >.env
+
 ```bash
+PORT= YOUR_BACKEND_PORT
 VITE_RAZORPAY_KEY_ID=RazorPay__key
 ```
+
 ```bash
 npm run dev
 ```
@@ -138,7 +147,8 @@ npm run frontend
 > hope you like it
 
 > [!NOTE]\
->to login as admin update the database 
+> to login as admin update the database
+
 ---
 
 ### 🔗 Useful Links
@@ -160,36 +170,50 @@ npm run frontend
 > WAPH: [91 965 680 5212](https:/wa.me/919656805212)<br/>
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
 
-
 # Screen Shots
 
 ## home
+
 ![home](./images/home.jpg)
 
 ## shop
+
 ![shop](./images/shop.jpg)
 
 ## cart
+
 ![cart](./images/cart.jpg)
 
-## product page 
+## product page
+
 ![cart](./images/review_page.png)
 
 ## profile
+
 ![profile](./images/profile.jpg)
 
 ## order View
+
 ![home](./images/orderview.jpg)
 
 # Admin
 
 ## dashboard
+
 ![dash](./images/admin/dash.png)
+
 ## all orders
+
 ![dash](./images/admin/order.png)
+
 ## all users
+
 ![dash](./images/admin/users.png)
+
 ## all products
+
 ![dash](./images/admin/all.png)
-## add  products
+
+## add products
+
 ![dash](./images/admin/add.png)
