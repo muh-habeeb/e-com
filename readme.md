@@ -89,7 +89,6 @@ project-root/
 npm run backend      # Runs backend with nodemon
 npm run frontend     # Runs frontend inside frontend/
 npm run dev          # Runs both backend & frontend concurrently
-npm run prepare      # Prepares required folders (like uploads)
 ```
 
 > Running the App
@@ -120,7 +119,15 @@ VITE_RAZORPAY_KEY_ID=your_raz_key_id
 ```
 
 ## frontend >.env
+>frontend vite config
+```
 
+change the server port to ur server port 
+ proxy: {
+      "/api/": "http://localhost:9999", #your port
+      "/uploads/": "http://localhost:9999",# your port
+    },
+```
 ```bash
 VITE_RAZORPAY_KEY_ID=RazorPay__key
 VITE_API_PORT= YOUR_BACKEND_PORT
