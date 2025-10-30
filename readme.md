@@ -122,8 +122,8 @@ VITE_RAZORPAY_KEY_ID=your_raz_key_id
 ## frontend >.env
 
 ```bash
-PORT= YOUR_BACKEND_PORT
 VITE_RAZORPAY_KEY_ID=RazorPay__key
+VITE_API_PORT= YOUR_BACKEND_PORT
 ```
 
 ```bash
