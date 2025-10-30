@@ -46,8 +46,20 @@ label {
   transition: all 0.3s;
 }
 
-.login{
-  background-image: url("../../assets/images_for_bg/bg.jpg");
+.login {
+  background-image: url("../../assets/images_for_bg/gradient.jpg");
+
+  object-fit: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.register {
+  background-image: url("../../assets/images_for_bg/gradient.jpg") ;
+  object-fit: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 /* 
 .dashboard-ul{

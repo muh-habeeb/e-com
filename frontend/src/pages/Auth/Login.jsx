@@ -91,14 +91,14 @@ const Login = () => {
 
   return (
     <div>
-      <section className="login bg-stoke2 bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh]  ">
-        <div className=" mr-[4rem] mt-[5rem] p-4 flex flex-col items-center justify-center  backdrop-blur-[10px] rounded-2xl">
+      <section className="login  bg-cover bg-center pl-[10rem] flex flex-wrap justify-center items-center w-full h-[100vh]  ">
+        <div className="w-[40rem] mr-[4rem] mt-[5rem] flex flex-col items-center justify-center rounded-lg  p-[50px] backdrop-blur-sm bg-white/10  border border-gray-200 border-gray-200/30 shadow-lg shadow-pink-500/20 ">
           <h1 className="text-2xl font-semibold mb-4 text-slate-100">
             Sign In
           </h1>
           <form
             onSubmit={submitHandler}
-            className="container w-[40rem] flex flex-col items-center justify-center  gap-2"
+            className="container  flex flex-col items-center justify-center  gap-2 w-full"
           >
             <div className="w-full  h-[40px] mb-5 ">
               <label
@@ -147,7 +147,7 @@ const Login = () => {
               {"New Customer ? "}
               <Link
                 to={redirect ? `/register?${redirect}` : "/register"}
-                className="text-pink-800 hover:bg-pink-900 hover:duration-300 duration-500 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
+                className="text-white hover:bg-pink-900 hover:duration-300 duration-500 rounded-lg hover:px-2 py-[2px]  text-center leading-3 no-underline hover:text-white"
               >
                 Register
               </Link>

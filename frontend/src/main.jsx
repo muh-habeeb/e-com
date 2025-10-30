@@ -58,7 +58,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       {/* for error redetection */}
-      {/* <Route path="*" element={<ErrorPage />} /> */}
+      <Route path="*" element={<ErrorPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/logout" element={<Logout />} />

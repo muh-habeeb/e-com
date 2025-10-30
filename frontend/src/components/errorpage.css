@@ -1,0 +1,8 @@
+.img{
+    background-image: url('../assets/404_1.svg');
+    height: 500px;
+    width:500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+}
