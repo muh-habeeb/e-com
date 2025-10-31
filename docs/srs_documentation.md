@@ -69,13 +69,13 @@ It features a responsive interface for both desktop and mobile browsers, ensurin
 
 ### 1.6 Structure of the System
 
-1. Authentication & Authorization Module – Secure login/signup with role-based access
-2. Product Management Module – Browse, search, and filter products with detailed information
-3. Shopping Cart Module – Add, remove, and manage cart items
-4. Order Management Module – Create orders, track status, and manage order history
-5. Payment Processing Module – Secure payment integration with multiple gateways
-6. Admin Dashboard – Manage products, categories, inventory, and orders
-7. User Interface – Responsive web design for all devices
+1. **Authentication & Authorization Module** – Secure login/signup with role-based access
+2. **Product Management Module** – Browse, search, and filter products with detailed information
+3. **Shopping Cart Module** – Add, remove, and manage cart items
+4. **Order Management Module** – Create orders, track status, and manage order history
+5. **Payment Processing Module** – Secure payment integration with multiple gateways
+6. **Admin Dashboard** – Manage products, categories, inventory, and orders
+7. **User Interface** – Responsive web design for all devices
 
 ### 1.7 System Architecture
 
