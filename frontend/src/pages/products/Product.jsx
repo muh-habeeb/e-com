@@ -16,6 +16,7 @@ const Product = ({ product }) => {
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
           className="w-[30rem] rounded-md h-[25rem] object-cover"
         />
         <HeartIcon product={product} />
