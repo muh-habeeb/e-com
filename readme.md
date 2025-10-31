@@ -177,7 +177,7 @@ npm run frontend
 > WAPH: [91 965 680 5212](https:/wa.me/919656805212)<br/>
 > MAIL: [muhhabeeb787@gmail.com](mailto:muhhabeeb787@gmail.com)
 
-# Screen Shots
+<!-- # Screen Shots
 
 ## home
 
@@ -223,4 +223,4 @@ npm run frontend
 
 ## add products
 
-![dash](./images/admin/add.png)
+![dash](./images/admin/add.png) -->
